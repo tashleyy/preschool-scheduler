@@ -32,9 +32,13 @@ module.exports.routes = {
   *                                                                          *
   ***************************************************************************/
 
-  '/': {
-    view: 'login'
-  }
+  'get /': 'ViewController.login',
+
+  'get /home': 'ViewController.home',
+
+  'post /user/login': 'UserController.login',
+
+  'post /user/logout': 'UserController.logout',
 
   /***************************************************************************
   *                                                                          *
