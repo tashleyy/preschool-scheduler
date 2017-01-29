@@ -65,6 +65,15 @@ module.exports.connections = {
     database: 'preschool'
   },
 
+  remoteMongoDBServer: {
+    adapter: 'sails-mongo',
+    host: 'ds135519.mlab.com',
+    port: 35519,
+    user: 'test',
+    password: 'test',
+    database: 'heroku_5nhg6cb6'
+  }
+
   /***************************************************************************
   *                                                                          *
   * PostgreSQL is another officially supported relational database.          *
