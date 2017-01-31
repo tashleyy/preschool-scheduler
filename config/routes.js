@@ -31,8 +31,9 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
-  'get /': 'ViewController.login',
+  'get /login': 'ViewController.login',
+  
+  'get /': 'ViewController.home',
 
   'get /home': 'ViewController.home',
 

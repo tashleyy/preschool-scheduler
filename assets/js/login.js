@@ -9,6 +9,7 @@ function onLogin(googleUser) {
       token: idToken
     },
     success: function(data) {
+      //document.location.href = "home";
       console.log('success: ' + data);
     },
     error: function(xhr, status, error) {

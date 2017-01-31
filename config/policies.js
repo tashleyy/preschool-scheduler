@@ -27,11 +27,14 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
-/*
+
   ViewController: {
-    'home': 'sessionAuth'
+    '/login': true,
+    '/': 'sessionAuth',
+    'home': 'sessionAuth',
+    'students': 'sessionAuth'
   }
-*/
+
   /***************************************************************************
   *                                                                          *
   * Here's an example of mapping some policies to run before a controller    *
