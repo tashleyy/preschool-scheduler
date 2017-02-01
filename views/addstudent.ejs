@@ -17,14 +17,16 @@
                 <li><a href="home">Home</a></li>
                 <li><a href="students">Students</a></li>
             </ul>
-             <ul class="nav navbar-nav navbar-right">
-                <li><a onClick="signOut();">Sign Out</a></li>
-            </ul>
-            <div class="g-signin2"  style="display: none"  data-onsuccess="onLogin"></div>
-        </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a onClick="signOut();">Sign Out</a>
+</li>
+</ul>
+<div class="g-signin2" style="display: none" data-onsuccess="onLogin"></div>
+</div>
 
-        <!--/.nav-collapse -->
-    </div>
+<!--/.nav-collapse -->
+</div>
 </nav>
 
 <div class="container">
@@ -33,21 +35,51 @@
         <br/>
         <br/>
         <br/>
-        <h1>Add Student</h1>
+        <h1>New Student</h1>
     </div>
 
     <div align="left">
         <form>
             <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" class="form-control" id="firstName">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <label for="startMonth" class="col-2 col-form-label">Start Month</label>
+            <div class="col-10">
+                <input class="form-control" type="month" id="startMonth" required>
             </div>
             <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" class="form-control" id="firstName">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
             </div>
-            <button type="submit" class="btn btn-primary" onClick="onSubmit();">Submit</button>
         </form>
-    </div>
+        <form class="form-inline">
+            <label class="sr-only" for="daySelect">Name</label>
+            <select class="form-control" id="daySelect">
+                <option>Monday</option>
+                <option>Tuesday</option>
+                <option>Wednesday</option>
+                <option>Thursday</option>
+                <option>Friday</option>
+            </select>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"> AM
+                </label>
+            </div>
+            <div class="form-check form-check-inline">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2"> PM
+                </label>
+            </div>
+            <div class="form-check form-check-inline disabled">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"> Afterschool Activities
+                </label>
+            </div>
+        </form>
+        <button type="submit" class="btn btn-primary" onClick="onSubmit();">Submit</button>
+
+</div>
 </div>
 <!-- /.container -->
