@@ -37,6 +37,8 @@ module.exports.routes = {
 
   'get /home': 'ViewController.home',
 
+  'get /addstudent': 'ViewController.addstudent',
+
   'get /students': 'ViewController.students',
 
   'post /user/login': 'UserController.login',

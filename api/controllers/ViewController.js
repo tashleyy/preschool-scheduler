@@ -9,5 +9,9 @@ module.exports = {
 
   'home': function(req, res) {
     res.view('home');
+  },
+
+  'addstudent': function(req, res) {
+    res.view('addstudent');
   }
 };

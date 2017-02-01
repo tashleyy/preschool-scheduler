@@ -14,12 +14,13 @@
 
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
+                <li class="active"><a href="home">Home</a></li>
                 <li><a href="students">Students</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login">Sign Out</a></li>
+                <li><a onClick="signOut();">Sign Out</a></li>
             </ul>
+            <div class="g-signin2"  style="display: none"  data-onsuccess="onLogin"></div>
         </div>
 
         <!--/.nav-collapse -->
@@ -34,7 +35,6 @@
         <br/>
         <h1>Calendar View</h1>
     </div>
-
     <div class="row">
         <table class="table table-bordered table-striped">
             <thead>

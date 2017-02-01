@@ -9,7 +9,10 @@ function onLogin(googleUser) {
       token: idToken
     },
     success: function(data) {
-      //document.location.href = "home";
+      if (window.location.pathname == "/login")
+      {
+        document.location.href = "home";
+      }
       console.log('success: ' + data);
     },
     error: function(xhr, status, error) {
@@ -25,9 +28,13 @@ function signOut() {
       url: '/user/logout',
       type: 'post',
       success: function(data) {
+        if (window.location.pathname == "/login")
+        {
+          $('.g-signin2').css('display', 'block');
+          $('.sign-out').css('display', 'none');
+        }
+        document.location.href = "login";
         console.log('data: ' + data);
-        $('.g-signin2').css('display', 'block');
-        $('.sign-out').css('display', 'none');
       },
       error: function(xhr, status, error) {
         console.log('error: ' + error);

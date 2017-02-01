@@ -18,8 +18,9 @@
                 <li class="active"><a href="students">Students</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="login">Sign Out</a></li>
+                <li><a onClick="signOut();">Sign Out</a></li>
             </ul>
+            <div class="g-signin2"  style="display: none"  data-onsuccess="onLogin"></div>
         </div>
 
         <!--/.nav-collapse -->
@@ -82,7 +83,7 @@
 </div>
 
 <div class="container">
-        <button type="button" onclick="alert('Add student under construction')">Add Student</button>
+        <button type="button"><a href="addstudent">Add Student</button>
 </div>
 
 
