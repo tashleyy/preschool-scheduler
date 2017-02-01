@@ -32,7 +32,8 @@ module.exports.policies = {
     '/login': true,
     '/': 'sessionAuth',
     'home': 'sessionAuth',
-    'students': 'sessionAuth'
+    'students': 'sessionAuth',
+    'addstudent': 'sessionAuth'
   }
 
   /***************************************************************************
