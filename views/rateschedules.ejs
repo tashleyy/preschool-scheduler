@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="home">Home</a></li>
                 <li><a href="students">Students</a></li>
-                <li><a href="rateschedules">Rate Schedules</a></li>
+                <li class="active"><a href="rateschedules">Rate Schedules</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -32,42 +32,63 @@
 </br>
 </br>
 </br>
-<h1>Rachel Wood</h1>
 <div class="container">
     <div class="row">
         <table class="table table-bordered table-striped">
             <tbody align="left">
+                <thead>
+                    <th>Rate Schedule Name</th>
+                    <th># Full Time Days</th>
+                    <th># Half Time Days</th>
+                    <th>Cost</th>
+                </thead>
                 <tr>
-                    <th>Birthdate</th>
-                    <td>1/1/1995</td>
+                    <td>5 days full-time</td>
+                    <td>5</td>
+                    <td>0</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Address</th>
-                    <td>1234 2nd St<br>Los Angeles, CA 91119</td>
+                    <td>4 days full-time</td>
+                    <td>4</td>
+                    <td>0</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Parent/Guardian Names</th>
-                    <td>John Wood, Mary Wood</td>
+                    <td>3 days full-time</td>
+                    <td>3</td>
+                    <td>0</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Parent/Guardian Phone Number</th>
-                    <td>(123) 456-7891</td>
+                    <td>2 days full-time</td>
+                    <td>2</td>
+                    <td>0</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Physician Name</th>
-                    <td>Dr. Doctor</td>
+                    <td>5 days part-time</td>
+                    <td>0</td>
+                    <td>5</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Physician Phone Number</th>
-                    <td>(123) 456-7891</td>
+                    <td>3 days part-time</td>
+                    <td>0</td>
+                    <td>3</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Date Enrolled</th>
-                    <td>1/1/2000</td>
+                    <td>3 days full, 2 days part</td>
+                    <td>3</td>
+                    <td>2</td>
+                    <td>$100</td>
                 </tr>
                 <tr>
-                    <th>Date Left</th>
-                    <td>N/A</td>
+                    <td>2 days full, 3 days part</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>$100</td>
                 </tr>
             </tbody>
         </table>
@@ -78,3 +99,7 @@
 
 </div>
 <!-- /.container -->
+
+<div class="container">
+        <button type="button"><a href="addrateschedule">Add Rate Schedule</button>
+</div>

@@ -39,6 +39,10 @@ module.exports.routes = {
 
   'get /addstudent': 'ViewController.addstudent',
 
+  'get /rateschedules': 'ViewController.rateschedules',
+
+  'get /addrateschedule': 'ViewController.addrateschedule',
+
   'get /students': 'ViewController.students',
 
   'get /student': 'ViewController.student',

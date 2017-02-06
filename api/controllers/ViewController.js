@@ -15,6 +15,14 @@ module.exports = {
     res.view('addstudent');
   },
 
+  'addrateschedule': function(req, res) {
+    res.view('addrateschedule');
+  },
+
+  'rateschedules': function(req, res) {
+    res.view('rateschedules');
+  },
+
   'student': function(req, res) {
     res.view('student');
   }

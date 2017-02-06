@@ -1,0 +1,65 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home">Foundations Preschool Scheduler</a>
+        </div>
+
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="home">Home</a></li>
+                <li><a href="students">Students</a></li>
+                <li><a href="rateschedules">Rate Schedules</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a onClick="signOut();">Sign Out</a>
+                </li>
+            </ul>
+<div class="g-signin2" style="display: none" data-onsuccess="onLogin"></div>
+</div>
+
+<!--/.nav-collapse -->
+</div>
+</nav>
+
+<div class="container">
+
+    <div>
+        <br/>
+        <br/>
+        <br/>
+        <h1>New Rate Schedule</h1>
+    </div>
+
+    <div align="left">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="fulltimedays">Number of Full-Time Days</label>
+                <input type="number" class="form-control" id="fulltimedays" required>
+            </div>
+            <div class="form-group">
+                <label for="parttimedays">Number of Part Time Days</label>
+                <input type="number" class="form-control" id="parttimedays" required>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input type="text" class="form-control" id="cost" required>
+            </div>
+            <button type="submit" class="btn btn-primary" onClick="onSubmit();">Submit</button>
+
+        </form>
+</div>
+</div>
+<!-- /.container -->
