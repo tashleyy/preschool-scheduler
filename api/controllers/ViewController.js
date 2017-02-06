@@ -13,5 +13,9 @@ module.exports = {
 
   'addstudent': function(req, res) {
     res.view('addstudent');
+  },
+
+  'student': function(req, res) {
+    res.view('student');
   }
 };
