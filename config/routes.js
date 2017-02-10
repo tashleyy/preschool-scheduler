@@ -51,6 +51,8 @@ module.exports.routes = {
 
   'post /user/logout': 'UserController.logout',
 
+  'post /rateschedulesubmit': 'RateScheduleController.submitRateSchedule',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

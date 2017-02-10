@@ -40,19 +40,49 @@
     </div>
 
     <div align="left">
-        <form>
+        <form onsubmit="submitRateSchedule()">
             <div class="form-group">
                 <label for="name">Name</label>
                 <input type="text" class="form-control" id="name" required>
             </div>
-            <div class="form-group">
-                <label for="fulltimedays">Number of Full-Time Days</label>
-                <input type="number" class="form-control" id="fulltimedays" required>
-            </div>
-            <div class="form-group">
-                <label for="parttimedays">Number of Part Time Days</label>
-                <input type="number" class="form-control" id="parttimedays" required>
-            </div>
+            <table class="table table-bordered table-striped">
+            <tbody align="left">
+                <thead>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                </thead>
+                <tr>
+                    <td>
+                        <input type="radio" name="monday" value="none" checked> None<br>
+                        <input type="radio" name="monday" value="half"> Half<br>
+                        <input type="radio" name="monday" value="full"> Full<br>
+                    </td>
+                    <td>
+                        <input type="radio" name="tuesday" value="none" checked> None<br>
+                        <input type="radio" name="tuesday" value="half"> Half<br>
+                        <input type="radio" name="tuesday" value="full"> Full<br>
+                    </td>
+                    <td>
+                        <input type="radio" name="wednesday" value="none" checked> None<br>
+                        <input type="radio" name="wednesday" value="half"> Half<br>
+                        <input type="radio" name="wednesday" value="full"> Full<br>
+                    </td>
+                    <td>
+                        <input type="radio" name="thursday" value="none" checked> None<br>
+                        <input type="radio" name="thursday" value="half"> Half<br>
+                        <input type="radio" name="thursday" value="full"> Full<br>
+                    </td>
+                    <td>
+                        <input type="radio" name="friday" value="none" checked> None<br>
+                        <input type="radio" name="friday" value="half"> Half<br>
+                        <input type="radio" name="friday" value="full"> Full<br>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
             <div class="form-group">
                 <label for="cost">Cost</label>
                 <input type="text" class="form-control" id="cost" required>
@@ -65,7 +95,9 @@
             <div class="col-10">
                 <input class="form-control" type="month" id="endMonth" required>
             </div>
-            <button type="submit" class="btn btn-primary" onClick="onSubmit();">Submit</button>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary" onClick="submitRateSchedule()">Submit</button>
+            </div>
         </form>
 </div>
 </div>

@@ -89,12 +89,12 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // collection: 'sessions',
-  // stringify: true,
-  // mongoOptions: {
-  //   server: {
-  //     ssl: true
-  //   }
-  // }
+   collection: 'sessions',
+   stringify: true,
+   mongoOptions: {
+     server: {
+       ssl: true
+     }
+   }
 
 };
