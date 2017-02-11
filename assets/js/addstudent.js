@@ -1,3 +1,3 @@
-function onSubmit() {
-    console.log('Submitting...');
+function addStudent() {
+    console.log('Add student');
 }

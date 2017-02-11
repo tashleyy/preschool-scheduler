@@ -1,11 +1,15 @@
 module.exports = {
-  'submitRateSchedule': function(req, res) {
+  'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name)
-    {
-      res.view('home');
+    if (!params.name) {
+      return res.badRequest();
     }
-    RateSchedule.create(params);
-    return res.ok();
+    RateSchedule.create({name: params.name}, function rateScheduleCreated(err, rateSchedule) {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+      return res.ok(rateSchedule);
+    });
   }
 }

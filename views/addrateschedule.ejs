@@ -8,8 +8,8 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="home">Foundations Preschool Scheduler</a>
+                </button>
+                <a class="navbar-brand" href="home">Foundations Preschool Scheduler</a>
         </div>
 
         <div id="navbar" class="collapse navbar-collapse">
@@ -23,11 +23,11 @@
                     <a onClick="signOut();">Sign Out</a>
                 </li>
             </ul>
-<div class="g-signin2" style="display: none" data-onsuccess="onLogin"></div>
-</div>
+            <div class="g-signin2" style="display: none" data-onsuccess="onLogin"></div>
+        </div>
 
-<!--/.nav-collapse -->
-</div>
+        <!--/.nav-collapse -->
+    </div>
 </nav>
 
 <div class="container">
@@ -40,13 +40,16 @@
     </div>
 
     <div align="left">
-        <form onsubmit="submitRateSchedule()">
+        <form>
             <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" required>
+                <label for="add-rate-schedule-name">Name</label>
+                <input type="text" class="form-control" id="add-rate-schedule-name" required>
+            </div>
+            <div class="form-group">
+                <label for="cost">Cost</label>
+                <input type="text" class="form-control" id="cost" required>
             </div>
             <table class="table table-bordered table-striped">
-            <tbody align="left">
                 <thead>
                     <th>Monday</th>
                     <th>Tuesday</th>
@@ -54,51 +57,131 @@
                     <th>Thursday</th>
                     <th>Friday</th>
                 </thead>
-                <tr>
-                    <td>
-                        <input type="radio" name="monday" value="none" checked> None<br>
-                        <input type="radio" name="monday" value="half"> Half<br>
-                        <input type="radio" name="monday" value="full"> Full<br>
-                    </td>
-                    <td>
-                        <input type="radio" name="tuesday" value="none" checked> None<br>
-                        <input type="radio" name="tuesday" value="half"> Half<br>
-                        <input type="radio" name="tuesday" value="full"> Full<br>
-                    </td>
-                    <td>
-                        <input type="radio" name="wednesday" value="none" checked> None<br>
-                        <input type="radio" name="wednesday" value="half"> Half<br>
-                        <input type="radio" name="wednesday" value="full"> Full<br>
-                    </td>
-                    <td>
-                        <input type="radio" name="thursday" value="none" checked> None<br>
-                        <input type="radio" name="thursday" value="half"> Half<br>
-                        <input type="radio" name="thursday" value="full"> Full<br>
-                    </td>
-                    <td>
-                        <input type="radio" name="friday" value="none" checked> None<br>
-                        <input type="radio" name="friday" value="half"> Half<br>
-                        <input type="radio" name="friday" value="full"> Full<br>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                <tbody align="left">
+                    <tr>
+                        <td>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsMonday" id="optionsMondayNone" value="none" checked>
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsMonday" id="optionsMondayHalf" value="half">
+                                        Half
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsMonday" id="optionsMondayFull" value="full">
+                                        Full
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsTuesday" id="optionsTuesdayNone" value="none" checked>
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsTuesday" id="optionsTuesdayHalf" value="half">
+                                        Half
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsTuesday" id="optionsTuesdayFull" value="full">
+                                        Full
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsWednesday" id="optionsWednesdayNone" value="none" checked>
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsWednesday" id="optionsWednesdayHalf" value="half">
+                                        Half
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsWednesday" id="optionsWednesdayFull" value="full">
+                                        Full
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsThursday" id="optionsThursdayNone" value="none" checked>
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsThursday" id="optionsThursdayHalf" value="half">
+                                        Half
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsThursday" id="optionsThursdayFull" value="full">
+                                        Full
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </td>
+                        <td>
+                            <fieldset class="form-group">
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsFriday" id="optionsFridayNone" value="none" checked>
+                                        None
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsFriday" id="optionsFridayHalf" value="half">
+                                        Half
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="optionsFriday" id="optionsFridayFull" value="full">
+                                        Full
+                                    </label>
+                                </div>
+                            </fieldset>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="form-group">
-                <label for="cost">Cost</label>
-                <input type="text" class="form-control" id="cost" required>
-            </div>
-            <label for="startMonth" class="col-2 col-form-label">Start Month</label>
-            <div class="col-10">
+                <label for="startMonth" class="col-2 col-form-label">Start Month</label>
                 <input class="form-control" type="month" id="startMonth" required>
             </div>
-            <label for="endMonth" class="col-2 col-form-label">End Month</label>
-            <div class="col-10">
+            <div class="form-group">
+                <label for="endMonth" class="col-2 col-form-label">End Month</label>
                 <input class="form-control" type="month" id="endMonth" required>
             </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary" onClick="submitRateSchedule()">Submit</button>
-            </div>
+            <button type="submit" class="btn btn-primary" onClick="createRateSchedule()">Submit</button>
         </form>
-</div>
+    </div>
 </div>
 <!-- /.container -->

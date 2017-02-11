@@ -1,8 +1,8 @@
 module.exports = {
-    attributes: {
-        name: {
-            type: 'string',
-            required: true
-        }
-    }
+	attributes: {
+		name: {
+			type: 'string',
+			required: true
+		}
+	}
 };

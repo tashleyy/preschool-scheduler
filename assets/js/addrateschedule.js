@@ -1,7 +1,7 @@
-function submitRateSchedule()
-{
+function createRateSchedule() {
+    var name = $('#add-rate-schedule-name').val();
     $.ajax({
-      url: 'rateschedulesubmit',
+      url: '/rateschedule/create',
       type: 'post',
       data: {
          name: name
@@ -14,4 +14,5 @@ function submitRateSchedule()
         console.log('error: ' + error);
       }
     });
+    // return false;
 }
