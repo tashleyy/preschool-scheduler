@@ -4,22 +4,46 @@ module.exports = {
             type: 'string',
             required: true
         },
-        days: {
-            type: 'string[7]',
-            enum:['Half', 'Full', 'None'],
+        monday: {
+            type: 'string',
+            enum:['half', 'full', 'none'],
+            defaultsTo:'None',
+            required: false
+        },
+        tuesday: {
+            type: 'string',
+            enum:['half', 'full', 'none'],
+            defaultsTo:'None',
+            required: false
+        },
+        wednesday: {
+            type: 'string',
+            enum:['half', 'full', 'none'],
+            defaultsTo:'None',
+            required: false
+        },
+        thursday: {
+            type: 'string',
+            enum:['half', 'full', 'none'],
+            defaultsTo:'None',
+            required: false
+        },
+        friday: {
+            type: 'string',
+            enum:['half', 'full', 'none'],
             defaultsTo:'None',
             required: false
         },
         cost: {
-            type: 'int',
+            type: 'string',
             required: false
         },
         startMonth: {
-            type: 'date',
+            type: 'string',
             required: false
         },
         endMonth: {
-            type: 'date',
+            type: 'string',
             required: false
         }
     }

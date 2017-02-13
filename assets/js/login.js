@@ -9,11 +9,9 @@ function onLogin(googleUser) {
       token: idToken
     },
     success: function(data) {
-      if (window.location.pathname == "/login")
-      {
+      if (window.location.pathname == "/login") {
         document.location.href = "home";
       }
-      console.log('success: ' + data);
     },
     error: function(xhr, status, error) {
       console.log('error: ' + error);
@@ -28,8 +26,7 @@ function signOut() {
       url: '/user/logout',
       type: 'post',
       success: function(data) {
-        if (window.location.pathname == "/login")
-        {
+        if (window.location.pathname == "/login") {
           $('.g-signin2').css('display', 'block');
           $('.sign-out').css('display', 'none');
         }
