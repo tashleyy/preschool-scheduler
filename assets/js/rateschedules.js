@@ -9,11 +9,11 @@ function displayRateSchedules() {
                 console.log(rs);
                 // Construct HTML string of table row
                 var rowHtml = '<tr><td>' + rs.name + '</td><td>'
-                    + rs.monday + '</td><td>'
-                    + rs.tuesday + '</td><td>'
-                    + rs.wednesday + '</td><td>'
-                    + rs.thursday + '</td><td>'
-                    + rs.friday + '</td><td>'
+                    + formatDay(rs.monday) + '</td><td>'
+                    + formatDay(rs.tuesday) + '</td><td>'
+                    + formatDay(rs.wednesday) + '</td><td>'
+                    + formatDay(rs.thursday) + '</td><td>'
+                    + formatDay(rs.friday) + '</td><td>'
                     + rs.cost + '</td><td>'
                     + rs.startMonth + '</td><td>'
                     + rs.endMonth + '</td></tr>';
@@ -25,6 +25,18 @@ function displayRateSchedules() {
             console.log('error: ' + error);
         }
     });
+}
+
+function formatDay(day) {
+    if (day === 'full')
+    {
+        return 'F';
+    }
+    else if (day === 'half')
+    {
+        return 'H';
+    }
+    return ' ';
 }
 
 $(document).ready(displayRateSchedules);
