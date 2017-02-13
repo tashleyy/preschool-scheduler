@@ -53,6 +53,8 @@ module.exports.routes = {
 
   'post /rateschedule/create': 'RateScheduleController.create',
 
+  'get /rateschedule/find': 'RateScheduleController.find',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

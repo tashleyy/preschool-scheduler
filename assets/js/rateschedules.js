@@ -1,14 +1,13 @@
 function displayRateSchedules() {
     $.ajax({
         url: '/rateschedule/find',
-        type: 'post',
+        type: 'get',
         success: function (data) {
-            console.log('data: ' + data);
             // Add table rows here
             for (var i = 0; i < data.length; i++) {
                 var rateSchedule = data[i];
+                console.log(rateSchedule);
                 // Construct HTML string of table row
-
                 // Use jQuery to add it to table body
             }
         },
