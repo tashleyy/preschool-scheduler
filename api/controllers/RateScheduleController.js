@@ -21,5 +21,13 @@ module.exports = {
       }
       return res.ok(rateSchedule);
     });
+  },
+  'find': function(req, res) {
+    RateSchedule.find().exec(function(err, rateSchedules) {
+      if (err) {
+        return res.serverError();
+      }
+      return res.ok(rateSchedules);
+    })
   }
 }
