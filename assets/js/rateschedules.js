@@ -26,3 +26,5 @@ function displayRateSchedules() {
         }
     });
 }
+
+$(document).ready(displayRateSchedules);
