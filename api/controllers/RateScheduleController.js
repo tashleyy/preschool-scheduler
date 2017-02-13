@@ -1,7 +1,9 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name || !params.cost) {
+    if (!params.name || !params.cost || !params.monday || !params.tuesday
+    || !params.wednesday || !params.thursday || !params.friday
+    || !params.startMonth || !params.endMonth) {
       return res.badRequest();
     }
     RateSchedule.create({name: params.name, 
