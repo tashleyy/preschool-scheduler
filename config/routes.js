@@ -43,6 +43,8 @@ module.exports.routes = {
 
   'get /addrateschedule': 'ViewController.addrateschedule',
 
+  'get /afterschoolactivities': 'ViewController.afterschoolactivities',
+
   'get /students': 'ViewController.students',
 
   'get /student': 'ViewController.student',

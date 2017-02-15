@@ -28,6 +28,11 @@
                 <% } else { %>
                     <li><a href="rateschedules">Rate Schedules</a></li>
                 <% } %>
+                <% if (location === 'afterschoolactivities') { %>
+                    <li class="active"><a href="afterschoolactivities">After School Activities</a></li>
+                <% } else { %>
+                    <li><a href="afterschoolactivities">After School Activities</a></li>
+                <% } %>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a onClick="signOut();">Sign Out</a></li>

@@ -23,6 +23,10 @@ module.exports = {
     res.view('rateschedules');
   },
 
+  'afterschoolactivities': function(req, res) {
+    res.view('afterschoolactivities');
+  },
+
   'student': function(req, res) {
     res.view('student');
   }
