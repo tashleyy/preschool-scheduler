@@ -28,12 +28,10 @@ function displayRateSchedules() {
 }
 
 function formatDay(day) {
-    if (day === 'full')
-    {
+    if (day === 'full') {
         return 'F';
     }
-    else if (day === 'half')
-    {
+    else if (day === 'half') {
         return 'H';
     }
     return ' ';

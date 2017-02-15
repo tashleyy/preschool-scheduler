@@ -4,8 +4,7 @@ module.exports = {
     if (!params.name) {  //TODO: add the rest of the params 
       return res.badRequest();
     }
-    RateSchedule.create(
-    {
+    RateSchedule.create({
       name: params.name, 
       phone: params.phone,
       ratetSchedule: params.studentSchedule,
