@@ -2,11 +2,10 @@ function displayRateSchedules() {
     $.ajax({
         url: '/rateschedule/find',
         type: 'get',
-        success: function (data) {
+        success: function(data) {
             // Add table rows here
             for (var i = 0; i < data.length; i++) {
                 var rs = data[i];
-                console.log(rs);
                 // Construct HTML string of table row
                 var rowHtml = '<tr><td>' + rs.name + '</td><td>'
                     + formatDay(rs.monday) + '</td><td>'
@@ -21,7 +20,7 @@ function displayRateSchedules() {
                 $('#rate-schedule-table tbody').append(rowHtml);
             }
         },
-        error: function (xhr, status, error) {
+        error: function(xhr, status, error) {
             console.log('error: ' + error);
         }
     });

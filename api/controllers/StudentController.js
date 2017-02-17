@@ -1,20 +1,39 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name) {  //TODO: add the rest of the params 
+    if (!params.name || !params.phone || !params.rsId) {
       return res.badRequest();
     }
-    RateSchedule.create({
-      name: params.name, 
-      phone: params.phone,
-      ratetSchedule: params.studentSchedule,
-      afterSchoolActivities: params.afterSchoolActivities
-    }, function studentCreated(err, student) {
+    RateSchedule.findOne({id: params.rsId})
+      .exec(function(err, rs) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(student);
+      if (!rs) {
+        return res.notFound();
+      }
+      Student.create({
+        name: params.name,
+        phone: params.phone,
+        rateSchedules: [params.rsId]
+      }).exec(function studentCreated(err, student) {
+        if (err) {
+          sails.log.error(err);
+          return res.serverError();
+        }
+        return res.ok(student);
+      });
+    });
+  },
+
+  'find': function(req, res) {
+    Student.find().populate('rateSchedules').exec(function(err, students) {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+      return res.ok(students);
     });
   }
 }

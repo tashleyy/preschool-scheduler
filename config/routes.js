@@ -57,6 +57,10 @@ module.exports.routes = {
 
   'get /rateschedule/find': 'RateScheduleController.find',
 
+  'post /student/create': 'StudentController.create',
+
+  'get /student/find': 'StudentController.find',
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *

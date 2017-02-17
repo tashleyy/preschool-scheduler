@@ -16,7 +16,7 @@ module.exports = {
       friday: params.friday,
       startMonth: params.startMonth,
       endMonth: params.endMonth
-    }, function rateScheduleCreated(err, rateSchedule) {
+    }).exec(function rateScheduleCreated(err, rateSchedule) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -24,9 +24,11 @@ module.exports = {
       return res.ok(rateSchedule);
     });
   },
+
   'find': function(req, res) {
     RateSchedule.find().exec(function(err, rateSchedules) {
       if (err) {
+        sails.log.error(err);
         return res.serverError();
       }
       return res.ok(rateSchedules);

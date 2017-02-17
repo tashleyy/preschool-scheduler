@@ -8,13 +8,14 @@ module.exports = {
             type: 'string',
             required: true
         },
-        rateSchedule: {
-            type: 'string',
-            required: true
+        rateSchedules: {
+            collection: 'RateSchedule',
+            via: 'students',
+            required: true,
+            dominant: true
         },
         afterSchoolActivities: {
             type: 'string',
-            required: true
         }
     }
 };

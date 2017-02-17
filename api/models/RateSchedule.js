@@ -6,45 +6,41 @@ module.exports = {
         },
         monday: {
             type: 'string',
-            enum:['half', 'full', 'none'],
-            defaultsTo:'None',
-            required: false
+            enum: ['half', 'full', 'none'],
+            defaultsTo: 'None'
         },
         tuesday: {
             type: 'string',
-            enum:['half', 'full', 'none'],
-            defaultsTo:'None',
-            required: false
+            enum: ['half', 'full', 'none'],
+            defaultsTo: 'None'
         },
         wednesday: {
             type: 'string',
-            enum:['half', 'full', 'none'],
-            defaultsTo:'None',
-            required: false
+            enum: ['half', 'full', 'none'],
+            defaultsTo: 'None'
         },
         thursday: {
             type: 'string',
-            enum:['half', 'full', 'none'],
-            defaultsTo:'None',
-            required: false
+            enum: ['half', 'full', 'none'],
+            defaultsTo: 'None'
         },
         friday: {
             type: 'string',
-            enum:['half', 'full', 'none'],
-            defaultsTo:'None',
-            required: false
+            enum: ['half', 'full', 'none'],
+            defaultsTo: 'None'
         },
         cost: {
-            type: 'string',
-            required: false
+            type: 'string'
         },
         startMonth: {
-            type: 'string',
-            required: false
+            type: 'string'
         },
         endMonth: {
-            type: 'string',
-            required: false
+            type: 'string'
+        },
+        students: {
+            collection: 'Student',
+            via: 'rateSchedules'
         }
     }
 };
