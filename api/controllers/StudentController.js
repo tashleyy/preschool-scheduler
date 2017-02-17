@@ -1,7 +1,8 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name || !params.phone || !params.rsId) {
+    //TODO put all checks in
+    if (!params.name || !params.birthday || !params.rsId) {
       return res.badRequest();
     }
     RateSchedule.findOne({id: params.rsId})
@@ -15,7 +16,14 @@ module.exports = {
       }
       Student.create({
         name: params.name,
-        phone: params.phone,
+        birthday: params.birthday,
+        parent1: params.parent1,
+        parentPhone1: params.parentPhone2,
+        parentPhone2: params.parentPhone2,
+        physician: params.physician,
+        physicianPhone: params.physicianPhone,
+        startDate: params.startDate,
+        endDate: params.endDate,
         rateSchedules: [params.rsId]
       }).exec(function studentCreated(err, student) {
         if (err) {
