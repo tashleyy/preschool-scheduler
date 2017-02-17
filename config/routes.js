@@ -61,6 +61,7 @@ module.exports.routes = {
 
   'get /student/find': 'StudentController.find',
 
+
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
