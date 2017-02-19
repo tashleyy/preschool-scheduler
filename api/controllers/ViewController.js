@@ -19,6 +19,10 @@ module.exports = {
     res.view('addrateschedule');
   },
 
+  'addafterschoolactivity': function(req, res) {
+    res.view('addafterschoolactivity');
+  },
+
   'rateschedules': function(req, res) {
     res.view('rateschedules');
   },
