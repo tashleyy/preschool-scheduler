@@ -13,7 +13,7 @@ function displayRateSchedules() {
                     + formatDay(rs.wednesday) + '</td><td>'
                     + formatDay(rs.thursday) + '</td><td>'
                     + formatDay(rs.friday) + '</td><td>'
-                    + rs.cost + '</td><td>'
+                    + formatCost(rs.cost) + '</td><td>'
                     + rs.startMonth + '</td><td>'
                     + rs.endMonth + '</td><td>'
                     + '<a href="#" onclick="showRateScheduleEditModal(\'' + rs.id + '\')"><span class="glyphicon glyphicon-pencil"/></a></td><td>'
@@ -71,7 +71,7 @@ function showRateScheduleDeleteModal(rsId) {
 function editRateSchedule() {
     var rsId = $('#rate-schedule-edit-modal').attr('rsId');
     var name = $('#edit-rate-schedule-name').val();
-    var cost = '$' + $('#edit-rate-schedule-cost').val();
+    var cost = $('#edit-rate-schedule-cost').val();
     var monday =  $('input[name="edit-options-monday"]:checked').val();
     var tuesday =  $('input[name="edit-options-tuesday"]:checked').val();
     var wednesday =  $('input[name="edit-options-wednesday"]:checked').val();
@@ -132,6 +132,18 @@ function formatDay(day) {
         return 'H';
     }
     return ' ';
+}
+
+function formatCost(cost) {
+    if (cost && typeof cost === 'string' && cost.length > 0 && cost[0] !== '$') {
+        if (cost[0] === '$') {
+            return cost;
+        }
+        return '$' + cost;
+    } else if (cost && typeof cost !== 'string') {
+        return '$' + cost.toString();
+    }
+    return cost;
 }
 
 $('#rate-schedule-edit-modal').modal({show: false});

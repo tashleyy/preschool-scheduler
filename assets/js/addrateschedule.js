@@ -1,6 +1,6 @@
 function createRateSchedule() {
     var name = $('#add-rate-schedule-name').val();
-    var cost = '$' + $('#add-rate-schedule-cost').val();
+    var cost = $('#add-rate-schedule-cost').val();
     var monday =  $('input[name="add-options-monday"]:checked').val();
     var tuesday =  $('input[name="add-options-tuesday"]:checked').val();
     var wednesday =  $('input[name="add-options-wednesday"]:checked').val();

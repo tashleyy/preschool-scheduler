@@ -3,7 +3,7 @@ module.exports = {
     var params = req.params.all();
     if (!params.name || !params.cost || !params.monday || !params.tuesday
       || !params.wednesday || !params.thursday || !params.friday
-      || !params.startMonth || !params.endMonth) {
+      || !params.startMonth || !params.endMonth || isNaN(params.cost)) {
       return res.badRequest();
     }
     RateSchedule.create({
@@ -52,7 +52,7 @@ module.exports = {
 
   'update': function(req, res) {
     var params = req.params.all();
-    if (!params.rsId) {
+    if (!params.rsId || (params.cost && isNaN(params.cost))) {
       return res.badRequest();
     }
     var id = params.rsId;
