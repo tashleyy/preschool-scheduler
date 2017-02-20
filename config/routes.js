@@ -57,11 +57,17 @@ module.exports.routes = {
 
   'post /rateschedule/create': 'RateScheduleController.create',
 
-  'post /afterschoolactivity/create': 'AfterSchoolActivityController.create',
-
   'get /rateschedule/find': 'RateScheduleController.find',
 
-  //'get /afterschoolactivity/find': 'AfterSchoolActivityController.find',
+  'get /rateschedule/findone': 'RateScheduleController.findOne',
+
+  'put /rateschedule/update': 'RateScheduleController.update',
+
+  'delete /rateschedule/destroy': 'RateScheduleController.destroy',
+
+  'post /afterschoolactivity/create': 'AfterSchoolActivityController.create',
+
+  'get /afterschoolactivity/find': 'AfterSchoolActivityController.find',
 
   'post /student/create': 'StudentController.create',
 

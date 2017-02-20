@@ -4,20 +4,20 @@ module.exports = {
     if (!params.name || !params.cost) {
       return res.badRequest();
     }
-    RateSchedule.create({
+    AfterSchoolActivity.create({
       name: params.name, 
       cost: params.cost
-    }).exec(function AfterSchoolActivityCreated(err, afterSchoolActivity) {
+    }).exec(function afterSchoolActivityCreated(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(AfterSchoolActivity);
+      return res.ok(afterSchoolActivity);
     });
   },
 
   'find': function(req, res) {
-    AfterSchoolActivity.find().exec(function(err, afterSchoolActivity) {
+    AfterSchoolActivity.find().exec(function(err, afterSchoolActivities) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
