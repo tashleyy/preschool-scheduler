@@ -57,7 +57,11 @@ module.exports.routes = {
 
   'post /rateschedule/create': 'RateScheduleController.create',
 
+  'post /afterschoolactivity/create': 'AfterSchoolActivityController.create',
+
   'get /rateschedule/find': 'RateScheduleController.find',
+
+  //'get /afterschoolactivity/find': 'AfterSchoolActivityController.find',
 
   'post /student/create': 'StudentController.create',
 

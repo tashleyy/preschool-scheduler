@@ -6,8 +6,8 @@ module.exports = {
     }
     RateSchedule.create({
       name: params.name, 
-      cost: params.cost,
-    }).exec(function AfterSchoolActivityCreated(err, AfterSchoolActivity) {
+      cost: params.cost
+    }).exec(function AfterSchoolActivityCreated(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -17,12 +17,12 @@ module.exports = {
   },
 
   'find': function(req, res) {
-    AfterSchoolActivity.find().exec(function(err, AfterschoolActivity) {
+    AfterSchoolActivity.find().exec(function(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(AfterSchoolActivities);
+      return res.ok(afterSchoolActivities);
     })
   }
 }
