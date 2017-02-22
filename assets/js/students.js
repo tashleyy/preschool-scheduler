@@ -4,7 +4,7 @@ function displayStudents() {
         type: 'get',
         success: function(data) {
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i]);
+                var student = data[i];
             }
         },
         error: function(xhr, status, error) {

@@ -57,23 +57,21 @@ function displayRateScheduleOptions() {
 
 function getDays() {
     var rateDrop = $('#add-student-rate-schedules');
-    //var selectedText = rateDrop.val().text(); 
-    for (var i = 0; i < rateDrop.options.length; i++) {
-        if (rateDrop.options[i].selected== true) {
-            var selectedText = rateDrop.options[i].text();
-            console.log(selectedText);
-        }
-    }
+    var id = rateDrop.val(); 
 
     $.ajax({
-        url: '/rateschedule/findOne',
+        url: '/rateschedule/findone',
         type: 'get',
         data: {
-            name: selectedText
+            id: id
         },
         success: function(data) {
-            var rs = data[0];
-            populateWithString(rs.monday, $('#optionsMonday'));
+            var rs = data;
+            populateWithString(rs.monday, $('input[name="optionsMonday"]'));
+            populateWithString(rs.tuesday, $('input[name="optionsTuesday"]'));
+            populateWithString(rs.wednesday, $('input[name="optionsWednesday"]'));
+            populateWithString(rs.thursday, $('input[name="optionsThursday"]'));
+            populateWithString(rs.friday, $('input[name="optionsFriday"]'));
             
         },
         error: function(xhr, status, error) {
@@ -96,18 +94,18 @@ function populateWithString(day, radioButton)
     if (day == 'full')
     {
         radioButton[FULL_INDEX].disabled = false;
-        radioButton[FULL_INDEX].selected = true;
+        radioButton.filter('[value=full]').prop('checked', true);
     } 
     else if (day == 'half')
     {
         radioButton[AM_INDEX].disabled = false;
         radioButton[PM_INDEX].disabled = false;
-        radioButton[AM_INDEX].selected = true;
+        radioButton.filter('[value=am]').prop('checked', true);
     }
     else if (day == 'none')
     {
         radioButton[NONE_INDEX].disabled = false;
-        radioButton[NONE_INDEX].selected = true;
+        radioButton.filter('[value=none]').prop('checked', true);
     }
 } 
 

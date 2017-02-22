@@ -31,6 +31,9 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
+
+  // ViewController routes
+
   'get /login': 'ViewController.login',
   
   'get /': 'ViewController.home',
@@ -45,23 +48,53 @@ module.exports.routes = {
 
   'get /afterschoolactivities': 'ViewController.afterschoolactivities',
 
+  'get /addafterschoolactivity': 'ViewController.addafterschoolactivity',
+
   'get /students': 'ViewController.students',
 
   'get /student': 'ViewController.student',
+
+  // UserController routes
 
   'post /user/login': 'UserController.login',
 
   'post /user/logout': 'UserController.logout',
 
+  // RateScheduleController routes
+
   'post /rateschedule/create': 'RateScheduleController.create',
 
   'get /rateschedule/find': 'RateScheduleController.find',
 
-  'get /rateschedule/findOne': 'RateScheduleController.findOne',
+  'get /rateschedule/findone': 'RateScheduleController.findOne',
+
+  'put /rateschedule/update': 'RateScheduleController.update',
+
+  'delete /rateschedule/destroy': 'RateScheduleController.destroy',
+
+  // AfterSchoolActivityController routes
+
+  'post /afterschoolactivity/create': 'AfterSchoolActivityController.create',
+
+  'get /afterschoolactivity/find': 'AfterSchoolActivityController.find',
+
+  'get /afterschoolactivity/findone': 'AfterSchoolActivityController.findOne',
+
+  'put /afterschoolactivity/update': 'AfterSchoolActivityController.update',
+
+  'delete /afterschoolactivity/destroy': 'AfterSchoolActivityController.destroy',
+
+  // StudentController routes
 
   'post /student/create': 'StudentController.create',
 
   'get /student/find': 'StudentController.find',
+
+  'get /student/findone': 'StudentController.findOne',
+
+  'put /student/update': 'StudentController.update',
+
+  'delete /student/destroy': 'StudentController.destroy',
 
   /***************************************************************************
   *                                                                          *

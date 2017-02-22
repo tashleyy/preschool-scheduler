@@ -30,13 +30,16 @@ module.exports = {
             defaultsTo: 'None'
         },
         cost: {
-            type: 'string'
+            type: 'float',
+            defaultsTo: 0
         },
         startMonth: {
-            type: 'string'
+            type: 'string',
+            required: true
         },
         endMonth: {
-            type: 'string'
+            type: 'string',
+            required: true
         },
         students: {
             collection: 'Student',
