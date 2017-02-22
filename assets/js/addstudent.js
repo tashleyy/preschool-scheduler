@@ -45,9 +45,6 @@ function displayRateScheduleOptions() {
             for (var i = 0; i < data.length; i++) {
                 var rs = data[i];
                 var optionHtml = '<option ';
-                if (i == 0) {
-                    optionHtml += 'selected ';
-                }
                 optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
                 $('#add-student-rate-schedules').append(optionHtml);
             }
@@ -57,5 +54,61 @@ function displayRateScheduleOptions() {
         }
     });
 }
+
+function getDays() {
+    var rateDrop = $('#add-student-rate-schedules');
+    //var selectedText = rateDrop.val().text(); 
+    for (var i = 0; i < rateDrop.options.length; i++) {
+        if (rateDrop.options[i].selected== true) {
+            var selectedText = rateDrop.options[i].text();
+            console.log(selectedText);
+        }
+    }
+
+    $.ajax({
+        url: '/rateschedule/findOne',
+        type: 'get',
+        data: {
+            name: selectedText
+        },
+        success: function(data) {
+            var rs = data[0];
+            populateWithString(rs.monday, $('#optionsMonday'));
+            
+        },
+        error: function(xhr, status, error) {
+            console.log('error: ' + error);
+        }
+    });
+}
+
+function populateWithString(day, radioButton)
+{
+    var NONE_INDEX = 0;
+    var AM_INDEX = 1;
+    var PM_INDEX = 2;
+    var FULL_INDEX = 3;
+
+    for (var i=0, numButtons=radioButton.length; i<numButtons; i++) {
+        radioButton[i].disabled = true;
+    }
+
+    if (day == 'full')
+    {
+        radioButton[FULL_INDEX].disabled = false;
+        radioButton[FULL_INDEX].selected = true;
+    } 
+    else if (day == 'half')
+    {
+        radioButton[AM_INDEX].disabled = false;
+        radioButton[PM_INDEX].disabled = false;
+        radioButton[AM_INDEX].selected = true;
+    }
+    else if (day == 'none')
+    {
+        radioButton[NONE_INDEX].disabled = false;
+        radioButton[NONE_INDEX].selected = true;
+    }
+} 
 
 $(document).ready(displayRateScheduleOptions);

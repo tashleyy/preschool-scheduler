@@ -33,5 +33,22 @@ module.exports = {
       }
       return res.ok(rateSchedules);
     })
+  },
+
+  'findOne': function(req, res) {
+    params = req.params.all();
+
+    if(!params.name)
+    {
+      return res.badRequest();
+    }
+
+    Student.find({ name: params.name }).exec(function(err, rateSchedules) {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+      return res.ok(rateSchedules);
+    })
   }
 }
