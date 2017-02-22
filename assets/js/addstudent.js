@@ -10,6 +10,11 @@ function addStudent() {
     var startDate = $('#add-student-start-day').val();
     var endDate = $('#add-student-end-day').val();
     var rs = $('#add-student-rate-schedules').val();
+    var monday = $('input[name="optionsMonday"]:checked').val();
+    var tuesday = $('input[name="optionsTuesday"]:checked').val();
+    var wednesday = $('input[name="optionsWednesday"]:checked').val();
+    var thursday = $('input[name="optionsThursday"]:checked').val();
+    var friday = $('input[name="optionsFriday"]:checked').val();
     $.ajax({
         url: '/student/create',
         type: 'post',
@@ -24,6 +29,11 @@ function addStudent() {
             physicianPhone: physicianPhone,
             startDate: startDate,
             endDate: endDate,
+            monday: monday,
+            tuesday: tuesday,
+            wednesday: wednesday,
+            thursday: thursday,
+            friday: friday,
             rsId: rs
         },
         success: function(data) {

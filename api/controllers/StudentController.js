@@ -25,6 +25,11 @@ module.exports = {
         physicianPhone: params.physicianPhone,
         startDate: params.startDate,
         endDate: params.endDate,
+        monday: params.monday,
+        tuesday: params.tuesday,
+        wednesday: params.wednesday,
+        thursday: params.thursday,
+        friday: params.friday,
         rateSchedules: [params.rsId]
       }).exec(function studentCreated(err, student) {
         if (err) {

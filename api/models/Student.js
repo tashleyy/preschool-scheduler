@@ -46,7 +46,19 @@ module.exports = {
             required: true,
             dominant: true
         },
-        afterSchoolActivities: {
+        monday: {
+            type: 'string',
+        },
+         tuesday: {
+            type: 'string',
+        },
+         wednesday: {
+            type: 'string',
+        },
+         thursday: {
+            type: 'string',
+        },
+         friday: {
             type: 'string',
         }
     }
