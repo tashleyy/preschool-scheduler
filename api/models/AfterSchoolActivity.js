@@ -5,8 +5,8 @@ module.exports = {
             required: true
         },
         cost: {
-            type: 'string',
-            required: true
+            type: 'float',
+            defaultsTo: 0
         }
     }
 };

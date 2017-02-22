@@ -31,7 +31,7 @@ module.exports = {
         },
         cost: {
             type: 'float',
-            required: true
+            defaultsTo: 0
         },
         startMonth: {
             type: 'string',

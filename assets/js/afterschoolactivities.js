@@ -8,7 +8,7 @@ function displayAfterSchoolActivities() {
                 var rs = data[i];
                 // Construct HTML string of table row
                 var rowHtml = '<tr><td>' + rs.name + '</td><td>'
-                    + rs.cost + '</td></tr>';
+                    + formatCost(rs.cost) + '</td></tr>';
                 // Use jQuery to add it to table body
                 $('#afterschool-activity-table tbody').append(rowHtml);
             }
@@ -18,6 +18,5 @@ function displayAfterSchoolActivities() {
         }
     });
 }
-
 
 $(document).ready(displayAfterSchoolActivities);

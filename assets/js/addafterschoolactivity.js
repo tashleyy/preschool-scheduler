@@ -1,13 +1,13 @@
 function createAfterSchoolActivity() {
     var name = $('#add-activity-name').val();
-    var cost = '$' + $('#add-activity-cost').val();
+    var cost = $('#add-activity-cost').val();
    
     $.ajax({
       url: '/afterschoolactivity/create',
       type: 'post',
       data: {
          name: name,
-         cost: cost,
+         cost: cost
       },
       success: function(data) {
         document.location.href = 'afterschoolactivities';
