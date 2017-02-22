@@ -1,38 +1,29 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name || !params.cost || !params.monday || !params.tuesday
-      || !params.wednesday || !params.thursday || !params.friday
-      || !params.startMonth || !params.endMonth || isNaN(params.cost)) {
+    if (!params.name || !params.cost) {
       return res.badRequest();
     }
-    RateSchedule.create({
+    AfterSchoolActivity.create({
       name: params.name, 
-      cost: params.cost,
-      monday: params.monday,
-      tuesday: params.tuesday,
-      wednesday: params.wednesday,
-      thursday: params.thursday,
-      friday: params.friday,
-      startMonth: params.startMonth,
-      endMonth: params.endMonth
-    }).exec(function(err, rateSchedule) {
+      cost: params.cost
+    }).exec(function(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(rateSchedule);
+      return res.ok(afterSchoolActivity);
     });
   },
 
   'find': function(req, res) {
-    RateSchedule.find().exec(function(err, rateSchedules) {
+    AfterSchoolActivity.find().exec(function(err, afterSchoolActivities) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(rateSchedules);
-    });
+      return res.ok(afterSchoolActivities);
+    })
   },
 
   'findOne': function(req, res) {
@@ -41,34 +32,33 @@ module.exports = {
       return res.badRequest();
     }
 
-    RateSchedule.findOne({id: params.id}).exec(function(err, rateSchedule) {
+    AfterSchoolActivity.findOne({id: params.id}).exec(function(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      return res.ok(rateSchedule);
+      return res.ok(afterSchoolActivity);
     });
   },
 
   'update': function(req, res) {
     var params = req.params.all();
-    if (!params.id || (params.cost && isNaN(params.cost))) {
+    if (!params.id) {
       return res.badRequest();
     }
     var id = params.id;
     delete params.id;
-
-    RateSchedule.update({id: id}, params)
-      .exec(function(err, rateSchedules) {
+    AfterSchoolActivity.update({id: id}, params)
+      .exec(function(err, afterSchoolActivities) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      var rateSchedule = rateSchedules[0];
-      if (!rateSchedule) {
+      var afterSchoolActivity = afterSchoolActivities[0];
+      if (!afterSchoolActivity) {
         return res.notFound();
       }
-      return res.ok(rateSchedule);
+      return res.ok(afterSchoolActivity);
     });
   },
 
@@ -78,7 +68,7 @@ module.exports = {
       return res.badRequest();
     }
 
-    RateSchedule.destroy({id: params.id}).exec(function(err) {
+    AfterSchoolActivity.destroy({id: params.id}).exec(function(err) {
       if (err) {
         sails.log.error(err);
         return res.serverError();

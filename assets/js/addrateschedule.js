@@ -1,11 +1,11 @@
 function createRateSchedule() {
     var name = $('#add-rate-schedule-name').val();
-    var cost = '$' + $('#add-rate-schedule-cost').val();
-    var monday =  $('input[name="optionsMonday"]:checked').val();
-    var tuesday =  $('input[name="optionsTuesday"]:checked').val();
-    var wednesday =  $('input[name="optionsWednesday"]:checked').val();
-    var thursday =  $('input[name="optionsThursday"]:checked').val();
-    var friday =  $('input[name="optionsFriday"]:checked').val();
+    var cost = $('#add-rate-schedule-cost').val();
+    var monday =  $('input[name="add-options-monday"]:checked').val();
+    var tuesday =  $('input[name="add-options-tuesday"]:checked').val();
+    var wednesday =  $('input[name="add-options-wednesday"]:checked').val();
+    var thursday =  $('input[name="add-options-thursday"]:checked').val();
+    var friday =  $('input[name="add-options-friday"]:checked').val();
     var startMonth = $('#add-rate-schedule-start-month').val();
     var endMonth = $('#add-rate-schedule-end-month').val();
     $.ajax({
