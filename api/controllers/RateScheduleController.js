@@ -16,7 +16,7 @@ module.exports = {
       friday: params.friday,
       startMonth: params.startMonth,
       endMonth: params.endMonth
-    }).exec(function rateScheduleCreated(err, rateSchedule) {
+    }).exec(function(err, rateSchedule) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -37,11 +37,11 @@ module.exports = {
 
   'findOne': function(req, res) {
     var params = req.params.all();
-    if (!params.rsId) {
+    if (!params.id) {
       return res.badRequest();
     }
 
-    RateSchedule.findOne({id: params.rsId}).exec(function(err, rateSchedule) {
+    RateSchedule.findOne({id: params.id}).exec(function(err, rateSchedule) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -52,11 +52,11 @@ module.exports = {
 
   'update': function(req, res) {
     var params = req.params.all();
-    if (!params.rsId || (params.cost && isNaN(params.cost))) {
+    if (!params.id || (params.cost && isNaN(params.cost))) {
       return res.badRequest();
     }
-    var id = params.rsId;
-    delete params.rsId;
+    var id = params.id;
+    delete params.id;
 
     RateSchedule.update({id: id}, params)
       .exec(function(err, rateSchedules) {
@@ -74,11 +74,11 @@ module.exports = {
 
   'destroy': function(req, res) {
     var params = req.params.all();
-    if (!params.rsId) {
+    if (!params.id) {
       return res.badRequest();
     }
 
-    RateSchedule.destroy({id: params.rsId}).exec(function(err) {
+    RateSchedule.destroy({id: params.id}).exec(function(err) {
       if (err) {
         sails.log.error(err);
         return res.serverError();

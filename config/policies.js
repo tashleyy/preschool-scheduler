@@ -26,14 +26,9 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
-  // '*': true,
-
   ViewController: {
-    '/login': true,
-    '/': 'sessionAuth',
-    'home': 'sessionAuth',
-    'students': 'sessionAuth',
-    'addstudent': 'sessionAuth'
+    '*': 'sessionAuth',
+    login: true,
   }
 
   /***************************************************************************

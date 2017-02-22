@@ -28,12 +28,12 @@ function displayRateSchedules() {
     });
 }
 
-function showRateScheduleEditModal(rsId) {
+function showRateScheduleEditModal(id) {
     $.ajax({
         url: '/rateschedule/findone',
         type: 'get',
         data: {
-            rsId: rsId
+            id: id
         },
         success: function(data) {
             // Reset radio buttons
@@ -52,7 +52,7 @@ function showRateScheduleEditModal(rsId) {
             $('input[name="edit-options-friday"]').filter('[value=' + data.friday + ']').prop('checked', true);
             $('#edit-rate-schedule-start-month').val(data.startMonth);
             $('#edit-rate-schedule-end-month').val(data.endMonth);
-            $('#rate-schedule-edit-modal').attr('rsId', rsId);
+            $('#rate-schedule-edit-modal').attr('rsId', id);
             $('#rate-schedule-edit-modal').modal('show');
         },
         error: function(xhr, status, error) {
@@ -62,14 +62,14 @@ function showRateScheduleEditModal(rsId) {
     return false;
 }
 
-function showRateScheduleDeleteModal(rsId) {
-    $('#rate-schedule-delete-modal').attr('rsId', rsId);
+function showRateScheduleDeleteModal(id) {
+    $('#rate-schedule-delete-modal').attr('rsId', id);
     $('#rate-schedule-delete-modal').modal('show');
     return false;
 }
 
 function editRateSchedule() {
-    var rsId = $('#rate-schedule-edit-modal').attr('rsId');
+    var id = $('#rate-schedule-edit-modal').attr('rsId');
     var name = $('#edit-rate-schedule-name').val();
     var cost = $('#edit-rate-schedule-cost').val();
     var monday =  $('input[name="edit-options-monday"]:checked').val();
@@ -83,7 +83,7 @@ function editRateSchedule() {
         url: '/rateschedule/update',
         type: 'put',
         data: {
-            rsId: rsId,
+            id: id,
             name: name,
             cost: cost,
             monday: monday,
@@ -106,12 +106,12 @@ function editRateSchedule() {
 }
 
 function deleteRateSchedule() {
-    var rsId = $('#rate-schedule-delete-modal').attr('rsId');
+    var id = $('#rate-schedule-delete-modal').attr('rsId');
     $.ajax({
         url: '/rateschedule/destroy',
         type: 'delete',
         data: {
-            rsId: rsId
+            id: id
         },
         success: function(data) {
             $('#rate-schedule-table tbody').html('');
