@@ -1,10 +1,13 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    //TODO put all checks in
-    if (!params.name || !params.birthday || !params.rsId) {
+    if (!params.name || !params.birthday || !params.rsId
+      || !params.parent1 || !params.parentPhone1 || !params.physician
+      || !params.physicianPhone || !params.startData || !params.endDate
+      || !params.rateSchedules) {
       return res.badRequest();
     }
+
     RateSchedule.findOne({id: params.rsId})
       .exec(function(err, rs) {
       if (err) {
@@ -25,11 +28,6 @@ module.exports = {
         physicianPhone: params.physicianPhone,
         startDate: params.startDate,
         endDate: params.endDate,
-        monday: params.monday,
-        tuesday: params.tuesday,
-        wednesday: params.wednesday,
-        thursday: params.thursday,
-        friday: params.friday,
         rateSchedules: [params.rsId]
       }).exec(function studentCreated(err, student) {
         if (err) {
@@ -56,6 +54,7 @@ module.exports = {
     if (!params.id) {
       return res.badRequest();
     }
+
     Student.findOne({id: params.id}).populate('rateSchedules').exec(function(err, student) {
       if (err) {
         sails.log.error(err);
@@ -70,9 +69,9 @@ module.exports = {
     if (!params.id) {
       return res.badRequest();
     }
+
     var id = params.id;
     delete params.id;
-
     Student.update({id: id}, params)
       .exec(function(err, students) {
       if (err) {
