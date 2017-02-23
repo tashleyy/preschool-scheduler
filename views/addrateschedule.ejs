@@ -1,5 +1,7 @@
 <%- partial('partials/nav.ejs', {location: 'addrateschedule'}) %>
 
+<% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] %>
+
 <div class="container">
     <h1>New Rate Schedule</h1>
 
@@ -15,154 +17,42 @@
             </div>
             <table class="table table-bordered table-striped">
                 <thead>
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                    <th>Friday</th>
+                    <% for(var i = 0; i < days.length; i++) { %>
+                        <th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
+                    <% } %>
                 </thead>
                <tbody align="left">
                     <tr>
-                        <td>
-                            <fieldset class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-monday" value="none" checked>
-                                        None
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-monday" value="am">
-                                        AM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-monday" value="pm">
-                                        PM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-monday" value="full">
-                                        Full
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <fieldset class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-tuesday" value="none" checked>
-                                        None
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-tuesday" value="am">
-                                        AM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-tuesday" value="pm">
-                                        PM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-tuesday" value="full">
-                                        Full
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <fieldset class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-wednesday" value="none" checked>
-                                        None
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-wednesday" value="am">
-                                        AM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-wednesday" value="pm">
-                                        PM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-wednesday" value="full">
-                                        Full
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <fieldset class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-thursday" value="none" checked>
-                                        None
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-thursday" value="am">
-                                        AM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-thursday" value="pm">
-                                        PM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-thursday" value="full">
-                                        Full
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </td>
-                        <td>
-                            <fieldset class="form-group">
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-friday" value="none" checked>
-                                        None
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-friday" value="am">
-                                        AM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-friday" value="pm">
-                                        PM
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="add-options-friday" value="full">
-                                        Full
-                                    </label>
-                                </div>
-                            </fieldset>
-                        </td>
+                        <% for(var i = 0; i < days.length; i++) { %>
+                            <td>
+                                <fieldset class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="none" checked>
+                                            None
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="am">
+                                            AM
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="pm">
+                                            PM
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="full">
+                                            Full
+                                        </label>
+                                    </div>
+                                </fieldset>
+                            </td>
+                        <% } %>
                     </tr>
                 </tbody>
             </table>
