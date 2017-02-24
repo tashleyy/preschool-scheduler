@@ -72,6 +72,9 @@ module.exports = {
 
     var id = params.id;
     delete params.id;
+    if (params.rateSchedules) {
+      params.rateSchedules = [params.rateSchedules];
+    }
     Student.update({id: id}, params)
       .exec(function(err, students) {
       if (err) {

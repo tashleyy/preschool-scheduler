@@ -47,7 +47,7 @@ function addStudent() {
     return false;
 }
 
-function displayRateScheduleOptions() {
+function displayAddStudentRateScheduleOptions() {
     $.ajax({
         url: '/rateschedule/find',
         type: 'get',
@@ -65,4 +65,4 @@ function displayRateScheduleOptions() {
     });
 }
 
-$(document).ready(displayRateScheduleOptions);
+$(document).ready(displayAddStudentRateScheduleOptions);
