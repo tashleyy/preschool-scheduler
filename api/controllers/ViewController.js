@@ -32,6 +32,9 @@ module.exports = {
   },
 
   'student': function(req, res) {
-    res.view('student');
+    Student.findOne({id: req.params.studentId}).populate('rateSchedules')
+      .exec(function(err, student) {
+      res.view('student', {student: student});
+    });
   }
 };

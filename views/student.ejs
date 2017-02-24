@@ -1,33 +1,30 @@
 <%- partial('partials/nav.ejs', {location: 'student'}) %>
 
-<h1>Rachel Wood</h1>
 <div class="container">
+    <h1><%= student.name %></h1>
     <div class="row">
         <table class="table table-bordered table-striped" id="student-info-table">
             <tbody align="left">
                 <tr>
                     <th>Birthdate</th>
-                    <td>1/1/1995</td>
+                    <td><%= student.birthday %></td>
                 </tr>
-                <tr>
-                    <th>Address</th>
-                    <td>1234 2nd St<br>Los Angeles, CA 91119</td>
-                </tr>
+
                 <tr>
                     <th>Parent/Guardian Names</th>
-                    <td>John Wood, Mary Wood</td>
+                    <td><%= student.parent1 %></td>
                 </tr>
                 <tr>
                     <th>Parent/Guardian Phone Number</th>
-                    <td>(123) 456-7891</td>
+                    <td><%= student.parentPhone1 %></td>
                 </tr>
                 <tr>
                     <th>Physician Name</th>
-                    <td>Dr. Doctor</td>
+                    <td><%= student.physician %></td>
                 </tr>
                 <tr>
                     <th>Physician Phone Number</th>
-                    <td>(123) 456-7891</td>
+                    <td><%= student.physicianPhone %></td>
                 </tr>
                 <tr>
                     <th>Rate Schedule</th>
@@ -35,11 +32,11 @@
                 </tr>
                 <tr>
                     <th>Date Enrolled</th>
-                    <td>1/1/2000</td>
+                    <td><%= student.startDate %></td>
                 </tr>
                 <tr>
                     <th>Date Left</th>
-                    <td>N/A</td>
+                    <td><%= student.endDate %></td>
                 </tr>
             </tbody>
         </table>   
