@@ -26,8 +26,13 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
 
+  '*': 'sessionAuth',
+
   ViewController: {
-    '*': 'sessionAuth',
+    login: true,
+  },
+
+  UserController: {
     login: true,
   }
 

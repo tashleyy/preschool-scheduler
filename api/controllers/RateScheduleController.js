@@ -6,6 +6,7 @@ module.exports = {
       || !params.startMonth || !params.endMonth || isNaN(params.cost)) {
       return res.badRequest();
     }
+
     RateSchedule.create({
       name: params.name, 
       cost: params.cost,
@@ -55,9 +56,9 @@ module.exports = {
     if (!params.id || (params.cost && isNaN(params.cost))) {
       return res.badRequest();
     }
+
     var id = params.id;
     delete params.id;
-
     RateSchedule.update({id: id}, params)
       .exec(function(err, rateSchedules) {
       if (err) {

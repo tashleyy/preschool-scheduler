@@ -2,10 +2,14 @@ function formatDay(day) {
     if (day === 'full') {
         return 'F';
     }
-    else if (day === 'half') {
+    else if (day === 'am') {
+        return 'A';
+    } else if (day === 'pm') {
+        return 'P';
+    } else if (day === 'half') { // remove
         return 'H';
     }
-    return ' ';
+    return '';
 }
 
 function formatCost(cost) {

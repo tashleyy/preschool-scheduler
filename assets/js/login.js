@@ -31,7 +31,6 @@ function signOut() {
           $('.sign-out').css('display', 'none');
         }
         document.location.href = "login";
-        console.log('data: ' + data);
       },
       error: function(xhr, status, error) {
         console.log('error: ' + error);

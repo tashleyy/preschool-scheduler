@@ -13,16 +13,14 @@ module.exports = {
             required: true
         },
         parent2: {
-            type: 'string',
-            required: false
+            type: 'string'
         },
         parentPhone1: {
             type: 'string',
             required: true
         },
         parentPhone2: {
-            type: 'string',
-            required: false
+            type: 'string'
         },
         physician: {
             type: 'string',
@@ -45,9 +43,6 @@ module.exports = {
             via: 'students',
             required: true,
             dominant: true
-        },
-        afterSchoolActivities: {
-            type: 'string',
         }
     }
 };

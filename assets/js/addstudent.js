@@ -10,6 +10,11 @@ function addStudent() {
     var startDate = $('#add-student-start-day').val();
     var endDate = $('#add-student-end-day').val();
     var rs = $('#add-student-rate-schedules').val();
+    var monday = $('input[name="optionsMonday"]:checked').val();
+    var tuesday = $('input[name="optionsTuesday"]:checked').val();
+    var wednesday = $('input[name="optionsWednesday"]:checked').val();
+    var thursday = $('input[name="optionsThursday"]:checked').val();
+    var friday = $('input[name="optionsFriday"]:checked').val();
     $.ajax({
         url: '/student/create',
         type: 'post',
@@ -24,6 +29,11 @@ function addStudent() {
             physicianPhone: physicianPhone,
             startDate: startDate,
             endDate: endDate,
+            monday: monday,
+            tuesday: tuesday,
+            wednesday: wednesday,
+            thursday: thursday,
+            friday: friday,
             rsId: rs
         },
         success: function(data) {
@@ -37,7 +47,7 @@ function addStudent() {
     return false;
 }
 
-function displayRateScheduleOptions() {
+function displayAddStudentRateScheduleOptions() {
     $.ajax({
         url: '/rateschedule/find',
         type: 'get',
@@ -45,9 +55,6 @@ function displayRateScheduleOptions() {
             for (var i = 0; i < data.length; i++) {
                 var rs = data[i];
                 var optionHtml = '<option ';
-                if (i == 0) {
-                    optionHtml += 'selected ';
-                }
                 optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
                 $('#add-student-rate-schedules').append(optionHtml);
             }
@@ -58,4 +65,4 @@ function displayRateScheduleOptions() {
     });
 }
 
-$(document).ready(displayRateScheduleOptions);
+$(document).ready(displayAddStudentRateScheduleOptions);

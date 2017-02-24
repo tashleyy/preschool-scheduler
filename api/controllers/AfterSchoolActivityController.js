@@ -4,6 +4,7 @@ module.exports = {
     if (!params.name || !params.cost) {
       return res.badRequest();
     }
+
     AfterSchoolActivity.create({
       name: params.name, 
       cost: params.cost
@@ -46,6 +47,7 @@ module.exports = {
     if (!params.id) {
       return res.badRequest();
     }
+
     var id = params.id;
     delete params.id;
     AfterSchoolActivity.update({id: id}, params)
