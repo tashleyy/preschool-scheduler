@@ -5,7 +5,14 @@
         <table class="table table-bordered table-striped" id="afterschool-activity-table">
             <thead>
                 <th>Afterschool Activity Name</th>
+                <th>M</th>
+                <th>T</th>
+                <th>W</th>
+                <th>Th</th>
+                <th>F</th>
                 <th>Cost</th>
+                <th>Start Month</th>
+                <th>End Month</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </thead>
@@ -15,6 +22,8 @@
     </div>
 </div>
 
+
+<% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] %>
 
 <div class="modal fade" id="afterschool-activity-edit-modal">
     <div class="modal-dialog">
@@ -31,6 +40,55 @@
                     <div class="form-group">
                         <label for="edit-afterschool-activity-cost">Cost ($)</label>
                         <input type="text" class="form-control" id="edit-afterschool-activity-cost" required>
+                    </div>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <% for(var i = 0; i < days.length; i++) { %>
+                                <th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
+                            <% } %>
+                        </thead>
+                    <tbody align="left">
+                            <tr>
+                                <% for(var i = 0; i < days.length; i++) { %>
+                                    <td>
+                                        <fieldset class="form-group">
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="none" checked>
+                                                    None
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="am">
+                                                    AM
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="pm">
+                                                    PM
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <label class="form-check-label">
+                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="full">
+                                                    Full
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                    </td>
+                                <% } %>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="form-group">
+                        <label for="edit-rate-schedule-start-month">Start Month</label>
+                        <input class="form-control" type="month" id="edit-rate-schedule-start-month" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-rate-schedule-end-month">End Month</label>
+                        <input class="form-control" type="month" id="edit-rate-schedule-end-month" required>
                     </div>
                 </form>
             </div>

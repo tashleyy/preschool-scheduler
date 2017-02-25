@@ -3,8 +3,7 @@ module.exports = {
     var params = req.params.all();
     if (!params.name || !params.birthday || !params.rsId
       || !params.parent1 || !params.parentPhone1 || !params.physician
-      || !params.physicianPhone || !params.startData || !params.endDate
-      || !params.rateSchedules) {
+      || !params.physicianPhone || !params.startDate || !params.endDate) {
       return res.badRequest();
     }
 

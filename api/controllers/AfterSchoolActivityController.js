@@ -1,13 +1,20 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name || !params.cost) {
+    if (!params.name || !params.cost) { //TODO add day requirements
       return res.badRequest();
     }
 
     AfterSchoolActivity.create({
       name: params.name, 
-      cost: params.cost
+      cost: params.cost,
+      monday: params.monday,
+      tuesday: params.tuesday,
+      wednesday: params.wednesday,
+      thursday: params.thursday,
+      friday: params.friday,
+      startMonth: params.startMonth,
+      endMonth: params.endMonth
     }).exec(function(err, afterSchoolActivity) {
       if (err) {
         sails.log.error(err);
