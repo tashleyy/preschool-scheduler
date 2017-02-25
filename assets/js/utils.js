@@ -23,3 +23,14 @@ function formatCost(cost) {
     }
     return cost;
 }
+
+function stringToDate(string) {
+    if (string.length < 7) return null;
+    return new Date(Date.UTC(Number(string.substring(0, 4)), Number(string.substring(5, 7))));
+}
+
+function dateToString(date) {
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1;
+    return year + '-' + (month > 9 ? '' : '0') + month;
+}
