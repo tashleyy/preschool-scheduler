@@ -52,7 +52,7 @@ module.exports.routes = {
 
   'get /students': 'ViewController.students',
 
-  'get /student/:studentId': 'ViewController.student',
+  'get /students/:studentId': 'ViewController.student',
 
   // UserController routes
 
