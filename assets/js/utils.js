@@ -34,3 +34,26 @@ function dateToString(date) {
     var month = date.getMonth() + 1;
     return year + '-' + (month > 9 ? '' : '0') + month;
 }
+
+function getRateScheduleString(rs) {
+    var string = '';
+    var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+    for (var i = 0; i < days.length; i++) {
+        var day = getRateScheduleDayString(days[i].charAt(0).toUpperCase(), rs[days[i]]);
+        string += day + (day.length > 0 ? ', ' : '');
+    }
+    if (string.endsWith(", ")) {
+        string = string.substring(0, string.length-2);
+    }
+    return string;
+}
+
+function getRateScheduleDayString(day, value) {
+    if (value === 'full') {
+        return day;
+    }
+    if (value === 'am' || value === 'pm') {
+        return day + ' (' + value.charAt(0).toUpperCase() + ')';
+    }
+    return '';
+}

@@ -9,7 +9,7 @@ function displayStudents() {
                 var rowHtml = '<tr><td><a href="/students/' + student.id + '">' + student.name + '</a></td><td>'
                     + student.parentPhone1 + '</td><td>';
                 if (student.rateSchedules && student.rateSchedules.length > 0) {
-                    rowHtml += student.rateSchedules[0].id + '</td><td>';
+                    rowHtml += getRateScheduleString(student.rateSchedules[0]) + '</td><td>';
                 } else {
                     rowHtml += '</td><td>';
                 }
@@ -41,6 +41,7 @@ function showStudentEditModal(id) {
             $('#edit-student-parent-phone-2').val(data.parentPhone2);
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
+            $('#edit-student-rate-schedules').val(data.rateSchedules[0].id);
             $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
