@@ -12,6 +12,13 @@ function formatDay(day) {
     return '';
 }
 
+function formatASADay(day) {
+    if (day === 'checked') {
+        return 'X';
+    }
+    return '';
+}
+
 function formatCost(cost) {
     if (cost && typeof cost === 'string' && cost.length > 0 && cost[0] !== '$') {
         if (cost[0] === '$') {
