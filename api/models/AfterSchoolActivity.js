@@ -5,29 +5,24 @@ module.exports = {
             required: true
         },
         monday: {
-            type: 'string',
-            enum: ['checked'],
-            defaultsTo: 'none'
+            type: 'boolean',
+            defaultsTo: false
         },
         tuesday: {
-            type: 'string',
-            enum: ['checked'],
-            defaultsTo: 'none'
+            type: 'boolean',
+            defaultsTo: false
         },
         wednesday: {
-            type: 'string',
-            enum: ['checked'],
-            defaultsTo: 'none'
+            type: 'boolean',
+            defaultsTo: false
         },
         thursday: {
-            type: 'string',
-            enum: ['checked'],
-            defaultsTo: 'none'
+            type: 'boolean',
+            defaultsTo: false
         },
         friday: {
-            type: 'string',
-            enum: ['checked'],
-            defaultsTo: 'none'
+            type: 'boolean',
+            defaultsTo: false
         },
         cost: {
             type: 'float',

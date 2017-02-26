@@ -2,9 +2,9 @@
 
 <div class="container">
     <div class="row">
-        <table class="table table-bordered table-striped" id="afterschool-activity-table">
+        <table class="table table-bordered table-striped" id="after-school-activity-table">
             <thead>
-                <th>Afterschool Activity Name</th>
+                <th>After School Activity Name</th>
                 <th>M</th>
                 <th>T</th>
                 <th>W</th>
@@ -25,21 +25,21 @@
 
 <% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] %>
 
-<div class="modal fade" id="afterschool-activity-edit-modal">
+<div class="modal fade" id="after-school-activity-edit-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Edit Afterschool Activity</h2>
+                <h2>Edit After School Activity</h2>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label for="edit-afterschool-activity-name">Name</label>
-                        <input type="text" class="form-control" id="edit-afterschool-activity-name" required>
+                        <label for="edit-after-school-activity-name">Name</label>
+                        <input type="text" class="form-control" id="edit-after-school-activity-name" required>
                     </div>
                     <div class="form-group">
-                        <label for="edit-afterschool-activity-cost">Cost ($)</label>
-                        <input type="text" class="form-control" id="edit-afterschool-activity-cost" required>
+                        <label for="edit-after-school-activity-cost">Cost ($)</label>
+                        <input type="text" class="form-control" id="edit-after-school-activity-cost" required>
                     </div>
                     <table class="table table-bordered table-striped">
                         <thead>
@@ -54,26 +54,7 @@
                                         <fieldset class="form-group">
                                             <div class="form-check">
                                                 <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="none" checked>
-                                                    None
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="am">
-                                                    AM
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="pm">
-                                                    PM
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <label class="form-check-label">
-                                                    <input type="radio" class="form-check-input" name="edit-options-<%= days[i] %>" value="full">
-                                                    Full
+                                                    <input type="checkbox" class="form-check-input" name="edit-asa-options-<%= days[i] %>">
                                                 </label>
                                             </div>
                                         </fieldset>
@@ -83,12 +64,12 @@
                         </tbody>
                     </table>
                     <div class="form-group">
-                        <label for="edit-rate-schedule-start-month">Start Month</label>
-                        <input class="form-control" type="month" id="edit-rate-schedule-start-month" required>
+                        <label for="edit-after-school-activity-start-month">Start Month</label>
+                        <input class="form-control" type="month" id="edit-after-school-activity-start-month" required>
                     </div>
                     <div class="form-group">
-                        <label for="edit-rate-schedule-end-month">End Month</label>
-                        <input class="form-control" type="month" id="edit-rate-schedule-end-month" required>
+                        <label for="edit-after-school-activity-end-month">End Month</label>
+                        <input class="form-control" type="month" id="edit-after-school-activity-end-month" required>
                     </div>
                 </form>
             </div>
@@ -100,11 +81,11 @@
     </div>
 </div>
 
-<div class="modal fade" id="afterschool-activity-delete-modal">
+<div class="modal fade" id="after-school-activity-delete-modal">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>Delete Afterschool Activity</h2>
+                <h2>Delete After School Activity</h2>
             </div>
             <div class="modal-body">
                 <p>Are you sure you want to delete this activity?</p>
@@ -118,5 +99,5 @@
 </div>
 
 <div class="container">
-    <button type="button"><a href="addafterschoolactivity">Add Afterschool Activity</a></button>
+    <button type="button"><a href="addafterschoolactivity">Add After School Activity</a></button>
 </div>

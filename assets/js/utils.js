@@ -13,7 +13,7 @@ function formatDay(day) {
 }
 
 function formatASADay(day) {
-    if (day === 'checked') {
+    if (day) {
         return 'X';
     }
     return '';

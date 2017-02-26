@@ -1,11 +1,11 @@
 function createAfterSchoolActivity() {
     var name = $('#add-afterschool-activity-name').val();
     var cost = $('#add-afterschool-activity-cost').val();
-    var monday =  $('input[name="add-options-monday"]:checked').val();
-    var tuesday =  $('input[name="add-options-tuesday"]:checked').val();
-    var wednesday =  $('input[name="add-options-wednesday"]:checked').val();
-    var thursday =  $('input[name="add-options-thursday"]:checked').val();
-    var friday =  $('input[name="add-options-friday"]:checked').val();
+    var monday =  $('input[name="add-asa-options-monday"]').prop('checked');
+    var tuesday =  $('input[name="add-asa-options-tuesday"]').prop('checked');;
+    var wednesday =  $('input[name="add-asa-options-wednesday"]').prop('checked');;
+    var thursday =  $('input[name="add-asa-options-thursday"]').prop('checked');;
+    var friday =  $('input[name="add-asa-options-friday"]').prop('checked');;
     var startMonth = $('#add-afterschool-activity-start-month').val();
     var endMonth = $('#add-afterschool-activity-end-month').val();
     $.ajax({
