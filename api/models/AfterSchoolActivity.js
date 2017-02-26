@@ -6,27 +6,27 @@ module.exports = {
         },
         monday: {
             type: 'string',
-            enum: ['am', 'pm', 'full', 'none'],
+            enum: ['checked'],
             defaultsTo: 'none'
         },
         tuesday: {
             type: 'string',
-            enum: ['am', 'pm', 'full', 'none'],
+            enum: ['checked'],
             defaultsTo: 'none'
         },
         wednesday: {
             type: 'string',
-            enum: ['am', 'pm', 'full', 'none'],
+            enum: ['checked'],
             defaultsTo: 'none'
         },
         thursday: {
             type: 'string',
-            enum: ['am', 'pm', 'full', 'none'],
+            enum: ['checked'],
             defaultsTo: 'none'
         },
         friday: {
             type: 'string',
-            enum: ['am', 'pm', 'full', 'none'],
+            enum: ['checked'],
             defaultsTo: 'none'
         },
         cost: {
