@@ -11,12 +11,20 @@
                 </tr>
 
                 <tr>
-                    <th>Parent/Guardian Names</th>
+                    <th>Parent/Guardian Name 1</th>
                     <td><%= student.parent1 %></td>
+                </tr>
+                <tr>
+                    <th>Parent/Guardian Name 2</th>
+                    <td><%= student.parent2 %></td>
                 </tr>
                 <tr>
                     <th>Parent/Guardian Phone Number</th>
                     <td><%= student.parentPhone1 %></td>
+                </tr>
+                <tr>
+                    <th>Alternate Phone Number</th>
+                    <td><%= student.parentPhone2 %></td>
                 </tr>
                 <tr>
                     <th>Physician Name</th>
@@ -28,7 +36,7 @@
                 </tr>
                 <tr>
                     <th>Rate Schedule</th>
-                    <td>Full time as fuck</td>
+                    <td><%= student.rateSchedules[0].name %></td>
                 </tr>
                 <tr>
                     <th>Date Enrolled</th>
@@ -46,28 +54,28 @@
             <tbody align="left">
                 <tr>
                     <th>Monday</th>
-                    <td>AM classes</td>
+                    <td><%= student.rateSchedules[0].monday %></td>
                     <td>Afterschool activity: soccer</td>
                 </tr>
                   <tr>
                     <th>Tuesday</th>
-                    <td>PM classes</td>
+                    <td><%= student.rateSchedules[0].tuesday %></td>
                     <td>Afterschool activity: soccer</td>
                 </tr>
                   <tr>
                     <th>Wednesday</th>
-                    <td>full classes</td>
+                    <td><%= student.rateSchedules[0].wednesday %></td>
                     <td>Afterschool activity: soccer</td>
                 </tr>
                   <tr>
                     <th>Thursday</th>
-                    <td>AM classes</td>
+                    <td><%= student.rateSchedules[0].thursday %></td>
                     <td>Afterschool activity: soccer</td>
                     
                 </tr>
                   <tr>
                     <th>Friday</th>
-                    <td>AM classes</td>
+                    <td><%= student.rateSchedules[0].friday %></td>
                     <td>Afterschool activity: soccer</td>
                 </tr>
             </tbody>

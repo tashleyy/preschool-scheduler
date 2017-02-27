@@ -24,6 +24,7 @@ function fillInStudentInformation(name){
             rowHtml = '<tr><td>' + "Physician Phone Number" + '<tr><td>' + rs.physicianPhone;
             $('#student-info-table tbody').append(rowHtml);
             rowHtml = '<tr><td>' + "Rate Schedule" + '<tr><td>' + rs.rateSchedule;
+            console.log(rs.rateSchedule.toString());
             $('#student-info-table tbody').append(rowHtml);
             rowHtml = '<tr><td>' + "Date Enrolled" + '<tr><td>' + rs.startDate;
             $('#student-info-table tbody').append(rowHtml);
