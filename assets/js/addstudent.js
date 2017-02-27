@@ -63,6 +63,21 @@ function displayAddStudentRateScheduleOptions() {
             console.log('error: ' + error);
         }
     });
+    $.ajax({
+        url: '/afterschoolactivity/find',
+        type: 'get',
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var rs = data[i];
+                var optionHtml = '<option ';
+                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
+                $('#add-afterschool-activities').append(optionHtml);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('error: ' + error);
+        }
+    });
 }
 
 $(document).ready(displayAddStudentRateScheduleOptions);
