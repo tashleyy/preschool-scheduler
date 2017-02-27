@@ -35,6 +35,10 @@ module.exports = {
         endMonth: {
             type: 'string',
             required: true
+        },
+        students: {
+            collection: 'Student',
+            via: 'afterSchoolActivities'
         }
     }
 };

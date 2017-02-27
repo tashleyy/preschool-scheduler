@@ -43,6 +43,12 @@ module.exports = {
             via: 'students',
             required: true,
             dominant: true
+        },
+        afterSchoolActivities: {
+            collection: 'AfterSchoolActivity',
+            via: 'students',
+            required: false,
+            dominant: true
         }
     }
 };
