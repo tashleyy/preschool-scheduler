@@ -10,6 +10,7 @@ function addStudent() {
     var startDate = $('#add-student-start-day').val();
     var endDate = $('#add-student-end-day').val();
     var rs = $('#add-student-rate-schedules').val();
+    var asa =  $('#add-afterschool-activities').val();
     var monday = $('input[name="optionsMonday"]:checked').val();
     var tuesday = $('input[name="optionsTuesday"]:checked').val();
     var wednesday = $('input[name="optionsWednesday"]:checked').val();
@@ -34,7 +35,8 @@ function addStudent() {
             wednesday: wednesday,
             thursday: thursday,
             friday: friday,
-            rsId: rs
+            rsId: rs,
+            asaId: asa
         },
         success: function(data) {
             document.location.href = 'students';
@@ -68,9 +70,9 @@ function displayAddStudentRateScheduleOptions() {
         type: 'get',
         success: function(data) {
             for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
+                var asa = data[i];
                 var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
+                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
                 $('#add-afterschool-activities').append(optionHtml);
             }
         },
