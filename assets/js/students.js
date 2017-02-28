@@ -42,6 +42,7 @@ function showStudentEditModal(id) {
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
             $('#edit-student-rate-schedules').val(data.rateSchedules[0].id);
+            $('#edit-student-after-school-activities').val(data.afterSchoolActivities[0].id);
             $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
@@ -71,6 +72,7 @@ function editStudent() {
     var physician = $('#edit-student-physician').val();
     var physicianPhone = $('#edit-student-physician-phone').val();
     var rateSchedules = $('#edit-student-rate-schedules').val();
+    var afterSchoolActivities = $('#edit-student-after-school-activities').val();
     var startDate = $('#edit-student-start-date').val();
     var endDate = $('#edit-student-end-date').val();
     $.ajax({
@@ -87,6 +89,7 @@ function editStudent() {
             physician: physician,
             physicianPhone: physicianPhone,
             rateSchedules: [rateSchedules],
+            afterSchoolActivities: [afterSchoolActivities],
             startDate: startDate,
             endDate: endDate
         },
@@ -138,9 +141,28 @@ function displayEditStudentRateScheduleOptions() {
     });
 }
 
+function displayEditStudentAfterSchoolActivitiesOptions() {
+    $.ajax({
+        url: '/afterschoolactivity/find',
+        type: 'get',
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var asa = data[i];
+                var optionHtml = '<option ';
+                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
+                $('#edit-student-after-school-activities').append(optionHtml);
+            }
+        },
+        error: function(xhr, status, error) {
+            console.log('error: ' + error);
+        }
+    });
+}
+
 $(document).ready(function () {
     $('#student-edit-modal').modal({show: false});
     $('#student-delete-modal').modal({show: false});
     displayStudents();
     displayEditStudentRateScheduleOptions();
+    displayEditStudentAfterSchoolActivitiesOptions();
 });

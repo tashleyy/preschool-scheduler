@@ -29,4 +29,8 @@ function populateAfterSchoolActivities() {
     });
 }
 
-$(document).ready(populateAfterSchoolActivities);
+$(document).ready(function() {
+    if (document.location.pathname.startsWith('/students/') && !document.location.pathname.endsWith('/students/')) {
+        populateAfterSchoolActivities();
+    }
+});
