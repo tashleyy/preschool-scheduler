@@ -1,40 +1,32 @@
-function fillInStudentInformation(name){
+function populateAfterSchoolActivities() {
     $.ajax({
-        url: '/student/find',
+        url: '/student/findone',
         type: 'get',
+        data: {
+            id: document.location.pathname.substring(document.location.pathname.lastIndexOf('/')+1)
+        },
         success: function(data) {
-
-            for (var i = 0; i < data.length; i++) {
-                if(data[i].name == name){
-                    var rs = data[i];
-                    break;
+            var asas = ['', '', '', '', ''];
+            var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            for (var i = 0; i < data.afterSchoolActivities.length; i++) {
+                var asa = data.afterSchoolActivities[i];
+                for (var j = 0; j < 5; j++) {
+                    if (asa[days[j]]) {
+                        asas[j] += asa.name + ', ';
+                    }
                 }
             }
-            // Construct HTML string of table row
-            var rowHtml = '<tr><td>' + "Birthday" + '<tr><td>' + rs.birthday;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Address" + '<tr><td>' + "address";
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Parent/Guardian Names" + '<tr><td>' + rs.parent1;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Parent/Guardian Phone Number" + '<tr><td>' + rs.phone;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Physician Name" + '<tr><td>' + rs.physician;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Physician Phone Number" + '<tr><td>' + rs.physicianPhone;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Rate Schedule" + '<tr><td>' + rs.rateSchedule;
-            console.log(rs.rateSchedule.toString());
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Date Enrolled" + '<tr><td>' + rs.startDate;
-            $('#student-info-table tbody').append(rowHtml);
-            rowHtml = '<tr><td>' + "Date Left" + '<tr><td>' + rs.endDate;
-            $('#student-info-table tbody').append(rowHtml);
-            
+            for (var i = 0; i < asas.length; i++) {
+                if (asas[i].length > 0) {
+                    asas[i] = asas[i].substring(0, asas[i].length-2);
+                }
+                $('#asa-' + days[i] + '-row .asa-table-cell').html(asas[i]);
+            }
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
         }
     });
 }
-  
+
+$(document).ready(populateAfterSchoolActivities);

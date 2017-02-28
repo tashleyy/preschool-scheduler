@@ -86,7 +86,7 @@ function editStudent() {
             parentPhone2: parentPhone2,
             physician: physician,
             physicianPhone: physicianPhone,
-            rateSchedules: rateSchedules,
+            rateSchedules: [rateSchedules],
             startDate: startDate,
             endDate: endDate
         },
@@ -138,7 +138,9 @@ function displayEditStudentRateScheduleOptions() {
     });
 }
 
-$('#student-edit-modal').modal({show: false});
-$('#student-delete-modal').modal({show: false});
-$(document).ready(displayStudents);
-$(document).ready(displayEditStudentRateScheduleOptions);
+$(document).ready(function () {
+    $('#student-edit-modal').modal({show: false});
+    $('#student-delete-modal').modal({show: false});
+    displayStudents();
+    displayEditStudentRateScheduleOptions();
+});

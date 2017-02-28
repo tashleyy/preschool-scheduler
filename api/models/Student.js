@@ -47,7 +47,6 @@ module.exports = {
         afterSchoolActivities: {
             collection: 'AfterSchoolActivity',
             via: 'students',
-            required: false,
             dominant: true
         }
     }

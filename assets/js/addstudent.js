@@ -10,7 +10,7 @@ function addStudent() {
     var startDate = $('#add-student-start-day').val();
     var endDate = $('#add-student-end-day').val();
     var rs = $('#add-student-rate-schedules').val();
-    var asa =  $('#add-afterschool-activities').val();
+    var asa =  $('#add-student-asas').val();
     var monday = $('input[name="optionsMonday"]:checked').val();
     var tuesday = $('input[name="optionsTuesday"]:checked').val();
     var wednesday = $('input[name="optionsWednesday"]:checked').val();
@@ -35,8 +35,8 @@ function addStudent() {
             wednesday: wednesday,
             thursday: thursday,
             friday: friday,
-            rsId: rs,
-            asaId: asa
+            rateSchedules: [rs],
+            afterSchoolActivities: [asa]
         },
         success: function(data) {
             document.location.href = 'students';
@@ -65,6 +65,9 @@ function displayAddStudentRateScheduleOptions() {
             console.log('error: ' + error);
         }
     });
+}
+
+function displayAddStudentAfterSchoolActivityOptions() {
     $.ajax({
         url: '/afterschoolactivity/find',
         type: 'get',
@@ -73,7 +76,7 @@ function displayAddStudentRateScheduleOptions() {
                 var asa = data[i];
                 var optionHtml = '<option ';
                 optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#add-afterschool-activities').append(optionHtml);
+                $('#add-student-asas').append(optionHtml);
             }
         },
         error: function(xhr, status, error) {
@@ -82,4 +85,7 @@ function displayAddStudentRateScheduleOptions() {
     });
 }
 
-$(document).ready(displayAddStudentRateScheduleOptions);
+$(document).ready(function() {
+    displayAddStudentRateScheduleOptions();
+    displayAddStudentAfterSchoolActivityOptions();
+});

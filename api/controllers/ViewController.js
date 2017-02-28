@@ -32,7 +32,7 @@ module.exports = {
   },
 
   'student': function(req, res) {
-    Student.findOne({id: req.params.studentId}).populate('rateSchedules')
+    Student.findOne({id: req.params.studentId}).populate('rateSchedules').populate('afterSchoolActivities')
       .exec(function(err, student) {
       if (err) {
         sails.log.error(err);

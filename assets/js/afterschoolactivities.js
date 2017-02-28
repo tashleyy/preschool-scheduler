@@ -125,6 +125,8 @@ function deleteAfterSchoolActivity() {
     });
 }
 
-$('#after-school-activity-edit-modal').modal({show: false});
-$('#after-school-activity-delete-modal').modal({show: false});
-$(document).ready(displayAfterSchoolActivities);
+$(document).ready(function () {
+    $('#after-school-activity-edit-modal').modal({show: false});
+    $('#after-school-activity-delete-modal').modal({show: false});
+    displayAfterSchoolActivities();
+});

@@ -124,6 +124,8 @@ function deleteRateSchedule() {
     });
 }
 
-$('#rate-schedule-edit-modal').modal({show: false});
-$('#rate-schedule-delete-modal').modal({show: false});
-$(document).ready(displayRateSchedules);
+$(document).ready(function() {
+    $('#rate-schedule-edit-modal').modal({show: false});
+    $('#rate-schedule-delete-modal').modal({show: false});
+    displayRateSchedules();
+});
