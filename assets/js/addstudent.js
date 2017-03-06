@@ -35,8 +35,8 @@ function addStudent() {
             wednesday: wednesday,
             thursday: thursday,
             friday: friday,
-            rateSchedules: [rs],
-            afterSchoolActivities: [asa]
+            rateSchedules: rs,
+            afterSchoolActivities: asa
         },
         success: function(data) {
             document.location.href = 'students';
@@ -60,6 +60,7 @@ function displayAddStudentRateScheduleOptions() {
                 optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
                 $('#add-student-rate-schedules').append(optionHtml);
             }
+            $('#add-student-rate-schedules').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -78,6 +79,7 @@ function displayAddStudentAfterSchoolActivityOptions() {
                 optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
                 $('#add-student-asas').append(optionHtml);
             }
+            $('#add-student-asas').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);

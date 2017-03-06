@@ -33,6 +33,14 @@ function showStudentEditModal(id) {
             id: id
         },
         success: function(data) {
+            var rs = [];
+            var asa = [];
+            for (var i = 0; i < data.rateSchedules.length; i++) {
+                rs.push(data.rateSchedules[i].id);
+            }
+            for (var i = 0; i < data.afterSchoolActivities.length; i++) {
+                asa.push(data.afterSchoolActivities[i].id);
+            }
             $('#edit-student-name').val(data.name);
             $('#edit-student-birthday').val(data.birthday);
             $('#edit-student-parent-1').val(data.parent1);
@@ -41,8 +49,10 @@ function showStudentEditModal(id) {
             $('#edit-student-parent-phone-2').val(data.parentPhone2);
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
-            $('#edit-student-rate-schedules').val(data.rateSchedules[0].id);
-            $('#edit-student-after-school-activities').val(data.afterSchoolActivities[0].id);
+            $('#edit-student-rate-schedules').multiselect('deselectAll', false);
+            $('#edit-student-after-school-activities').multiselect('deselectAll', false);
+            $('#edit-student-rate-schedules').multiselect('select', rs);
+            $('#edit-student-after-school-activities').multiselect('select', asa);
             $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
@@ -88,8 +98,8 @@ function editStudent() {
             parentPhone2: parentPhone2,
             physician: physician,
             physicianPhone: physicianPhone,
-            rateSchedules: [rateSchedules],
-            afterSchoolActivities: [afterSchoolActivities],
+            rateSchedules: rateSchedules,
+            afterSchoolActivities: afterSchoolActivities,
             startDate: startDate,
             endDate: endDate
         },
@@ -134,6 +144,7 @@ function displayEditStudentRateScheduleOptions() {
                 optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
                 $('#edit-student-rate-schedules').append(optionHtml);
             }
+            $('#edit-student-rate-schedules').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -152,6 +163,7 @@ function displayEditStudentAfterSchoolActivitiesOptions() {
                 optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
                 $('#edit-student-after-school-activities').append(optionHtml);
             }
+            $('#edit-student-after-school-activities').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
