@@ -35,7 +35,22 @@
                 </tr>
                 <tr>
                     <th>Rate Schedule</th>
-                    <td><%= student.rateSchedules[0].name %></td>
+                    <%
+                        formatRateSchedules = function(rateSchedules) {
+                            var string = '';
+                            if (!rateSchedules) {
+                                return string;
+                            }
+                            for (var i = 0; i < rateSchedules.length; i++) {
+                                string += rateSchedules[i].name;
+                                if (i < rateSchedules.length-1) {
+                                    string += ', ';
+                                }
+                            }
+                            return string;
+                        }
+                    %>
+                    <td><%= formatRateSchedules(student.rateSchedules) %></td>
                 </tr>
                 <tr>
                     <th>Date Enrolled</th>

@@ -7,13 +7,9 @@ function displayStudents() {
                 var student = data[i];
                 // Construct HTML string of table row
                 var rowHtml = '<tr><td><a href="/students/' + student.id + '">' + student.name + '</a></td><td>'
-                    + student.parentPhone1 + '</td><td>';
-                if (student.rateSchedules && student.rateSchedules.length > 0) {
-                    rowHtml += getRateScheduleString(student.rateSchedules[0]) + '</td><td>';
-                } else {
-                    rowHtml += '</td><td>';
-                }
-                rowHtml += '<a href="#" onclick="showStudentEditModal(\'' + student.id + '\')"><span class="glyphicon glyphicon-pencil"></span></a></td><td>'
+                    + student.parentPhone1 + '</td><td>'
+                    + getRateSchedulesString(student.rateSchedules) + '</td><td>'
+                    + '<a href="#" onclick="showStudentEditModal(\'' + student.id + '\')"><span class="glyphicon glyphicon-pencil"></span></a></td><td>'
                     + '<a href="#" onclick="showStudentDeleteModal(\'' + student.id + '\')"><span class="glyphicon glyphicon-trash"></span></a></td></tr>';
                 // Use jQuery to add it to table body
                 $('#students-table tbody').append(rowHtml);

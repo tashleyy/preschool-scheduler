@@ -42,11 +42,19 @@ function dateToString(date) {
     return year + '-' + (month > 9 ? '' : '0') + month;
 }
 
+function getRateSchedulesString(rateSchedules) {
+    if (!rateSchedules || rateSchedules.length === 0) {
+        return string;
+    }
+    return getRateScheduleString(rateSchedules[0]);
+}
+
 function getRateScheduleString(rs) {
     var string = '';
     var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+    var letters = ['M', 'T', 'W', 'H', 'F'];
     for (var i = 0; i < days.length; i++) {
-        var day = getRateScheduleDayString(days[i].charAt(0).toUpperCase(), rs[days[i]]);
+        var day = getRateScheduleDayString(letters[i], rs[days[i]]);
         string += day + (day.length > 0 ? ', ' : '');
     }
     if (string.endsWith(", ")) {
