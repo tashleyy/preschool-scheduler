@@ -70,7 +70,7 @@ function appendRemainingTable(populatedArray)
         for (var j = 0; j < 5; j++) {
             for (var k = 0; k < 2; k++) {  
                 var numStudents =  populatedArray[i][j][k];
-                if (numStudents >= 12) {
+                if (numStudents > 12) {
                     add += "<td bgcolor=\"#F95E76\">"
                 } else {
                     add += "<td>";
