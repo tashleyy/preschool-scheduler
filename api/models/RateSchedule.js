@@ -41,9 +41,9 @@ module.exports = {
             type: 'string',
             required: true
         },
-        students: {
-            collection: 'Student',
-            via: 'rateSchedules'
+        timePeriods: {
+            collection: 'TimePeriod',
+            via: 'rateSchedule'
         }
     }
 };

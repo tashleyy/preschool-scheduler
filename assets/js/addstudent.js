@@ -9,13 +9,6 @@ function addStudent() {
     var physicianPhone = $('#add-physician-phone').val();
     var startDate = $('#add-student-start-day').val();
     var endDate = $('#add-student-end-day').val();
-    var rs = $('#add-student-rate-schedules').val();
-    var asa =  $('#add-student-asas').val();
-    var monday = $('input[name="optionsMonday"]:checked').val();
-    var tuesday = $('input[name="optionsTuesday"]:checked').val();
-    var wednesday = $('input[name="optionsWednesday"]:checked').val();
-    var thursday = $('input[name="optionsThursday"]:checked').val();
-    var friday = $('input[name="optionsFriday"]:checked').val();
     $.ajax({
         url: '/student/create',
         type: 'post',
@@ -29,14 +22,7 @@ function addStudent() {
             physician: physician,
             physicianPhone: physicianPhone,
             startDate: startDate,
-            endDate: endDate,
-            monday: monday,
-            tuesday: tuesday,
-            wednesday: wednesday,
-            thursday: thursday,
-            friday: friday,
-            rateSchedules: [rs],
-            afterSchoolActivities: [asa]
+            endDate: endDate
         },
         success: function(data) {
             document.location.href = 'students';
@@ -48,44 +34,3 @@ function addStudent() {
     });
     return false;
 }
-
-function displayAddStudentRateScheduleOptions() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
-                $('#add-student-rate-schedules').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
-function displayAddStudentAfterSchoolActivityOptions() {
-    $.ajax({
-        url: '/afterschoolactivity/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var asa = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#add-student-asas').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
-$(document).ready(function() {
-    displayAddStudentRateScheduleOptions();
-    displayAddStudentAfterSchoolActivityOptions();
-});

@@ -36,8 +36,8 @@ module.exports = {
             type: 'string',
             required: true
         },
-        students: {
-            collection: 'Student',
+        timePeriods: {
+            collection: 'TimePeriod',
             via: 'afterSchoolActivities'
         }
     }

@@ -8,8 +8,8 @@ function displayStudents() {
                 // Construct HTML string of table row
                 var rowHtml = '<tr><td><a href="/students/' + student.id + '">' + student.name + '</a></td><td>'
                     + student.parentPhone1 + '</td><td>';
-                if (student.rateSchedules && student.rateSchedules.length > 0) {
-                    rowHtml += getRateScheduleString(student.rateSchedules[0]) + '</td><td>';
+                if (student.timePeriods && student.timePeriods.length > 0) {
+                    rowHtml += getCurrentTimePeriodString(student.timePeriods) + '</td><td>';
                 } else {
                     rowHtml += '</td><td>';
                 }
@@ -71,8 +71,6 @@ function editStudent() {
     var parentPhone2 = $('#edit-student-parent-phone-2').val();
     var physician = $('#edit-student-physician').val();
     var physicianPhone = $('#edit-student-physician-phone').val();
-    var rateSchedules = $('#edit-student-rate-schedules').val();
-    var afterSchoolActivities = $('#edit-student-after-school-activities').val();
     var startDate = $('#edit-student-start-date').val();
     var endDate = $('#edit-student-end-date').val();
     $.ajax({
@@ -88,8 +86,6 @@ function editStudent() {
             parentPhone2: parentPhone2,
             physician: physician,
             physicianPhone: physicianPhone,
-            rateSchedules: [rateSchedules],
-            afterSchoolActivities: [afterSchoolActivities],
             startDate: startDate,
             endDate: endDate
         },
@@ -123,46 +119,10 @@ function deleteStudent() {
     });
 }
 
-function displayEditStudentRateScheduleOptions() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
-                $('#edit-student-rate-schedules').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
-function displayEditStudentAfterSchoolActivitiesOptions() {
-    $.ajax({
-        url: '/afterschoolactivity/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var asa = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#edit-student-after-school-activities').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
 $(document).ready(function () {
     $('#student-edit-modal').modal({show: false});
     $('#student-delete-modal').modal({show: false});
     displayStudents();
-    displayEditStudentRateScheduleOptions();
-    displayEditStudentAfterSchoolActivitiesOptions();
+    //displayEditStudentRateScheduleOptions();
+    //displayEditStudentAfterSchoolActivitiesOptions();
 });

@@ -34,10 +34,6 @@
                     <td><%= student.physicianPhone %></td>
                 </tr>
                 <tr>
-                    <th>Rate Schedule</th>
-                    <td><%= student.rateSchedules[0].name %></td>
-                </tr>
-                <tr>
                     <th>Date Enrolled</th>
                     <td><%= student.startDate %></td>
                 </tr>
@@ -48,35 +44,12 @@
             </tbody>
         </table>   
         <div style="clear:both;"></div>
-        <h2>Weekly Schedule</h2>
+        <h2>Current Weekly Schedule</h2>
         <table class="table table-bordered table-striped">
             <tbody align="left">
-                <tr id="asa-monday-row">
-                    <th>Monday</th>
-                    <td><%= student.rateSchedules[0].monday %></td>
-                    <td class="asa-table-cell"></td>
-                </tr>
-                  <tr id="asa-tuesday-row">
-                    <th>Tuesday</th>
-                    <td><%= student.rateSchedules[0].tuesday %></td>
-                    <td class="asa-table-cell"></td>
-                </tr>
-                  <tr id="asa-wednesday-row">
-                    <th>Wednesday</th>
-                    <td><%= student.rateSchedules[0].wednesday %></td>
-                    <td class="asa-table-cell"></td>
-                </tr>
-                  <tr id="asa-thursday-row">
-                    <th>Thursday</th>
-                    <td><%= student.rateSchedules[0].thursday %></td>
-                    <td class="asa-table-cell"></td>                    
-                </tr>
-                  <tr id="asa-friday-row">
-                    <th>Friday</th>
-                    <td><%= student.rateSchedules[0].friday %></td>
-                    <td class="asa-table-cell"></td>
-                </tr>
             </tbody>
         </table>
+    </div>
+    <div class="container" id="addstudentschedulebutton">
     </div>
 </div>

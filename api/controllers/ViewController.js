@@ -31,8 +31,22 @@ module.exports = {
     res.view('afterschoolactivities');
   },
 
+  'addtimeperiod': function(req, res) {
+    Student.findOne({id: req.params.studentId}).populate('timePeriods')
+      .exec(function(err, student) {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+      if (!student) {
+        return res.notFound();
+      }
+      res.view('addtimeperiod', {student: student});
+    });
+  },
+
   'student': function(req, res) {
-    Student.findOne({id: req.params.studentId}).populate('rateSchedules').populate('afterSchoolActivities')
+    Student.findOne({id: req.params.studentId}).populate('timePeriods')
       .exec(function(err, student) {
       if (err) {
         sails.log.error(err);

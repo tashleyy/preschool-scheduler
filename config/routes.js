@@ -54,6 +54,8 @@ module.exports.routes = {
 
   'get /students/:studentId': 'ViewController.student',
 
+  'get /addtimeperiod/:studentId': 'ViewController.addtimeperiod',
+
   // UserController routes
 
   'post /user/login': 'UserController.login',
@@ -95,6 +97,19 @@ module.exports.routes = {
   'put /student/update': 'StudentController.update',
 
   'delete /student/destroy': 'StudentController.destroy',
+
+  // StudentController routes
+
+  'post /timeperiod/create': 'TimePeriodController.create',
+
+  'get /timeperiod/find': 'TimePeriodController.find',
+
+  'get /timeperiod/findone': 'TimePeriodController.findOne',
+
+  'put /timeperiod/update': 'TimePeriodController.update',
+
+  'delete /timeperiod/destroy': 'TimePeriodController.destroy',
+
 
   /***************************************************************************
   *                                                                          *

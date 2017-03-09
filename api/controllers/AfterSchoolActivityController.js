@@ -1,8 +1,10 @@
 module.exports = {
   'create': function(req, res) {
     var params = req.params.all();
-    if (!params.name || !params.cost) { //TODO add day requirements
-      return res.badRequest();
+    if (!params.name || !params.cost || !params.monday || !params.tuesday ||
+        !params.wednesday || !params.thursday || !params.friday || !params.startMonth ||
+        !params.endMonth) { //TODO add day requirements
+        return res.badRequest();
     }
 
     AfterSchoolActivity.create({

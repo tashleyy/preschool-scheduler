@@ -175,9 +175,9 @@ function populateWithSuccessfulRateSchedule(students, year) {
     //Iterates through students and adds their rate schedule to the calendar
     for (var i = 0; i < students.length; i++) {
         var currStudent = students[i];
-        for (var j = 0; j < currStudent.rateSchedules.length; j++) {
+        for (var j = 0; j < currStudent.timePeriods.length; j++) {
 
-            var rateSchedule = currStudent.rateSchedules[j];
+            var timePeriod = currStudent.timePeriods[j];
         
             var studentStartDate = MonthAndYear.makeFromString(currStudent.startDate);
             var rateScheduleStartDate = MonthAndYear.makeFromString(rateSchedule.startMonth);
