@@ -17,7 +17,7 @@ function displayAddPeriodRateScheduleOptions() {
     });
 }
 
-function displayAddStudentAfterSchoolActivityOptions() {
+function displayAddPeriodAfterSchoolActivityOptions() {
     $.ajax({
         url: '/afterschoolactivity/find',
         type: 'get',

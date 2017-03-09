@@ -46,7 +46,7 @@ function displayStudentsOnCalendar(year) {
 //makes a get request for all students in the calendar
 function populateArrayForYear(year) {
     $.ajax({
-        url: '/student/find',
+        url: '/timeperiod/find',
         type: 'get',
         success: function(data) {
             returnArray =  populateWithSuccessfulRateSchedule(data, year);
@@ -149,12 +149,12 @@ class MonthAndYear {
 
 //iterates through an array of students and fills in the attendance
 //numbers for the schoolyear
-function populateWithSuccessfulRateSchedule(students, year) {
+function populateWithSuccessfulRateSchedule(timePeriods, year) {
     //This maps a certain month to the index that it will be on our table.
     //For example, October corresponds to 10, but because this is a school
     //year calendar, we are going to put it in row 1.  That is why
     //monthToIndex[10]=1
-    var monthToIndex = [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3];
+    var monthToIndex = [3, 4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2];
 
     //creates the array that will contain student attendance.  Everything
     //initialized to 0.
@@ -173,50 +173,41 @@ function populateWithSuccessfulRateSchedule(students, year) {
     var latestApplicableDate = new MonthAndYear(year + 1, 7);
     
     //Iterates through students and adds their rate schedule to the calendar
-    for (var i = 0; i < students.length; i++) {
-        var currStudent = students[i];
-        for (var j = 0; j < currStudent.timePeriods.length; j++) {
+    for (var i = 0; i < timePeriods.length; i++) {
+        var timePeriod = timePeriods[i];
+        var rateSchedule = timePeriod.rateSchedule;
 
-            var timePeriod = currStudent.timePeriods[j];
-        
-            var studentStartDate = MonthAndYear.makeFromString(currStudent.startDate);
-            var rateScheduleStartDate = MonthAndYear.makeFromString(rateSchedule.startMonth);
-            var startDate = MonthAndYear.getCopyOfLargest(studentStartDate, rateScheduleStartDate);
-        
-            var studentEndDate = MonthAndYear.makeFromString(currStudent.endDate);
-            var rateScheduleEndDate = MonthAndYear.makeFromString(rateSchedule.endMonth);
-            var endDate = MonthAndYear.getCopyOfSmallest(rateScheduleEndDate, studentEndDate);
+        var startDate = MonthAndYear.makeFromString(timePeriod.startDate);
+        var endDate = MonthAndYear.makeFromString(timePeriod.endDate);
 
-            if (!(MonthAndYear.lessThan(endDate, earliestApplicableDate)) && !MonthAndYear.lessThan(latestApplicableDate, startDate)) {
+        if (!(MonthAndYear.lessThan(endDate, earliestApplicableDate)) && !MonthAndYear.lessThan(latestApplicableDate, startDate)) {
             
-                var actualStart = MonthAndYear.getCopyOfLargest(startDate, earliestApplicableDate);
-                var actualEnd = MonthAndYear.getCopyOfSmallest(latestApplicableDate, endDate);
-
-                var currDate = actualStart;
+            var actualStart = MonthAndYear.getCopyOfLargest(startDate, earliestApplicableDate);
+            var actualEnd = MonthAndYear.getCopyOfSmallest(latestApplicableDate, endDate);
+            var currDate = actualStart;
             
-                while (!MonthAndYear.lessThan(actualEnd, currDate)) {
-                    var monthArray = makeSmallArray(rateSchedule.monday);
-                    months[monthToIndex[currDate.month]][0][0] += monthArray[0];
-                    months[monthToIndex[currDate.month]][0][1] += monthArray[1];
+            while (!MonthAndYear.lessThan(actualEnd, currDate)) {
+                var monthArray = makeSmallArray(rateSchedule.monday);
+                months[monthToIndex[currDate.month]][0][0] += monthArray[0];
+                months[monthToIndex[currDate.month]][0][1] += monthArray[1];
 
-                    monthArray = makeSmallArray(rateSchedule.tuesday);
-                    months[monthToIndex[currDate.month]][1][0] += monthArray[0];
-                    months[monthToIndex[currDate.month]][1][1] += monthArray[1];
+                monthArray = makeSmallArray(rateSchedule.tuesday);
+                months[monthToIndex[currDate.month]][1][0] += monthArray[0];
+                months[monthToIndex[currDate.month]][1][1] += monthArray[1];
 
-                    monthArray = makeSmallArray(rateSchedule.wednesday);
-                    months[monthToIndex[currDate.month]][2][0] += monthArray[0];
-                    months[monthToIndex[currDate.month]][2][1] += monthArray[1];
+                monthArray = makeSmallArray(rateSchedule.wednesday);
+                months[monthToIndex[currDate.month]][2][0] += monthArray[0];
+                months[monthToIndex[currDate.month]][2][1] += monthArray[1];
 
-                    monthArray = makeSmallArray(rateSchedule.thursday);
-                    months[monthToIndex[currDate.month]][3][0] += monthArray[0];
-                    months[monthToIndex[currDate.month]][3][1] += monthArray[1];
+                monthArray = makeSmallArray(rateSchedule.thursday);
+                months[monthToIndex[currDate.month]][3][0] += monthArray[0];
+                months[monthToIndex[currDate.month]][3][1] += monthArray[1];
 
-                    monthArray = makeSmallArray(rateSchedule.friday);
-                    months[monthToIndex[currDate.month]][4][0] += monthArray[0];
-                    months[monthToIndex[currDate.month]][4][1] += monthArray[1];
+                monthArray = makeSmallArray(rateSchedule.friday);
+                months[monthToIndex[currDate.month]][4][0] += monthArray[0];
+                months[monthToIndex[currDate.month]][4][1] += monthArray[1];
 
-                    currDate.incrementMonth();
-                } 
+                currDate.incrementMonth();
             }
         } 
     }

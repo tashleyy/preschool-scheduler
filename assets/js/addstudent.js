@@ -54,7 +54,3 @@ function displayAddStudentRateScheduleOptions() {
     });
 }
 
-$(document).ready(function() {
-    displayAddStudentRateScheduleOptions();
-    displayAddStudentAfterSchoolActivityOptions();
-});

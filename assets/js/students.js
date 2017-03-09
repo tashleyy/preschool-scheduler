@@ -9,7 +9,7 @@ function displayStudents() {
                 var rowHtml = '<tr><td><a href="/students/' + student.id + '">' + student.name + '</a></td><td>'
                     + student.parentPhone1 + '</td><td>';
                 if (student.timePeriods && student.timePeriods.length > 0) {
-                    rowHtml += getCurrentTimePeriodString(student.timePeriods) + '</td><td>';
+                    //rowHtml += getCurrentTimePeriodString(student.timePeriods) + '</td><td>';
                 } else {
                     rowHtml += '</td><td>';
                 }
@@ -96,11 +96,6 @@ function editStudent() {
             parentPhone2: parentPhone2,
             physician: physician,
             physicianPhone: physicianPhone,
-<<<<<<< HEAD
-=======
-            rateSchedules: rateSchedules,
-            afterSchoolActivities: afterSchoolActivities,
->>>>>>> master
             startDate: startDate,
             endDate: endDate
         },
@@ -134,47 +129,6 @@ function deleteStudent() {
     });
 }
 
-<<<<<<< HEAD
-=======
-function displayEditStudentRateScheduleOptions() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
-                $('#edit-student-rate-schedules').append(optionHtml);
-            }
-            $('#edit-student-rate-schedules').multiselect();
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
-function displayEditStudentAfterSchoolActivitiesOptions() {
-    $.ajax({
-        url: '/afterschoolactivity/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var asa = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#edit-student-after-school-activities').append(optionHtml);
-            }
-            $('#edit-student-after-school-activities').multiselect();
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
->>>>>>> master
 $(document).ready(function () {
     $('#student-edit-modal').modal({show: false});
     $('#student-delete-modal').modal({show: false});
