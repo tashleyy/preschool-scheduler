@@ -33,9 +33,6 @@ function addStudent() {
         }
     });
     return false;
-<<<<<<< HEAD
-}
-=======
 }
 
 function displayAddStudentRateScheduleOptions() {
