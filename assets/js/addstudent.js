@@ -33,4 +33,31 @@ function addStudent() {
         }
     });
     return false;
+<<<<<<< HEAD
 }
+=======
+}
+
+function displayAddStudentRateScheduleOptions() {
+    $.ajax({
+        url: '/rateschedule/find',
+        type: 'get',
+        success: function(data) {
+            for (var i = 0; i < data.length; i++) {
+                var rs = data[i];
+                var optionHtml = '<option ';
+                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
+                $('#add-student-rate-schedules').append(optionHtml);
+            }
+            $('#add-student-rate-schedules').multiselect();
+        },
+        error: function(xhr, status, error) {
+            console.log('error: ' + error);
+        }
+    });
+}
+
+$(document).ready(function() {
+    displayAddStudentRateScheduleOptions();
+    displayAddStudentAfterSchoolActivityOptions();
+});

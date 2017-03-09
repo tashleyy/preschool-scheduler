@@ -17,7 +17,7 @@ function displayAddPeriodRateScheduleOptions() {
     });
 }
 
-function displayAddPeriodAfterSchoolActivityOptions() {
+function displayAddStudentAfterSchoolActivityOptions() {
     $.ajax({
         url: '/afterschoolactivity/find',
         type: 'get',
@@ -26,9 +26,9 @@ function displayAddPeriodAfterSchoolActivityOptions() {
                 var asa = data[i];
                 var optionHtml = '<option ';
                 optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#add-period-asas').append(optionHtml);
+                $('#add-student-asas').append(optionHtml);
             }
-            $('#add-period-asas').multiselect();
+            $('#add-student-asas').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
