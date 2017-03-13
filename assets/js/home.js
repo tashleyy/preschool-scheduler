@@ -4,22 +4,28 @@ function setUpHomePage() {
     {
         year = getCorrectYear();
     }
-    var yearInt = parseInt(year);
-    var yearNext = yearInt + 1;
-    var yearPrev = yearInt - 1;
+    var yearInt     = parseInt(year);
+    var yearNext    = yearInt + 1;
+    var yearPrev    = yearInt - 1;
     var yearTwoNext = yearNext + 1;
 
     //creates page header with appropriate years
     $('#yearHeader').append(year + "/" + yearNext.toString());
 
     //creates navigation buttons at the bottom of the window
-    $('#previousYearButton').append("<a href=\"?year=" + yearPrev.toString() + "\">" +
-        "<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>" +
-        yearPrev.toString() + "/" + year + "</a>");
-    $('#nextYearButton').append("<a href=\"?year=" + yearNext + "\">" + yearNext.toString() 
-    + "/" + yearTwoNext.toString() + 
-    "<span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>" +
-         "</a>");
+    $('#previousYearButton').append(
+        "<a href=\"?year=" 
+        + yearPrev.toString() + "\">" 
+        +"<span class=\"glyphicon glyphicon-chevron-left\" aria-hidden=\"true\"></span>" 
+        + yearPrev.toString() + "/" + year 
+        + "</a>");
+
+    $('#nextYearButton').append(
+        "<a href=\"?year=" 
+        + yearNext + "\">" + yearNext.toString() 
+        + "/" + yearTwoNext.toString() + 
+        "<span class=\"glyphicon glyphicon-chevron-right\" aria-hidden=\"true\"></span>" 
+        +"</a>");
     
     //goes through database and fills in calendar
     displayStudentsOnCalendar(yearInt);
@@ -37,6 +43,7 @@ function displayStudentsOnCalendar(year) {
         add += "<th>PM</th>";
     }
     add += "</tr>";
+
     $('#monthCalendar').append(add);
 
     //fills in the numbers for the calendar school year
@@ -159,7 +166,8 @@ function populateWithSuccessfulRateSchedule(timePeriods, year) {
     //creates the array that will contain student attendance.  Everything
     //initialized to 0.
     var months = new Array(12);
-    for (var i = 0; i < months.length; i++) {
+    for (var i = 0; i < months.length; i++) 
+    {
         months[i] = new Array(5);
         for (var j = 0; j < 5; j++) {
             months[i][j] = new Array(2);
@@ -170,44 +178,50 @@ function populateWithSuccessfulRateSchedule(timePeriods, year) {
     }
     //Earliest month on the calendar is September, latest is August
     var earliestApplicableDate = new MonthAndYear(year, 8);
-    var latestApplicableDate = new MonthAndYear(year + 1, 7);
+    var latestApplicableDate   = new MonthAndYear(year + 1, 7);
     
     //Iterates through students and adds their rate schedule to the calendar
-    for (var i = 0; i < timePeriods.length; i++) {
-        var timePeriod = timePeriods[i];
+    for (var i = 0; i < timePeriods.length; i++) 
+    {
+        var timePeriod   = timePeriods[i];
         var rateSchedule = timePeriod.rateSchedule;
 
         var startDate = MonthAndYear.makeFromString(timePeriod.startDate);
-        var endDate = MonthAndYear.makeFromString(timePeriod.endDate);
+        var endDate   = MonthAndYear.makeFromString(timePeriod.endDate);
+        
+        //check to make sure rateSchedule is not undefined as in the case when a rateschedule is deleted
+        if(rateSchedule)
+        {
+            if (!(MonthAndYear.lessThan(endDate, earliestApplicableDate)) && !MonthAndYear.lessThan(latestApplicableDate, startDate)) {
+                
+                var actualStart = MonthAndYear.getCopyOfLargest(startDate, earliestApplicableDate);
+                var actualEnd   = MonthAndYear.getCopyOfSmallest(latestApplicableDate, endDate);
+                var currDate    = actualStart;
+                
+                while (!MonthAndYear.lessThan(actualEnd, currDate)) 
+                {
+                    var monthArray = makeSmallArray(rateSchedule.monday);
+                    months[monthToIndex[currDate.month]][0][0] += monthArray[0];
+                    months[monthToIndex[currDate.month]][0][1] += monthArray[1];
 
-        if (!(MonthAndYear.lessThan(endDate, earliestApplicableDate)) && !MonthAndYear.lessThan(latestApplicableDate, startDate)) {
-            
-            var actualStart = MonthAndYear.getCopyOfLargest(startDate, earliestApplicableDate);
-            var actualEnd = MonthAndYear.getCopyOfSmallest(latestApplicableDate, endDate);
-            var currDate = actualStart;
-            
-            while (!MonthAndYear.lessThan(actualEnd, currDate)) {
-                var monthArray = makeSmallArray(rateSchedule.monday);
-                months[monthToIndex[currDate.month]][0][0] += monthArray[0];
-                months[monthToIndex[currDate.month]][0][1] += monthArray[1];
+                    monthArray = makeSmallArray(rateSchedule.tuesday);
+                    months[monthToIndex[currDate.month]][1][0] += monthArray[0];
+                    months[monthToIndex[currDate.month]][1][1] += monthArray[1];
 
-                monthArray = makeSmallArray(rateSchedule.tuesday);
-                months[monthToIndex[currDate.month]][1][0] += monthArray[0];
-                months[monthToIndex[currDate.month]][1][1] += monthArray[1];
+                    monthArray = makeSmallArray(rateSchedule.wednesday);
+                    months[monthToIndex[currDate.month]][2][0] += monthArray[0];
+                    months[monthToIndex[currDate.month]][2][1] += monthArray[1];
 
-                monthArray = makeSmallArray(rateSchedule.wednesday);
-                months[monthToIndex[currDate.month]][2][0] += monthArray[0];
-                months[monthToIndex[currDate.month]][2][1] += monthArray[1];
+                    monthArray = makeSmallArray(rateSchedule.thursday);
+                    months[monthToIndex[currDate.month]][3][0] += monthArray[0];
+                    months[monthToIndex[currDate.month]][3][1] += monthArray[1];
 
-                monthArray = makeSmallArray(rateSchedule.thursday);
-                months[monthToIndex[currDate.month]][3][0] += monthArray[0];
-                months[monthToIndex[currDate.month]][3][1] += monthArray[1];
+                    monthArray = makeSmallArray(rateSchedule.friday);
+                    months[monthToIndex[currDate.month]][4][0] += monthArray[0];
+                    months[monthToIndex[currDate.month]][4][1] += monthArray[1];
 
-                monthArray = makeSmallArray(rateSchedule.friday);
-                months[monthToIndex[currDate.month]][4][0] += monthArray[0];
-                months[monthToIndex[currDate.month]][4][1] += monthArray[1];
-
-                currDate.incrementMonth();
+                    currDate.incrementMonth();
+                }
             }
         } 
     }
@@ -238,10 +252,12 @@ function makeSmallArray(dayString)
 //builds titles on the calendar
 function buildCalendarHeader() {
     var days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-    var add = "<thead>";
-    add += "<tr>";
 
-    add += "<th>Month</th>";
+    var add = "<thead>";
+    
+    add     += "<tr>";
+    add     += "<th>Month</th>";
+    
     for (var i = 0; i < days.length; i++) {
         add += "<th colspan=\"2\">";
         add += days[i];
@@ -256,7 +272,7 @@ function buildCalendarHeader() {
 
 function getCorrectYear() {
     var today = new Date();
-    var year = today.getFullYear();
+    var year  = today.getFullYear();
     var month = today.getMonth();
 
     if (month < 8) 
