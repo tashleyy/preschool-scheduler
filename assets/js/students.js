@@ -35,11 +35,17 @@ function showStudentEditModal(id) {
         success: function(data) {
             var rs = [];
             var asa = [];
-            for (var i = 0; i < data.rateSchedules.length; i++) {
-                rs.push(data.rateSchedules[i].id);
+            if(data.rateSchedules)
+            {
+                for (var i = 0; i < data.rateSchedules.length; i++) {
+                    rs.push(data.rateSchedules[i].id);
+                }
             }
-            for (var i = 0; i < data.afterSchoolActivities.length; i++) {
-                asa.push(data.afterSchoolActivities[i].id);
+            if(data.afterSchoolActivities)
+            {
+                for (var i = 0; i < data.afterSchoolActivities.length; i++) {
+                    asa.push(data.afterSchoolActivities[i].id);
+                }
             }
             $('#edit-student-name').val(data.name);
             $('#edit-student-birthday').val(data.birthday);
