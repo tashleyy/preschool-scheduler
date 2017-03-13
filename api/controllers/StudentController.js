@@ -3,7 +3,6 @@ module.exports = {
     var params = req.params.all();
     if (!params.name || !params.birthday || !params.parent1 || !params.parentPhone1 
     || !params.physician || !params.physicianPhone || !params.startDate || !params.endDate) {
-      console.log("Don't have all the arguments!");
       return res.badRequest();
     }
 
@@ -27,8 +26,7 @@ module.exports = {
     });
   },
 
-  'find': function(req, res) {
-    
+  'find': function(req, res) {    
     Student.find().populate('timePeriods').exec(function(err, students) {
       if (err) {
         sails.log.error(err);
@@ -48,6 +46,9 @@ module.exports = {
       if (err) {
         sails.log.error(err);
         return res.serverError();
+      }
+      if (!student) {
+        return res.notFound();
       }
       return res.ok(student);
     });

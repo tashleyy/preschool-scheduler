@@ -139,6 +139,4 @@ $(document).ready(function () {
     $('#student-edit-modal').modal({show: false});
     $('#student-delete-modal').modal({show: false});
     displayStudents();
-    //displayEditStudentRateScheduleOptions();
-    //displayEditStudentAfterSchoolActivitiesOptions();
 });

@@ -3,49 +3,49 @@
 <% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] %>
 
 <div class="container">
-    <h1>New After School Activity</h1>
+	<h1>New After School Activity</h1>
 
-    <div align="left">
-        <form id="add-after-school-activity-form">
-            <div class="form-group">
-                <label for="add-after-school-activity-name">Name *</label>
-                <input type="text" class="form-control" id="add-after-school-activity-name" required>
-            </div>
-            <div class="form-group">
-                <label for="add-after-school-activity-cost">Cost ($) *</label>
-                <input type="text" class="form-control" id="add-after-school-activity-cost" required>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <% for(var i = 0; i < days.length; i++) { %>
-                        <th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
-                    <% } %>
-                </thead>
-               <tbody align="left">
-                    <tr>
-                        <% for(var i = 0; i < days.length; i++) { %>
-                            <td>
-                                <fieldset class="form-group">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="checkbox" class="form-check-input" name="add-asa-options-<%= days[i] %>">
-                                        </label>
-                                    </div>
-                                </fieldset>
-                            </td>
-                        <% } %>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <label for="add-after-school-activity-start-month">Start Month *</label>
-                <input class="form-control" type="month" id="add-after-school-activity-start-month" required>
-            </div>
-            <div class="form-group">
-                <label for="add-after-school-activity-end-month">End Month *</label>
-                <input class="form-control" type="month" id="add-after-school-activity-end-month" required>
-            </div>
-            <button type="submit" class="btn btn-primary" onClick="createAfterSchoolActivity()">Submit</button>
-        </form>
-    </div>
+	<div align="left">
+		<form id="add-asa-form">
+			<div class="form-group">
+				<label for="add-asa-name">Name *</label>
+				<input type="text" class="form-control" id="add-asa-name" required>
+			</div>
+			<div class="form-group">
+				<label for="add-asa-cost">Cost ($) *</label>
+				<input type="text" class="form-control" id="add-asa-cost" required>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<% for(var i = 0; i < days.length; i++) { %>
+						<th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
+					<% } %>
+				</thead>
+			   <tbody align="left">
+					<tr>
+						<% for(var i = 0; i < days.length; i++) { %>
+							<td>
+								<fieldset class="form-group">
+									<div class="form-check">
+										<label class="form-check-label">
+											<input type="checkbox" class="form-check-input" name="add-asa-options-<%= days[i] %>">
+										</label>
+									</div>
+								</fieldset>
+							</td>
+						<% } %>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group">
+				<label for="add-asa-start-month">Start Month *</label>
+				<input class="form-control" type="month" id="add-asa-start-month" required>
+			</div>
+			<div class="form-group">
+				<label for="add-asa-end-month">End Month *</label>
+				<input class="form-control" type="month" id="add-asa-end-month" required>
+			</div>
+			<button type="submit" class="btn btn-primary" onClick="createAfterSchoolActivity()">Submit</button>
+		</form>
+	</div>
 </div>

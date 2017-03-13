@@ -1,13 +1,13 @@
 function createRateSchedule() {
-    var name = $('#add-rate-schedule-name').val();
-    var cost = $('#add-rate-schedule-cost').val();
-    var monday =  $('input[name="add-options-monday"]:checked').val();
-    var tuesday =  $('input[name="add-options-tuesday"]:checked').val();
-    var wednesday =  $('input[name="add-options-wednesday"]:checked').val();
-    var thursday =  $('input[name="add-options-thursday"]:checked').val();
-    var friday =  $('input[name="add-options-friday"]:checked').val();
-    var startMonth = $('#add-rate-schedule-start-month').val();
-    var endMonth = $('#add-rate-schedule-end-month').val();
+    var name = $('#add-rs-name').val();
+    var cost = $('#add-rs-cost').val();
+    var monday =  $('input[name="add-rs-options-monday"]:checked').val();
+    var tuesday =  $('input[name="add-rs-options-tuesday"]:checked').val();
+    var wednesday =  $('input[name="add-rs-options-wednesday"]:checked').val();
+    var thursday =  $('input[name="add-rs-options-thursday"]:checked').val();
+    var friday =  $('input[name="add-rs-options-friday"]:checked').val();
+    var startMonth = $('#add-rs-start-month').val();
+    var endMonth = $('#add-rs-end-month').val();
     $.ajax({
       url: '/rateschedule/create',
       type: 'post',

@@ -19,7 +19,7 @@ function displayAfterSchoolActivities() {
                     + '<a href="#" onclick="showAfterSchoolActivityEditModal(\'' + asa.id + '\')"><span class="glyphicon glyphicon-pencil"/></a></td><td>'
                     + '<a href="#" onclick="showAfterSchoolActivityDeleteModal(\'' + asa.id + '\')"><span class="glyphicon glyphicon-trash"/></a></td></tr>';
                 // Use jQuery to add it to table body
-                $('#after-school-activity-table tbody').append(rowHtml);
+                $('#asa-table tbody').append(rowHtml);
             }
         },
         error: function(xhr, status, error) {
@@ -43,18 +43,18 @@ function showAfterSchoolActivityEditModal(id) {
             $('input[name="edit-asa-options-thursday"]').prop('checked', false);
             $('input[name="edit-asa-options-friday"]').prop('checked', false);
             
-            $('#edit-after-school-activity-name').val(data.name);
-            $('#edit-after-school-activity-cost').val(data.cost);
+            $('#edit-asa-name').val(data.name);
+            $('#edit-asa-cost').val(data.cost);
             $('input[name="edit-asa-options-monday"]').prop('checked', data.monday);
             $('input[name="edit-asa-options-tuesday"]').prop('checked', data.tuesday);
             $('input[name="edit-asa-options-wednesday"]').prop('checked', data.wednesday);
             $('input[name="edit-asa-options-thursday"]').prop('checked', data.thursday);
             $('input[name="edit-asa-options-friday"]').prop('checked', data.friday);
             
-            $('#edit-after-school-activity-start-month').val(data.startMonth);
-            $('#edit-after-school-activity-end-month').val(data.endMonth);
-            $('#after-school-activity-edit-modal').attr('asaId', id);
-            $('#after-school-activity-edit-modal').modal('show');
+            $('#edit-asa-start-month').val(data.startMonth);
+            $('#edit-asa-end-month').val(data.endMonth);
+            $('#asa-edit-modal').attr('asaId', id);
+            $('#asa-edit-modal').modal('show');
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -64,22 +64,22 @@ function showAfterSchoolActivityEditModal(id) {
 }
 
 function showAfterSchoolActivityDeleteModal(id) {
-    $('#after-school-activity-delete-modal').attr('asaId', id);
-    $('#after-school-activity-delete-modal').modal('show');
+    $('#asa-delete-modal').attr('asaId', id);
+    $('#asa-delete-modal').modal('show');
     return false;
 }
 
 function editAfterSchoolActivity() {
-    var id = $('#after-school-activity-edit-modal').attr('asaId');
-    var name = $('#edit-after-school-activity-name').val();
-    var cost = $('#edit-after-school-activity-cost').val();
+    var id = $('#asa-edit-modal').attr('asaId');
+    var name = $('#edit-asa-name').val();
+    var cost = $('#edit-asa-cost').val();
     var monday =  $('input[name="edit-asa-options-monday"]').prop('checked');
     var tuesday =  $('input[name="edit-asa-options-tuesday"]').prop('checked');
     var wednesday =  $('input[name="edit-asa-options-wednesday"]').prop('checked');
     var thursday =  $('input[name="edit-asa-options-thursday"]').prop('checked');
     var friday =  $('input[name="edit-asa-options-friday"]').prop('checked');
-    var startMonth = $('#edit-after-school-activity-start-month').val();
-    var endMonth = $('#edit-after-school-activity-end-month').val();
+    var startMonth = $('#edit-asa-start-month').val();
+    var endMonth = $('#edit-asa-end-month').val();
     $.ajax({
         url: '/afterschoolactivity/update',
         type: 'put',
@@ -96,9 +96,9 @@ function editAfterSchoolActivity() {
             endMonth: endMonth
         },
         success: function(data) {
-            $('#after-school-activity-table tbody').html('');
+            $('#asa-table tbody').html('');
             displayAfterSchoolActivities();
-            $('#after-school-activity-edit-modal').modal('hide');            
+            $('#asa-edit-modal').modal('hide');            
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -107,7 +107,7 @@ function editAfterSchoolActivity() {
 }
 
 function deleteAfterSchoolActivity() {
-    var id = $('#after-school-activity-delete-modal').attr('asaId');
+    var id = $('#asa-delete-modal').attr('asaId');
     $.ajax({
         url: '/afterschoolactivity/destroy',
         type: 'delete',
@@ -115,9 +115,9 @@ function deleteAfterSchoolActivity() {
             id: id
         },
         success: function(data) {
-            $('#after-school-activity-table tbody').html('');
+            $('#asa-table tbody').html('');
             displayAfterSchoolActivities();
-            $('#after-school-activity-delete-modal').modal('hide');
+            $('#asa-delete-modal').modal('hide');
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -126,7 +126,7 @@ function deleteAfterSchoolActivity() {
 }
 
 $(document).ready(function () {
-    $('#after-school-activity-edit-modal').modal({show: false});
-    $('#after-school-activity-delete-modal').modal({show: false});
+    $('#asa-edit-modal').modal({show: false});
+    $('#asa-delete-modal').modal({show: false});
     displayAfterSchoolActivities();
 });

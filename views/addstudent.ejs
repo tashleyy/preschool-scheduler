@@ -1,51 +1,51 @@
 <%- partial('partials/nav.ejs', {location: 'addstudent'}) %>
 
 <div class="container">
-    <h1>New Student</h1>
+	<h1>New Student</h1>
 
-    <div>
-        <form>
-            <div class="form-group">
-                <label for="add-student-name">Name *</label>
-                <input type="text" class="form-control" id="add-student-name" required>
-            </div>
-            <div class="form-group">
-                <label for="add-student-birth-date">Birthday *</label>
-                <input class="form-control" type="date" id="add-student-birth-date" required>
-            </div>
-            <div class="form-group">
-                <label for="add-parent-name1">Parent/Guardian 1 *</label>
-                <input type="text" class="form-control" id="add-parent-name1" required>
-            </div>
-            <div class="form-group">
-                <label for="add-parent-name2">Parent/Guardian 2</label>
-                <input type="text" class="form-control" id="add-parent-name2">
-            </div>
-            <div class="form-group">
-                <label for="add-parent-phone1">Phone Number *</label>
-                <input type="text" class="form-control" id="add-parent-phone1" required>
-            </div>
-            <div class="form-group">
-                <label for="add-parent-phone2">Alternate Phone Number</label>
-                <input type="text" class="form-control" id="add-parent-phone2">
-            </div>
-            <div class="form-group">
-                <label for="add-physician-name">Physician Name *</label>
-                <input type="text" class="form-control" id="add-physician-name" required>
-            </div>
-            <div class="form-group">
-                <label for="add-physician-phone">Physician Phone Number *</label>
-                <input type="text" class="form-control" id="add-physician-phone" required>
-            </div>
-            <div class="form-group">
-                <label for="add-student-start-day">Start Date *</label>
-                <input class="form-control" type="date" id="add-student-start-day" required>
-            </div>
-            <div class="form-group">
-                <label for="add-student-end-day">End Date *</label>
-                <input class="form-control" type="date" id="add-student-end-day" required>
-            </div>
-            <button type="submit" class="btn btn-primary" onClick="addStudent();">Submit</button>
-        </form>
-    </div>
+	<div>
+		<form>
+			<div class="form-group">
+				<label for="add-student-name">Name *</label>
+				<input type="text" class="form-control" id="add-student-name" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-birth-date">Birthday *</label>
+				<input class="form-control" type="date" id="add-student-birth-date" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-parent-name1">Parent/Guardian 1 *</label>
+				<input type="text" class="form-control" id="add-student-parent-name-1" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-parent-name2">Parent/Guardian 2</label>
+				<input type="text" class="form-control" id="add-student-parent-name-2">
+			</div>
+			<div class="form-group">
+				<label for="add-student-parent-phone1">Phone Number *</label>
+				<input type="text" class="form-control" id="add-student-parent-phone-1" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-parent-phone2">Alternate Phone Number</label>
+				<input type="text" class="form-control" id="add-student-parent-phone-2">
+			</div>
+			<div class="form-group">
+				<label for="add-student-physician-name">Physician Name *</label>
+				<input type="text" class="form-control" id="add-student-physician-name" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-physician-phone">Physician Phone Number *</label>
+				<input type="text" class="form-control" id="add-student-physician-phone" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-start-date">Start Date *</label>
+				<input class="form-control" type="date" id="add-student-start-date" required>
+			</div>
+			<div class="form-group">
+				<label for="add-student-end-date">End Date *</label>
+				<input class="form-control" type="date" id="add-student-end-date" required>
+			</div>
+			<button type="submit" class="btn btn-primary" onClick="addStudent();">Submit</button>
+		</form>
+	</div>
 </div>

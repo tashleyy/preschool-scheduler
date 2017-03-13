@@ -9,7 +9,6 @@ function displayAddPeriodRateScheduleOptions() {
                 optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
                 $('#add-period-rate-schedules').append(optionHtml);
             }
-            $('#add-period-rate-schedules').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -26,9 +25,8 @@ function displayAddPeriodAfterSchoolActivityOptions() {
                 var asa = data[i];
                 var optionHtml = '<option ';
                 optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#add-student-asas').append(optionHtml);
+                $('#add-period-asas').append(optionHtml);
             }
-            $('#add-student-asas').multiselect();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -37,16 +35,11 @@ function displayAddPeriodAfterSchoolActivityOptions() {
 }
 
 function addTimePeriod(student) {
-    var startDate = $('#add-period-start-day').val();
-    var endDate = $('#add-period-end-day').val();
+    var startDate = $('#add-period-start-date').val();
+    var endDate = $('#add-period-end-date').val();
     var rs = $('#add-period-rate-schedules').val();
     var asa =  $('#add-period-asas').val();
 
-    console.log(startDate);
-    console.log(endDate);
-    console.log(rs);
-    console.log(asa);
-    console.log(student);
     $.ajax({
         url: '/timeperiod/create',
         type: 'post',

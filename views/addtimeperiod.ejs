@@ -1,31 +1,31 @@
-<%- partial('partials/nav.ejs', {location: 'addstudentschedule'}) %>
+<%- partial('partials/nav.ejs', {location: 'addtimeperiod'}) %>
 
 <div class="container">
-    <h1>New Time Period</h1>
+	<h1>New Time Period</h1>
 
-    <div>
-        <form>
-            <div class="form-group">
-                <label for="add-period-start-day">Start Date *</label>
-                <input class="form-control" type="date" id="add-period-start-day" required>
-            </div>
-            <div class="form-group">
-                <label for="add-period-end-day">End Date *</label>
-                <input class="form-control" type="date" id="add-period-end-day" required>
-            </div>
-            <div class="form-group">
-                <label for="add-period-rate-schedules">Rate Schedule *</label>
-                <select id="add-period-rate-schedules">
-                    <option disabled selected value> -- select a rate schedule -- </option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="add-period-asas">After School Activities</label>
-                <select id="add-period-asas">
-                    <option disabled selected value> -- select an ASA -- </option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-primary" onClick="addTimePeriod('<%= student.id %>');">Submit</button>
-        </form>
-    </div>
+	<div>
+		<form>
+			<div class="form-group">
+				<label for="add-period-start-date">Start Date *</label>
+				<input class="form-control" type="date" id="add-period-start-date" required>
+			</div>
+			<div class="form-group">
+				<label for="add-period-end-date">End Date *</label>
+				<input class="form-control" type="date" id="add-period-end-date" required>
+			</div>
+			<div class="form-group">
+				<label for="add-period-rate-schedules">Rate Schedule *</label>
+				<select id="add-period-rate-schedules">
+					<option disabled selected value> -- select a rate schedule -- </option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="add-period-asas">After School Activities</label>
+				<select id="add-period-asas">
+					<option disabled selected value> -- select an ASA -- </option>
+				</select>
+			</div>
+			<button type="submit" class="btn btn-primary" onClick="addTimePeriod('<%= student.id %>');">Submit</button>
+		</form>
+	</div>
 </div>
