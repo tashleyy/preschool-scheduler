@@ -55,7 +55,9 @@ module.exports = {
   },
 
   'find': function (req, res) {
-    TimePeriod.find()
+    var params = req.params.all();
+    TimePeriod.find({student: params.student})
+      .populate('student')
       .populate('rateSchedule')
       .populate('afterSchoolActivities')
       .exec(function(err, timePeriods) {
