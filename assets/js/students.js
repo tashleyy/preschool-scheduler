@@ -55,11 +55,6 @@ function showStudentEditModal(id) {
             $('#edit-student-parent-phone-2').val(data.parentPhone2);
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
-            $('#edit-student-rate-schedules').multiselect('deselectAll', false);
-            $('#edit-student-after-school-activities').multiselect('deselectAll', false);
-            $('#edit-student-rate-schedules').multiselect('select', rs);
-            $('#edit-student-after-school-activities').multiselect('select', asa);
-            $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
             $('#student-edit-modal').attr('studentId', id);
