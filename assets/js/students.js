@@ -33,14 +33,6 @@ function showStudentEditModal(id) {
             id: id
         },
         success: function(data) {
-            var rs = [];
-            var asa = [];
-            for (var i = 0; i < data.rateSchedules.length; i++) {
-                rs.push(data.rateSchedules[i].id);
-            }
-            for (var i = 0; i < data.afterSchoolActivities.length; i++) {
-                asa.push(data.afterSchoolActivities[i].id);
-            }
             $('#edit-student-name').val(data.name);
             $('#edit-student-birthday').val(data.birthday);
             $('#edit-student-parent-1').val(data.parent1);
@@ -49,10 +41,6 @@ function showStudentEditModal(id) {
             $('#edit-student-parent-phone-2').val(data.parentPhone2);
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
-            $('#edit-student-rate-schedules').multiselect('deselectAll', false);
-            $('#edit-student-after-school-activities').multiselect('deselectAll', false);
-            $('#edit-student-rate-schedules').multiselect('select', rs);
-            $('#edit-student-after-school-activities').multiselect('select', asa);
             $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
@@ -133,6 +121,4 @@ $(document).ready(function () {
     $('#student-edit-modal').modal({show: false});
     $('#student-delete-modal').modal({show: false});
     displayStudents();
-    //displayEditStudentRateScheduleOptions();
-    //displayEditStudentAfterSchoolActivitiesOptions();
 });

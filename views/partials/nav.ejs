@@ -1,43 +1,43 @@
 <nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-                aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/home">Foundations Preschool Scheduler</a>
-        </div>
+	<div class="container">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+				aria-controls="navbar">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/home">Foundations Preschool Scheduler</a>
+		</div>
 
-        <div id="navbar" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav">
-                <% if (location === 'home') { %>
-                    <li class="active"><a href="/home">Home</a></li>
-                <% } else { %>
-                    <li><a href="/home">Home</a></li>
-                <% } %>
-                <% if (location === 'students') { %>
-                    <li class="active"><a href="/students">Students</a></li>
-                <% } else { %>
-                    <li><a href="/students">Students</a></li>
-                <% } %>
-                <% if (location === 'rateschedules') { %>
-                    <li class="active"><a href="/rateschedules">Rate Schedules</a></li>
-                <% } else { %>
-                    <li><a href="/rateschedules">Rate Schedules</a></li>
-                <% } %>
-                <% if (location === 'afterschoolactivities') { %>
-                    <li class="active"><a href="/afterschoolactivities">After School Activities</a></li>
-                <% } else { %>
-                    <li><a href="/afterschoolactivities">After School Activities</a></li>
-                <% } %>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a onClick="signOut();">Sign Out</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="g-signin2" style="display: none"></div>
+		<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+				<% if (location === 'home') { %>
+					<li class="active"><a href="/home">Home</a></li>
+				<% } else { %>
+					<li><a href="/home">Home</a></li>
+				<% } %>
+				<% if (location === 'students') { %>
+					<li class="active"><a href="/students">Students</a></li>
+				<% } else { %>
+					<li><a href="/students">Students</a></li>
+				<% } %>
+				<% if (location === 'rateschedules') { %>
+					<li class="active"><a href="/rateschedules">Rate Schedules</a></li>
+				<% } else { %>
+					<li><a href="/rateschedules">Rate Schedules</a></li>
+				<% } %>
+				<% if (location === 'afterschoolactivities') { %>
+					<li class="active"><a href="/afterschoolactivities">After School Activities</a></li>
+				<% } else { %>
+					<li><a href="/afterschoolactivities">After School Activities</a></li>
+				<% } %>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a onClick="signOut();">Sign Out</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="g-signin2" style="display: none"></div>
 </nav>

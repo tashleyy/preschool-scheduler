@@ -47,6 +47,9 @@ module.exports = {
         sails.log.error(err);
         return res.serverError();
       }
+      if (!rateSchedule) {
+        return res.notFound();
+      }
       return res.ok(rateSchedule);
     });
   },

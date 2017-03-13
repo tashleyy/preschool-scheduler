@@ -1,14 +1,14 @@
 function addStudent() {
     var name = $('#add-student-name').val();
     var birthday = $('#add-student-birth-date').val();
-    var parent1 = $('#add-parent-name1').val();
-    var parent2 = $('#add-parent-name2').val();
-    var parentPhone1 = $('#add-parent-phone1').val();
-    var parentPhone2 = $('#add-parent-phone2').val();
-    var physician = $('#add-physician-name').val();
-    var physicianPhone = $('#add-physician-phone').val();
-    var startDate = $('#add-student-start-day').val();
-    var endDate = $('#add-student-end-day').val();
+    var parent1 = $('#add-student-parent-name-1').val();
+    var parent2 = $('#add-student-parent-name-2').val();
+    var parentPhone1 = $('#add-student-parent-phone-1').val();
+    var parentPhone2 = $('#add-student-parent-phone-2').val();
+    var physician = $('#add-student-physician-name').val();
+    var physicianPhone = $('#add-student-physician-phone').val();
+    var startDate = $('#add-student-start-date').val();
+    var endDate = $('#add-student-end-date').val();
     $.ajax({
         url: '/student/create',
         type: 'post',
@@ -34,23 +34,3 @@ function addStudent() {
     });
     return false;
 }
-
-function displayAddStudentRateScheduleOptions() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
-                $('#add-student-rate-schedules').append(optionHtml);
-            }
-            $('#add-student-rate-schedules').multiselect();
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-

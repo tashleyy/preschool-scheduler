@@ -19,7 +19,7 @@ function displayRateSchedules() {
                     + '<a href="#" onclick="showRateScheduleEditModal(\'' + rs.id + '\')"><span class="glyphicon glyphicon-pencil"/></a></td><td>'
                     + '<a href="#" onclick="showRateScheduleDeleteModal(\'' + rs.id + '\')"><span class="glyphicon glyphicon-trash"/></a></td></tr>';
                 // Use jQuery to add it to table body
-                $('#rate-schedule-table tbody').append(rowHtml);
+                $('#rs-table tbody').append(rowHtml);
             }
         },
         error: function(xhr, status, error) {
@@ -37,23 +37,23 @@ function showRateScheduleEditModal(id) {
         },
         success: function(data) {
             // Reset radio buttons
-            $('input[name="edit-options-monday"]').filter('[value=none]').prop('checked', true);
-            $('input[name="edit-options-tuesday"]').filter('[value=none]').prop('checked', true);
-            $('input[name="edit-options-wednesday"]').filter('[value=none]').prop('checked', true);
-            $('input[name="edit-options-thursday"]').filter('[value=none]').prop('checked', true);
-            $('input[name="edit-options-friday"]').filter('[value=none]').prop('checked', true);
+            $('input[name="edit-rs-options-monday"]').filter('[value=none]').prop('checked', true);
+            $('input[name="edit-rs-options-tuesday"]').filter('[value=none]').prop('checked', true);
+            $('input[name="edit-rs-options-wednesday"]').filter('[value=none]').prop('checked', true);
+            $('input[name="edit-rs-options-thursday"]').filter('[value=none]').prop('checked', true);
+            $('input[name="edit-rs-options-friday"]').filter('[value=none]').prop('checked', true);
 
-            $('#edit-rate-schedule-name').val(data.name);
-            $('#edit-rate-schedule-cost').val(data.cost);
-            $('input[name="edit-options-monday"]').filter('[value=' + data.monday + ']').prop('checked', true);
-            $('input[name="edit-options-tuesday"]').filter('[value=' + data.tuesday + ']').prop('checked', true);
-            $('input[name="edit-options-wednesday"]').filter('[value=' + data.wednesday + ']').prop('checked', true);
-            $('input[name="edit-options-thursday"]').filter('[value=' + data.thursday + ']').prop('checked', true);
-            $('input[name="edit-options-friday"]').filter('[value=' + data.friday + ']').prop('checked', true);
-            $('#edit-rate-schedule-start-month').val(data.startMonth);
-            $('#edit-rate-schedule-end-month').val(data.endMonth);
-            $('#rate-schedule-edit-modal').attr('rsId', id);
-            $('#rate-schedule-edit-modal').modal('show');
+            $('#edit-rs-name').val(data.name);
+            $('#edit-rs-cost').val(data.cost);
+            $('input[name="edit-rs-options-monday"]').filter('[value=' + data.monday + ']').prop('checked', true);
+            $('input[name="edit-rs-options-tuesday"]').filter('[value=' + data.tuesday + ']').prop('checked', true);
+            $('input[name="edit-rs-options-wednesday"]').filter('[value=' + data.wednesday + ']').prop('checked', true);
+            $('input[name="edit-rs-options-thursday"]').filter('[value=' + data.thursday + ']').prop('checked', true);
+            $('input[name="edit-rs-options-friday"]').filter('[value=' + data.friday + ']').prop('checked', true);
+            $('#edit-rs-start-month').val(data.startMonth);
+            $('#edit-rs-end-month').val(data.endMonth);
+            $('#rs-edit-modal').attr('rsId', id);
+            $('#rs-edit-modal').modal('show');
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -63,22 +63,22 @@ function showRateScheduleEditModal(id) {
 }
 
 function showRateScheduleDeleteModal(id) {
-    $('#rate-schedule-delete-modal').attr('rsId', id);
-    $('#rate-schedule-delete-modal').modal('show');
+    $('#rs-delete-modal').attr('rsId', id);
+    $('#rs-delete-modal').modal('show');
     return false;
 }
 
 function editRateSchedule() {
-    var id = $('#rate-schedule-edit-modal').attr('rsId');
-    var name = $('#edit-rate-schedule-name').val();
-    var cost = $('#edit-rate-schedule-cost').val();
-    var monday =  $('input[name="edit-options-monday"]:checked').val();
-    var tuesday =  $('input[name="edit-options-tuesday"]:checked').val();
-    var wednesday =  $('input[name="edit-options-wednesday"]:checked').val();
-    var thursday =  $('input[name="edit-options-thursday"]:checked').val();
-    var friday =  $('input[name="edit-options-friday"]:checked').val();
-    var startMonth = $('#edit-rate-schedule-start-month').val();
-    var endMonth = $('#edit-rate-schedule-end-month').val();
+    var id = $('#rs-edit-modal').attr('rsId');
+    var name = $('#edit-rs-name').val();
+    var cost = $('#edit-rs-cost').val();
+    var monday =  $('input[name="edit-rs-options-monday"]:checked').val();
+    var tuesday =  $('input[name="edit-rs-options-tuesday"]:checked').val();
+    var wednesday =  $('input[name="edit-rs-options-wednesday"]:checked').val();
+    var thursday =  $('input[name="edit-rs-options-thursday"]:checked').val();
+    var friday =  $('input[name="edit-rs-options-friday"]:checked').val();
+    var startMonth = $('#edit-rs-start-month').val();
+    var endMonth = $('#edit-rs-end-month').val();
     $.ajax({
         url: '/rateschedule/update',
         type: 'put',
@@ -95,9 +95,9 @@ function editRateSchedule() {
             endMonth: endMonth
         },
         success: function(data) {
-            $('#rate-schedule-table tbody').html('');
+            $('#rs-table tbody').html('');
             displayRateSchedules();
-            $('#rate-schedule-edit-modal').modal('hide');            
+            $('#rs-edit-modal').modal('hide');            
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -106,7 +106,7 @@ function editRateSchedule() {
 }
 
 function deleteRateSchedule() {
-    var id = $('#rate-schedule-delete-modal').attr('rsId');
+    var id = $('#rs-delete-modal').attr('rsId');
     $.ajax({
         url: '/rateschedule/destroy',
         type: 'delete',
@@ -114,9 +114,9 @@ function deleteRateSchedule() {
             id: id
         },
         success: function(data) {
-            $('#rate-schedule-table tbody').html('');
+            $('#rs-table tbody').html('');
             displayRateSchedules();
-            $('#rate-schedule-delete-modal').modal('hide');
+            $('#rs-delete-modal').modal('hide');
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -125,7 +125,7 @@ function deleteRateSchedule() {
 }
 
 $(document).ready(function() {
-    $('#rate-schedule-edit-modal').modal({show: false});
-    $('#rate-schedule-delete-modal').modal({show: false});
+    $('#rs-edit-modal').modal({show: false});
+    $('#rs-delete-modal').modal({show: false});
     displayRateSchedules();
 });

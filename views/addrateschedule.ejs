@@ -1,70 +1,55 @@
 <%- partial('partials/nav.ejs', {location: 'addrateschedule'}) %>
 
 <% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'] %>
+<% var dayOptions = ['none', 'am', 'pm', 'full'] %>
 
 <div class="container">
-    <h1>New Rate Schedule</h1>
+	<h1>New Rate Schedule</h1>
 
-    <div align="left">
-        <form id="add-rate-schedule-form">
-            <div class="form-group">
-                <label for="add-rate-schedule-name">Name *</label>
-                <input type="text" class="form-control" id="add-rate-schedule-name" required>
-            </div>
-            <div class="form-group">
-                <label for="add-rate-schedule-cost">Cost ($) *</label>
-                <input type="text" class="form-control" id="add-rate-schedule-cost" required>
-            </div>
-            <table class="table table-bordered table-striped">
-                <thead>
-                    <% for(var i = 0; i < days.length; i++) { %>
-                        <th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
-                    <% } %>
-                </thead>
-               <tbody align="left">
-                    <tr>
-                        <% for(var i = 0; i < days.length; i++) { %>
-                            <td>
-                                <fieldset class="form-group">
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="none" checked>
-                                            None
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="am">
-                                            AM
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="pm">
-                                            PM
-                                        </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label">
-                                            <input type="radio" class="form-check-input" name="add-options-<%= days[i] %>" value="full">
-                                            Full
-                                        </label>
-                                    </div>
-                                </fieldset>
-                            </td>
-                        <% } %>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="form-group">
-                <label for="add-rate-schedule-start-month">Start Month *</label>
-                <input class="form-control" type="month" id="add-rate-schedule-start-month" required>
-            </div>
-            <div class="form-group">
-                <label for="add-rate-schedule-end-month">End Month *</label>
-                <input class="form-control" type="month" id="add-rate-schedule-end-month" required>
-            </div>
-            <button type="submit" class="btn btn-primary" onClick="createRateSchedule()">Submit</button>
-        </form>
-    </div>
+	<div align="left">
+		<form id="add-rs-form">
+			<div class="form-group">
+				<label for="add-rs-name">Name *</label>
+				<input type="text" class="form-control" id="add-rs-name" required>
+			</div>
+			<div class="form-group">
+				<label for="add-rs-cost">Cost ($) *</label>
+				<input type="text" class="form-control" id="add-rs-cost" required>
+			</div>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<% for(var i = 0; i < days.length; i++) { %>
+						<th><%= days[i].charAt(0).toUpperCase()+days[i].slice(1) %></th>
+					<% } %>
+				</thead>
+			   <tbody align="left">
+					<tr>
+						<% for(var i = 0; i < days.length; i++) { %>
+							<td>
+								<fieldset class="form-group">
+                  <% for(var j = 0; j < dayOptions.length; j++) { %>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="add-rs-options-<%= days[i] %>" value="<%= dayOptions[j] %>" <%= j === 0 ? 'checked' : '' %> >
+                        <%= dayOptions[j] %>
+                      </label>
+                    </div>
+                  <% } %>
+								</fieldset>
+							</td>
+						<% } %>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-group">
+				<label for="add-rs-start-month">Start Month *</label>
+				<input class="form-control" type="month" id="add-rs-start-month" required>
+			</div>
+			<div class="form-group">
+				<label for="add-rs-end-month">End Month *</label>
+				<input class="form-control" type="month" id="add-rs-end-month" required>
+			</div>
+			<button type="submit" class="btn btn-primary" onClick="createRateSchedule()">Submit</button>
+		</form>
+	</div>
 </div>
