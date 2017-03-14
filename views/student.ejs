@@ -2,6 +2,7 @@
 
 <div class="container">
     <h1><%= student.name %></h1>
+    <p id="student-id" hidden><%= student.id %></p>
     <div class="row">
         <table class="table table-bordered table-striped" id="student-info-table">
             <tbody align="left">
@@ -46,7 +47,21 @@
         <div style="clear:both;"></div>
         <h2>Current Weekly Schedule</h2>
         
-        <table class="table table-bordered table-striped id="time-period-table">
+        <table class="table table-bordered table-striped" id="time-period-table">
+            <tbody align="left">
+            </tbody>
+        </table>
+
+        <h2>Future Weekly Schedules</h2>
+        
+        <table class="table table-bordered table-striped" id="future-time-period-table">
+            <tbody align="left">
+            </tbody>
+        </table>
+
+        <h2>Past Weekly Schedules</h2>
+        
+        <table class="table table-bordered table-striped" id="past-time-period-table">
             <tbody align="left">
             </tbody>
         </table>
