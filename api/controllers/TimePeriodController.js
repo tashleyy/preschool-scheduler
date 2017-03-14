@@ -4,59 +4,76 @@ module.exports = {
     if (!params.startDate || !params.endDate || !params.rateSchedule || !params.student) {
       return res.badRequest();
     }
-
-    RateSchedule.findOne({id: params.rateSchedule}).exec(function(err, rs) {
+    
+    Student.findOne({id: params.student}).exec(function(err, student) {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
-      if (!rs) {
+      if (!student) {
         return res.notFound();
       }
-      if (params.afterSchoolActivities && params.afterSchoolActivities.length > 0) {
-        AfterSchoolActivity.find({id: params.afterSchoolActivities[0]})
-          .exec(function(err2, asa) {
-          if (err2) {
-            sails.log.error(err2);
-            return res.serverError();
-          }
-          if (!asa) {
-            return res.notFound();
-          }
+      RateSchedule.findOne({id: params.rateSchedule}).exec(function(err2, rs) {
+        if (err2) {
+          sails.log.error(err2);
+          return res.serverError();
+        }
+        if (!rs) {
+          return res.notFound();
+        }
+        if (params.afterSchoolActivities && params.afterSchoolActivities.length > 0) {
+          AfterSchoolActivity.find({id: params.afterSchoolActivities[0]})
+            .exec(function(err3, asa) {
+            if (err3) {
+              sails.log.error(err3);
+              return res.serverError();
+            }
+            if (!asa) {
+              return res.notFound();
+            }
+            TimePeriod.create({
+              startDate: params.startDate,
+              endDate: params.endDate,
+              student: params.student,
+              rateSchedule: params.rateSchedule,
+              afterSchoolActivities: params.afterSchoolActivities[0]
+            }).exec(function timePeriodCreated(err4, timePeriod) {
+              if (err4) {
+                sails.log.error(err4);
+                return res.serverError();
+              }
+              student.timePeriods.push(timePeriod);
+              student.save();
+              return res.ok(timePeriod);
+            });
+          });
+        } else {
           TimePeriod.create({
             startDate: params.startDate,
             endDate: params.endDate,
             student: params.student,
-            rateSchedule: params.rateSchedule,
-            afterSchoolActivities: params.afterSchoolActivities[0]
-          }).exec(function timePeriodCreated(err, timePeriod) {
-            if (err) {
-              sails.log.error(err);
+            rateSchedule: params.rateSchedule
+          }).exec(function timePeriodCreated(err3, timePeriod) {
+            if (err3) {
+              sails.log.error(err3);
               return res.serverError();
             }
+            student.timePeriods.push(timePeriod);
+            student.save();
             return res.ok(timePeriod);
           });
-        });
-      } else {
-        TimePeriod.create({
-          startDate: params.startDate,
-          endDate: params.endDate,
-          student: params.student,
-          rateSchedule: params.rateSchedule
-        }).exec(function timePeriodCreated(err2, timePeriod) {
-          if (err2) {
-            sails.log.error(err2);
-            return res.serverError();
-          }
-          return res.ok(timePeriod);
-        });
-      }
+        }
+      });
     });
   },
 
   'find': function (req, res) {
     var params = req.params.all();
-    TimePeriod.find({student: params.student})
+    var criteria = {};
+    if (params.student) {
+      criteria.student = params.student;
+    }
+    TimePeriod.find(criteria)
       .populate('student')
       .populate('rateSchedule')
       .populate('afterSchoolActivities')

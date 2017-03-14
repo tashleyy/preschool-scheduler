@@ -9,7 +9,7 @@ function displayStudents() {
                 var rowHtml = '<tr><td><a href="/students/' + student.id + '">' + student.name + '</a></td><td>'
                     + student.parentPhone1 + '</td><td>';
                 if (student.timePeriods && student.timePeriods.length > 0) {
-                    //rowHtml += getCurrentTimePeriodString(student.timePeriods) + '</td><td>';
+                    rowHtml += getTimePeriodString(student.timePeriods) + '</td><td>';
                 } else {
                     rowHtml += '</td><td>';
                 }

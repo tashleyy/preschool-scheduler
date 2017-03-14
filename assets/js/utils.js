@@ -31,15 +31,11 @@ function formatCost(cost) {
     return cost;
 }
 
-function stringToDate(string) {
-    if (string.length < 7) return null;
-    return new Date(Date.UTC(Number(string.substring(0, 4)), Number(string.substring(5, 7))));
-}
-
-function dateToString(date) {
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    return year + '-' + (month > 9 ? '' : '0') + month;
+function dateToDateString(obj) {
+    var year = obj.getFullYear();
+    var month = obj.getMonth() + 1;
+    var date = obj.getDate();
+    return year + '-' + (month > 9 ? '' : '0') + month + '-' + (date > 9 ? '' : '0') + date;
 }
 
 function getRateSchedulesString(rateSchedules) {
@@ -50,6 +46,9 @@ function getRateSchedulesString(rateSchedules) {
 }
 
 function getRateScheduleString(rs) {
+    if (!rs) {
+        return '';
+    }
     var string = '';
     var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
     var letters = ['M', 'T', 'W', 'H', 'F'];
@@ -71,4 +70,46 @@ function getRateScheduleDayString(day, value) {
         return day + ' (' + value.charAt(0).toUpperCase() + ')';
     }
     return '';
+}
+
+function getTimePeriodString(timePeriods, date) {
+    if (!date) {
+        date = dateToDateString(new Date());
+    }
+    timePeriods.sort(function(a, b) {
+        if (a.endDate < b.endDate) {
+            return -1;
+        }
+        if (a.endDate > b.endDate) {
+            return 1;
+        }
+        return 0;
+    });
+    var tp;
+    for (var i = 0; i < timePeriods.length; i++) {
+        if (timePeriods[i].endDate > date) {
+            if (timePeriods[i].startDate <= date) {
+                tp = timePeriods[i];
+            }
+            break;
+        }
+    }
+    if (tp) {
+        $.ajax({
+            url: '/rateschedule/findone',
+            type: 'get',
+            data: {
+                id: tp.rateSchedule
+            },
+            success: function(data) {
+                return getRateScheduleString(data);
+            },
+            error: function(xhr, status, error) {
+                console.log('error: ' + error);
+                return '';
+            }
+        });
+    } else {
+        return '';
+    }
 }
