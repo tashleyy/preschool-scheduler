@@ -1,33 +1,3 @@
-function displayAfterSchoolActivities() {
-    $.ajax({
-        url: '/afterschoolactivity/find',
-        type: 'get',
-        success: function(data) {
-            // Add table rows here
-            for (var i = 0; i < data.length; i++) {
-                var asa = data[i];
-                // Construct HTML string of table row
-                var rowHtml = '<tr><td>' + asa.name + '</td><td>'
-                    + formatASADay(asa.monday) + '</td><td>'
-                    + formatASADay(asa.tuesday) + '</td><td>'
-                    + formatASADay(asa.wednesday) + '</td><td>'
-                    + formatASADay(asa.thursday) + '</td><td>'
-                    + formatASADay(asa.friday) + '</td><td>'
-                    + formatCost(asa.cost) + '</td><td>'
-                    + asa.startMonth + '</td><td>'
-                    + asa.endMonth + '</td><td>'
-                    + '<a href="#" onclick="showAfterSchoolActivityEditModal(\'' + asa.id + '\')"><span class="glyphicon glyphicon-pencil"/></a></td><td>'
-                    + '<a href="#" onclick="showAfterSchoolActivityDeleteModal(\'' + asa.id + '\')"><span class="glyphicon glyphicon-trash"/></a></td></tr>';
-                // Use jQuery to add it to table body
-                $('#asa-table tbody').append(rowHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
 function showAfterSchoolActivityEditModal(id) {
     $.ajax({
         url: '/afterschoolactivity/findone',
@@ -128,5 +98,4 @@ function deleteAfterSchoolActivity() {
 $(document).ready(function () {
     $('#asa-edit-modal').modal({show: false});
     $('#asa-delete-modal').modal({show: false});
-    displayAfterSchoolActivities();
 });

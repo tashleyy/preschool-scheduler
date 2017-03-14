@@ -1,5 +1,35 @@
 <%- partial('partials/nav.ejs', {location: 'rateschedules'}) %>
 
+<%
+	formatDay = function(day) {
+		if (day === 'full') {
+			return 'F';
+		}
+		else if (day === 'am') {
+			return 'A';
+		} else if (day === 'pm') {
+			return 'P';
+		} else if (day === 'half') { // remove
+			return 'H';
+		}
+		return '';
+	}
+%>
+
+<%
+	formatCost = function(cost) {
+		if (cost && typeof cost === 'string' && cost.length > 0 && cost[0] !== '$') {
+			if (cost[0] === '$') {
+				return cost;
+			}
+			return '$' + cost;
+		} else if (cost && typeof cost !== 'string') {
+			return '$' + cost.toString();
+		}
+		return cost;		
+	}
+%>
+
 <div class="container">
 	<div class="row">
 		<table class="table table-bordered table-striped" id="rs-table">
@@ -19,6 +49,26 @@
 				</tr>
 			</thead>
 			<tbody align="left">
+				<% for (var i = 0; i < rateSchedules.length; i++) { %>
+					<% var rs = rateSchedules[i] %>
+					<tr>
+						<td><%= rs.name %></td>
+						<td><%= formatDay(rs.monday) %></td>
+						<td><%= formatDay(rs.tuesday) %></td>
+						<td><%= formatDay(rs.wednesday) %></td>
+						<td><%= formatDay(rs.thursday) %></td>
+						<td><%= formatDay(rs.friday) %></td>
+						<td><%= formatCost(rs.cost) %></td>
+						<td><%= rs.startMonth %></td>
+						<td><%= rs.endMonth %></td>
+						<td><a href="#" onclick="showRateScheduleEditModal('<%= rs.id %>')">
+							<span class="glyphicon glyphicon-pencil"/>
+						</a></td>
+						<td><a href="#" onclick="showRateScheduleDeleteModal('<%= rs.id %>')">
+							<span class="glyphicon glyphicon-trash"/>
+						</a></td>
+					</tr>
+				<% } %>
 			</tbody>
 		</table>
 	</div>

@@ -17,12 +17,18 @@
 				<label for="add-period-rate-schedules">Rate Schedule *</label>
 				<select id="add-period-rate-schedules">
 					<option disabled selected value> -- select a rate schedule -- </option>
+					<% for (var i = 0; i < rateSchedules.length; i++) { %>
+						<option value="<%= rateSchedules[i].id %>"><%= rateSchedules[i].name %></option>
+					<% } %>
 				</select>
 			</div>
 			<div class="form-group">
 				<label for="add-period-asas">After School Activities</label>
 				<select id="add-period-asas">
 					<option disabled selected value> -- select an ASA -- </option>
+					<% for (var i = 0; i < afterSchoolActivities.length; i++) { %>
+						<option value="<%= afterSchoolActivities[i].id %>"><%= afterSchoolActivities[i].name %></option>
+					<% } %>
 				</select>
 			</div>
 			<button type="submit" class="btn btn-primary" onClick="addTimePeriod('<%= student.id %>');">Submit</button>

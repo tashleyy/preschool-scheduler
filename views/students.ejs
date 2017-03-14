@@ -12,8 +12,21 @@
                     <th>Delete</th>
                 </tr>
             </thead>
-
             <tbody align="left">
+                <% for (var i = 0; i < students.length; i++) { %>
+                    <% var s = students[i] %>
+                    <tr>
+                        <td><a href="/students/<%= s.id %>"><%= s.name %></td>
+                        <td><%= s.parentPhone1 %></td>
+                        <td><%= s.timePeriodString %></td>
+                        <td><a href="#" onclick="showStudentEditModal('<%= s.id %>')">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a></td>
+                        <td><a href="#" onclick="showStudentDeleteModal('<%= s.id %>')">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

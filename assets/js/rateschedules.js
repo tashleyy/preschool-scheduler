@@ -1,33 +1,3 @@
-function displayRateSchedules() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            // Add table rows here
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                // Construct HTML string of table row
-                var rowHtml = '<tr><td>' + rs.name + '</td><td>'
-                    + formatDay(rs.monday) + '</td><td>'
-                    + formatDay(rs.tuesday) + '</td><td>'
-                    + formatDay(rs.wednesday) + '</td><td>'
-                    + formatDay(rs.thursday) + '</td><td>'
-                    + formatDay(rs.friday) + '</td><td>'
-                    + formatCost(rs.cost) + '</td><td>'
-                    + rs.startMonth + '</td><td>'
-                    + rs.endMonth + '</td><td>'
-                    + '<a href="#" onclick="showRateScheduleEditModal(\'' + rs.id + '\')"><span class="glyphicon glyphicon-pencil"/></a></td><td>'
-                    + '<a href="#" onclick="showRateScheduleDeleteModal(\'' + rs.id + '\')"><span class="glyphicon glyphicon-trash"/></a></td></tr>';
-                // Use jQuery to add it to table body
-                $('#rs-table tbody').append(rowHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
 function showRateScheduleEditModal(id) {
     $.ajax({
         url: '/rateschedule/findone',
@@ -127,5 +97,4 @@ function deleteRateSchedule() {
 $(document).ready(function() {
     $('#rs-edit-modal').modal({show: false});
     $('#rs-delete-modal').modal({show: false});
-    displayRateSchedules();
 });

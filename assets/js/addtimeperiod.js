@@ -1,39 +1,3 @@
-function displayAddPeriodRateScheduleOptions() {
-    $.ajax({
-        url: '/rateschedule/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var rs = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + rs.id + '">' + rs.name + '</option>';
-                $('#add-period-rate-schedules').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
-function displayAddPeriodAfterSchoolActivityOptions() {
-    $.ajax({
-        url: '/afterschoolactivity/find',
-        type: 'get',
-        success: function(data) {
-            for (var i = 0; i < data.length; i++) {
-                var asa = data[i];
-                var optionHtml = '<option ';
-                optionHtml += 'value="' + asa.id + '">' + asa.name + '</option>';
-                $('#add-period-asas').append(optionHtml);
-            }
-        },
-        error: function(xhr, status, error) {
-            console.log('error: ' + error);
-        }
-    });
-}
-
 function addTimePeriod(student) {
     var startDate = $('#add-period-start-date').val();
     var endDate = $('#add-period-end-date').val();
@@ -60,9 +24,3 @@ function addTimePeriod(student) {
     });
     return false;
 }
-
-$(document).ready(function() {
-    displayAddPeriodRateScheduleOptions();
-    displayAddPeriodAfterSchoolActivityOptions();
-});
-

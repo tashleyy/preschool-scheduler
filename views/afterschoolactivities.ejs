@@ -1,5 +1,28 @@
 <%- partial('partials/nav.ejs', {location: 'afterschoolactivities'}) %>
 
+<%
+	formatASADay = function(day) {
+		if (day) {
+			return 'X';
+		}
+		return '';		
+	}
+%>
+
+<%
+	formatCost = function(cost) {
+		if (cost && typeof cost === 'string' && cost.length > 0 && cost[0] !== '$') {
+			if (cost[0] === '$') {
+				return cost;
+			}
+			return '$' + cost;
+		} else if (cost && typeof cost !== 'string') {
+			return '$' + cost.toString();
+		}
+		return cost;		
+	}
+%>
+
 <div class="container">
 	<div class="row">
 		<table class="table table-bordered table-striped" id="asa-table">
@@ -17,6 +40,26 @@
 				<th>Delete</th>
 			</thead>
 			<tbody align="left">
+				<% for (var i = 0; i < afterSchoolActivities.length; i++) { %>
+					<% var asa = afterSchoolActivities[i] %>
+					<tr>
+						<td><%= asa.name %></td>
+						<td><%= formatASADay(asa.monday) %></td>
+						<td><%= formatASADay(asa.tuesday) %></td>
+						<td><%= formatASADay(asa.wednesday) %></td>
+						<td><%= formatASADay(asa.thursday) %></td>
+						<td><%= formatASADay(asa.friday) %></td>
+						<td><%= formatCost(asa.cost) %></td>
+						<td><%= asa.startMonth %></td>
+						<td><%= asa.endMonth %></td>
+						<td><a href="#" onclick="showAfterSchoolActivityEditModal('<%= asa.id %>')">
+							<span class="glyphicon glyphicon-pencil"/>
+						</a></td>
+						<td><a href="#" onclick="showAfterSchoolActivityDeleteModal('<%= asa.id %>')">
+							<span class="glyphicon glyphicon-trash"/>
+						</a></td>
+					</tr>
+				<% } %>
 			</tbody>
 		</table>
 	</div>
