@@ -240,6 +240,7 @@ function populateAfterSchoolActivities(afterSchoolActivities)
 {
     var returnArray = [0, 0, 0, 0, 0];
     for (var i = 0; i < afterSchoolActivities.length; i++) {
+        var afterSchoolActivity = afterSchoolActivities[i];
         if(afterSchoolActivity.monday) {
             returnArray[0] = 1;
         } 
