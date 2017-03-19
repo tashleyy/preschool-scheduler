@@ -41,6 +41,7 @@ function displayStudentsOnCalendar(year) {
     for (var i = 0; i < 5; i++) {
         add += "<th>AM</th>";
         add += "<th>PM</th>";
+        add += "<th>Eve</th>"
     }
     add += "</tr>";
 
@@ -75,7 +76,7 @@ function appendRemainingTable(populatedArray)
     {
         add += "<tr><td>" + months[i] + "</td>"
         for (var j = 0; j < 5; j++) {
-            for (var k = 0; k < 2; k++) {  
+            for (var k = 0; k < 3; k++) {  
                 var numStudents =  populatedArray[i][j][k];
                 if (numStudents > 12) {
                     add += "<td bgcolor=\"#F95E76\">"
@@ -170,8 +171,8 @@ function populateWithSuccessfulRateSchedule(timePeriods, year) {
     {
         months[i] = new Array(5);
         for (var j = 0; j < 5; j++) {
-            months[i][j] = new Array(2);
-            for (var k = 0; k < 2; k++) {
+            months[i][j] = new Array(3);
+            for (var k = 0; k < 3; k++) {
                  months[i][j][k] = 0;
             }
         }
@@ -185,6 +186,7 @@ function populateWithSuccessfulRateSchedule(timePeriods, year) {
     {
         var timePeriod   = timePeriods[i];
         var rateSchedule = timePeriod.rateSchedule;
+        var afterSchoolActivities = timePeriod.afterSchoolActivities;
 
         var startDate = MonthAndYear.makeFromString(timePeriod.startDate);
         var endDate   = MonthAndYear.makeFromString(timePeriod.endDate);
@@ -220,12 +222,41 @@ function populateWithSuccessfulRateSchedule(timePeriods, year) {
                     months[monthToIndex[currDate.month]][4][0] += monthArray[0];
                     months[monthToIndex[currDate.month]][4][1] += monthArray[1];
 
+                    var asaArray = populateAfterSchoolActivities(afterSchoolActivities);
+                    for (var j = 0; j < 5; j++)
+                    {
+                        months[monthToIndex[currDate.month]][j][2] += asaArray[j];
+                    }
+
                     currDate.incrementMonth();
                 }
             }
         } 
     }
     return months;
+}
+
+function populateAfterSchoolActivities(afterSchoolActivities)
+{
+    var returnArray = [0, 0, 0, 0, 0];
+    for (var i = 0; i < afterSchoolActivities.length; i++) {
+        if(afterSchoolActivity.monday) {
+            returnArray[0] = 1;
+        } 
+        if(afterSchoolActivity.tuesday) {
+            returnArray[1] = 1;
+        } 
+        if(afterSchoolActivity.wednesday) {
+            returnArray[2] = 1;
+        } 
+        if(afterSchoolActivity.thursday) {
+            returnArray[3] = 1;
+        } 
+        if(afterSchoolActivity.friday) {
+            returnArray[4] = 1;
+        }
+    }
+    return returnArray;
 }
 
 function makeSmallArray(dayString)
@@ -259,7 +290,7 @@ function buildCalendarHeader() {
     add     += "<th>Month</th>";
     
     for (var i = 0; i < days.length; i++) {
-        add += "<th colspan=\"2\">";
+        add += "<th colspan=\"3\">";
         add += days[i];
         add += "</th>";
     }
