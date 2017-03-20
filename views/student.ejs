@@ -46,16 +46,22 @@
         </table>   
         <div style="clear:both;"></div>
         <h2>Current Weekly Schedule</h2>
-        
-        <table class="table table-bordered table-striped" id="time-period-table">
-            <tbody>
-                <th>Rate Schedule</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-            </tbody>
-        </table>
-        <table class="table table-bordered table-striped" id="current-weekly-schedule">
-        </table>
+
+        <button type="button" data-toggle="collapse" data-target="#current-weekly">+/-</button>
+
+        <div id="current-weekly" class="collapse">
+            <table class="table table-bordered table-striped" id="time-period-table">   
+                <tbody>
+                    <!--th>Rate Schedule</th>
+                    <th>Start Date</th>
+                    <th>End Date</th-->
+                </tbody>
+            </table>
+
+            <table class="table table-bordered table-striped" id="current-weekly-schedule">
+            </table>
+        </div>
+
         <h2>Future Weekly Schedules</h2>
         
         <table class="table table-bordered table-striped" id="future-time-period-table">
