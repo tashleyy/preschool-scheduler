@@ -137,7 +137,7 @@ class MonthAndYear {
     {
         var splitString = dateString.split("-");
         var year = parseInt(splitString[0]);
-        var month = parseInt(splitString[1]);
+        var month = parseInt(splitString[1] - 1);
         return new MonthAndYear(year, month);
     }
 
@@ -277,7 +277,6 @@ function makeSmallArray(dayString)
     {
         returnArray[1] = 1;
     }
-    //console.log(returnArray);
     return returnArray;
 }
 
