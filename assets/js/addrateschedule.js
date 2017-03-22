@@ -1,3 +1,33 @@
+function validateForm() {
+  var submitForm = true;
+  var costString = $('#add-rs-cost').val();
+  if(isNaN(parseInt(costString))) {
+    showErrorOnElement("add-rs-cost");
+    submitForm = false;
+  } else {
+    removeErrorFromElement("add-rs-cost");
+  }
+
+  var startMonthString = $('#add-rs-start-month').val();
+  var endMonthString = $('#add-rs-end-month').val();
+  var startMonth = MonthAndYear.makeFromString(startMonthString);
+  var endMonth = MonthAndYear.makeFromString(endMonthString);
+  if (MonthAndYear.lessThan(endMonth, startMonth)) {
+    showErrorOnElement("add-rs-start-month");
+    showErrorOnElement("add-rs-end-month");
+    submitForm = false;
+  } else {
+    removeErrorFromElement("add-rs-start-month");
+    removeErrorFromElement("add-rs-end-month");
+  }
+
+  if (submitForm)
+  {
+    createRateSchedule();
+  }
+  return submitForm;
+}
+
 function createRateSchedule() {
     var name = $('#add-rs-name').val();
     var cost = $('#add-rs-cost').val();
@@ -8,6 +38,7 @@ function createRateSchedule() {
     var friday =  $('input[name="add-rs-options-friday"]:checked').val();
     var startMonth = $('#add-rs-start-month').val();
     var endMonth = $('#add-rs-end-month').val();
+
     $.ajax({
       url: '/rateschedule/create',
       type: 'post',

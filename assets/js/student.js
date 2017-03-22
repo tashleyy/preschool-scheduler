@@ -12,8 +12,8 @@ function displayTimePeriods() {
             var todayMAY = new MonthAndYear(today.getFullYear(), today.getMonth());
             for (var i = 0; i < data.length; i++) {
                 var tp = data[i];
-                console.log(tp);
-                console.log(tp.student);
+                //console.log(tp);
+                //console.log(tp.student);
                 if (tp.student) {
                     if (tp.student.id == stuid) {
                         // Construct HTML string of table row

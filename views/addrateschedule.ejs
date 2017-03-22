@@ -7,7 +7,7 @@
 	<h1>New Rate Schedule</h1>
 
 	<div align="left">
-		<form id="add-rs-form">
+		<form id="add-rs-form" onsubmit="return validateForm()">
 			<div class="form-group">
 				<label for="add-rs-name">Name *</label>
 				<input type="text" class="form-control" id="add-rs-name" required>
@@ -15,6 +15,12 @@
 			<div class="form-group">
 				<label for="add-rs-cost">Cost ($) *</label>
 				<input type="text" class="form-control" id="add-rs-cost" required>
+				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+				<div id="add-rs-cost-message" style="display: none;">
+					<font color="#a94442">
+						Please enter a valid number. Ex: 1000
+					</font>
+				</div>
 			</div>
 			<table class="table table-bordered table-striped">
 				<thead>
@@ -44,12 +50,24 @@
 			<div class="form-group">
 				<label for="add-rs-start-month">Start Month *</label>
 				<input class="form-control" type="month" id="add-rs-start-month" required>
+				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+				<div id="add-rs-start-month-message" style="display: none;">
+					<font color="#a94442">
+						Start month must be before end month.
+					</font>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="add-rs-end-month">End Month *</label>
 				<input class="form-control" type="month" id="add-rs-end-month" required>
+				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+				<div id="add-rs-end-month-message" style="display: none;">
+					<font color="#a94442">
+						End month must be after start month.
+					</font>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-primary" onClick="createRateSchedule()">Submit</button>
+			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 </div>
