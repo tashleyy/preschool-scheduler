@@ -82,12 +82,24 @@ module.exports = {
       return res.badRequest();
     }
 
-    Student.destroy({id: params.id}).exec(function(err) {
-      if (err) {
-        sails.log.error(err);
-        return res.serverError();
+    Student.findOne({id: params.id}).populate('timePeriods').exec(function(err, student) {
+      var tps = [];
+      for (var i = 0; i < student.timePeriods.length; i++) {
+        tps.push(student.timePeriods[i].id);
       }
-      return res.ok();
+      TimePeriod.destroy({id: tps}).exec(function(err2) {
+        if (err2) {
+          sails.log.error(err2);
+          return res.serverError();
+        }
+        Student.destroy({id: params.id}).exec(function(err3) {
+          if (err3) {
+            sails.log.error(err3);
+            return res.serverError();
+          }
+          return res.ok();
+        });
+      });
     });
   }
 }

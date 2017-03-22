@@ -36,7 +36,7 @@ module.exports = {
               endDate: params.endDate,
               student: params.student,
               rateSchedule: params.rateSchedule,
-              afterSchoolActivities: params.afterSchoolActivities[0]
+              afterSchoolActivities: params.afterSchoolActivities
             }).exec(function timePeriodCreated(err4, timePeriod) {
               if (err4) {
                 sails.log.error(err4);

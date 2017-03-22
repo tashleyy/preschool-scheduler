@@ -8,14 +8,12 @@ function showStudentEditModal(id) {
         success: function(data) {
             var rs = [];
             var asa = [];
-            if(data.rateSchedules)
-            {
+            if(data.rateSchedules) {
                 for (var i = 0; i < data.rateSchedules.length; i++) {
                     rs.push(data.rateSchedules[i].id);
                 }
             }
-            if(data.afterSchoolActivities)
-            {
+            if(data.afterSchoolActivities) {
                 for (var i = 0; i < data.afterSchoolActivities.length; i++) {
                     asa.push(data.afterSchoolActivities[i].id);
                 }
@@ -28,6 +26,7 @@ function showStudentEditModal(id) {
             $('#edit-student-parent-phone-2').val(data.parentPhone2);
             $('#edit-student-physician').val(data.physician);
             $('#edit-student-physician-phone').val(data.physicianPhone);
+            $('#edit-student-start-date').val(data.startDate);
             $('#edit-student-end-date').val(data.endDate);
 
             $('#student-edit-modal').attr('studentId', id);
@@ -74,9 +73,8 @@ function editStudent() {
             endDate: endDate
         },
         success: function(data) {
-            $('#students-table tbody').html('');
-            displayStudents();
             $('#student-edit-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -93,9 +91,8 @@ function deleteStudent() {
             id: id
         },
         success: function(data) {
-            $('#students-table tbody').html('');
-            displayStudents();
             $('#student-delete-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);

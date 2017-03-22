@@ -128,7 +128,23 @@ module.exports = {
       if (!student) {
         return res.notFound();
       }
-      res.view('student', {student: student});
+      RateSchedule.find().exec(function(err2, rateSchedules) {
+        if (err2) {
+          sails.log.error(err2);
+          return res.serverError();
+        }
+        AfterSchoolActivity.find().exec(function(err3, afterSchoolActivities) {
+          if (err3) {
+            sails.log.error(err3);
+            return res.serverError();
+          }
+          res.view('student', {
+            student: student,
+            rateSchedules: rateSchedules,
+            afterSchoolActivities: afterSchoolActivities
+          });
+        });
+      });
     });
   }
 };

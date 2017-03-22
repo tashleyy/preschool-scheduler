@@ -66,9 +66,8 @@ function editAfterSchoolActivity() {
             endMonth: endMonth
         },
         success: function(data) {
-            $('#asa-table tbody').html('');
-            displayAfterSchoolActivities();
-            $('#asa-edit-modal').modal('hide');            
+            $('#asa-edit-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -85,9 +84,8 @@ function deleteAfterSchoolActivity() {
             id: id
         },
         success: function(data) {
-            $('#asa-table tbody').html('');
-            displayAfterSchoolActivities();
             $('#asa-delete-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);

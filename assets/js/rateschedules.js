@@ -65,9 +65,8 @@ function editRateSchedule() {
             endMonth: endMonth
         },
         success: function(data) {
-            $('#rs-table tbody').html('');
-            displayRateSchedules();
-            $('#rs-edit-modal').modal('hide');            
+            $('#rs-edit-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
@@ -84,9 +83,8 @@ function deleteRateSchedule() {
             id: id
         },
         success: function(data) {
-            $('#rs-table tbody').html('');
-            displayRateSchedules();
             $('#rs-delete-modal').modal('hide');
+            location.reload();
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);

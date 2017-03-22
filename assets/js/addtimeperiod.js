@@ -2,7 +2,7 @@ function addTimePeriod(student) {
     var startDate = $('#add-period-start-date').val();
     var endDate = $('#add-period-end-date').val();
     var rs = $('#add-period-rate-schedules').val();
-    var asa =  $('#add-period-asas').val();
+    var asas =  $('#add-period-asas').val();
 
     $.ajax({
         url: '/timeperiod/create',
@@ -11,7 +11,7 @@ function addTimePeriod(student) {
             startDate: startDate,
             endDate: endDate,
             rateSchedule: rs,
-            afterSchoolActivities: [asa],
+            afterSchoolActivities: asas,
             student: student
         },
         success: function(data) {
@@ -24,3 +24,7 @@ function addTimePeriod(student) {
     });
     return false;
 }
+
+$(document).ready(function() {
+    $('#add-period-asas').multiselect();
+});
