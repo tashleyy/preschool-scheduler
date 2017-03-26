@@ -32,5 +32,4 @@ function addStudent() {
             console.log('error: ' + error);
         }
     });
-    return false;
 }

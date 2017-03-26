@@ -15,14 +15,13 @@ function addTimePeriod(student) {
             student: student
         },
         success: function(data) {
-            document.location.href = 'students';
+            document.location.href = '/students/' + student;
             console.log('data: ' + data);
         },
         error: function(xhr, status, error) {
             console.log('error: ' + error);
         }
     });
-    return false;
 }
 
 $(document).ready(function() {

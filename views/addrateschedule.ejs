@@ -7,7 +7,7 @@
 	<h1>New Rate Schedule</h1>
 
 	<div align="left">
-		<form id="add-rs-form" onsubmit="return validateForm()">
+		<form id="add-rs-form" onsubmit="if (validateForm()) createRateSchedule(); return false;">
 			<div class="form-group">
 				<label for="add-rs-name">Name *</label>
 				<input type="text" class="form-control" id="add-rs-name" required>
@@ -67,7 +67,7 @@
 					</font>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button class="btn btn-primary">Submit</button>
 		</form>
 	</div>
 </div>

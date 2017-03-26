@@ -21,10 +21,6 @@ function validateForm() {
     removeErrorFromElement("add-rs-end-month");
   }
 
-  if (submitForm)
-  {
-    createRateSchedule();
-  }
   return submitForm;
 }
 
@@ -61,5 +57,4 @@ function createRateSchedule() {
         console.log('error: ' + error);
       }
     });
-    return false;
 }

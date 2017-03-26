@@ -35,7 +35,8 @@ function showStudentEditModal(id) {
         error: function(xhr, status, error) {
             console.log('error: ' + error);
         }
-    })
+    });
+    return false;
 }
 
 function showStudentDeleteModal(id) {
