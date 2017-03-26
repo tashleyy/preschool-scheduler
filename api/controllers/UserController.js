@@ -1,41 +1,39 @@
-var GoogleAuth = require('google-auth-library');
-var auth = new GoogleAuth();
+const GoogleAuth = require('google-auth-library');
+
+const auth = new GoogleAuth();
 
 module.exports = {
-  'login': function(req, res) {
-    var params = req.params.all();
-    var token = params.token;
-    var client = new auth.OAuth2(sails.config.keys.CLIENT_ID, '', '');
+  login(req, res) {
+    const params = req.params.all();
+    const token = params.token;
+    const client = new auth.OAuth2(sails.config.keys.CLIENT_ID, '', '');
     client.verifyIdToken(
       token,
       sails.config.keys.CLIENT_ID,
-      function(error, login) {
+      (error, login) => {
         if (error) {
           return res.serverError();
         }
-        var payload = login.getPayload();
-        var email = payload.email;
-        res.cookie('gauth', token, {maxAge: 86400000});
-        return res.ok();
-        // User.findOne({email: email}).exec(function userFound(error, user) {
-        //   if (error) {
-        //     req.session.authenticated = false;
-        //     return res.serverError();
-        //   }
-        //   if (!user) {
-        //     req.session.authenticated = false;
-        //     return res.forbidden();
-        //   }
-        //   req.session.authenticated = true;
-        //   return res.ok();
-        // });
-      }
+        const payload = login.getPayload();
+        const email = payload.email;
+        User.findOne({ email }).exec((error2, user) => {
+          if (error2) {
+            req.session.authenticated = false;
+            return res.serverError();
+          }
+          if (!user) {
+            // return res.forbidden();
+          }
+          res.cookie('gauth', token, { maxAge: 86400000 });
+          return res.ok();
+        });
+      } // eslint-disable-line comma-dangle
     );
   },
 
-  'logout': function(req, res) {
+  logout(req, res) {
     // req.session.authenticated = false;
     res.clearCookie('gauth');
     return res.ok();
-  }
+  },
 };

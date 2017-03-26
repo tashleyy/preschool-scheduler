@@ -1,14 +1,14 @@
 module.exports = {
-  'create': function(req, res) {
-    var params = req.params.all();
+  create(req, res) {
+    const params = req.params.all();
     if (!params.name || !params.cost || !params.monday || !params.tuesday
         || !params.wednesday || !params.thursday || !params.friday
         || !params.startMonth || !params.endMonth) {
-        return res.badRequest();
+      return res.badRequest();
     }
 
     AfterSchoolActivity.create({
-      name: params.name, 
+      name: params.name,
       cost: params.cost,
       monday: params.monday,
       tuesday: params.tuesday,
@@ -16,8 +16,8 @@ module.exports = {
       thursday: params.thursday,
       friday: params.friday,
       startMonth: params.startMonth,
-      endMonth: params.endMonth
-    }).exec(function(err, afterSchoolActivity) {
+      endMonth: params.endMonth,
+    }).exec((err, afterSchoolActivity) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -26,23 +26,23 @@ module.exports = {
     });
   },
 
-  'find': function(req, res) {
-    AfterSchoolActivity.find().exec(function(err, afterSchoolActivities) {
+  find(req, res) {
+    AfterSchoolActivity.find().exec((err, afterSchoolActivities) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
       return res.ok(afterSchoolActivities);
-    })
+    });
   },
 
-  'findOne': function(req, res) {
-    var params = req.params.all();
+  findOne(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    AfterSchoolActivity.findOne({id: params.id}).exec(function(err, afterSchoolActivity) {
+    AfterSchoolActivity.findOne({ id: params.id }).exec((err, afterSchoolActivity) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -54,40 +54,40 @@ module.exports = {
     });
   },
 
-  'update': function(req, res) {
-    var params = req.params.all();
+  update(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    var id = params.id;
+    const id = params.id;
     delete params.id;
-    AfterSchoolActivity.update({id: id}, params)
-      .exec(function(err, afterSchoolActivities) {
-      if (err) {
-        sails.log.error(err);
-        return res.serverError();
-      }
-      var afterSchoolActivity = afterSchoolActivities[0];
-      if (!afterSchoolActivity) {
-        return res.notFound();
-      }
-      return res.ok(afterSchoolActivity);
-    });
+    AfterSchoolActivity.update({ id }, params)
+      .exec((err, afterSchoolActivities) => {
+        if (err) {
+          sails.log.error(err);
+          return res.serverError();
+        }
+        const afterSchoolActivity = afterSchoolActivities[0];
+        if (!afterSchoolActivity) {
+          return res.notFound();
+        }
+        return res.ok(afterSchoolActivity);
+      });
   },
 
-  'destroy': function(req, res) {
-    var params = req.params.all();
+  destroy(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    AfterSchoolActivity.destroy({id: params.id}).exec(function(err) {
+    AfterSchoolActivity.destroy({ id: params.id }).exec((err) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
       return res.ok();
     });
-  }
-}
+  },
+};

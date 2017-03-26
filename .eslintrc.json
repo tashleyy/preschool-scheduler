@@ -1,0 +1,23 @@
+{
+    "extends": "airbnb-base",
+    "env": {
+        "jquery": true,
+        "browser": true
+    },
+    "plugins": [
+        "import"
+    ],
+    "globals": {
+        "sails": true,
+        "AfterSchoolActivity": true,
+        "RateSchedule": true,
+        "Student": true,
+        "TimePeriod": true,
+        "User": true
+    },
+    "rules": {
+        "consistent-return": "off",
+        "no-plusplus": "off",
+        "no-useless-escape": "warn"
+    }
+}

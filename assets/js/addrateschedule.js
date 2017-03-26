@@ -1,60 +1,63 @@
+/* global showErrorOnElement, removeErrorFromElement, MonthAndYear */
+// eslint-disable-next-line no-unused-vars
 function validateForm() {
-  var submitForm = true;
-  var costString = $('#add-rs-cost').val();
-  if(isNaN(parseInt(costString))) {
-    showErrorOnElement("add-rs-cost");
+  let submitForm = true;
+  const costString = $('#add-rs-cost').val();
+  if (isNaN(parseInt(costString, 10))) {
+    showErrorOnElement('add-rs-cost');
     submitForm = false;
   } else {
-    removeErrorFromElement("add-rs-cost");
+    removeErrorFromElement('add-rs-cost');
   }
 
-  var startMonthString = $('#add-rs-start-month').val();
-  var endMonthString = $('#add-rs-end-month').val();
-  var startMonth = MonthAndYear.makeFromString(startMonthString);
-  var endMonth = MonthAndYear.makeFromString(endMonthString);
+  const startMonthString = $('#add-rs-start-month').val();
+  const endMonthString = $('#add-rs-end-month').val();
+  const startMonth = MonthAndYear.makeFromString(startMonthString);
+  const endMonth = MonthAndYear.makeFromString(endMonthString);
   if (MonthAndYear.lessThan(endMonth, startMonth)) {
-    showErrorOnElement("add-rs-start-month");
-    showErrorOnElement("add-rs-end-month");
+    showErrorOnElement('add-rs-start-month');
+    showErrorOnElement('add-rs-end-month');
     submitForm = false;
   } else {
-    removeErrorFromElement("add-rs-start-month");
-    removeErrorFromElement("add-rs-end-month");
+    removeErrorFromElement('add-rs-start-month');
+    removeErrorFromElement('add-rs-end-month');
   }
 
   return submitForm;
 }
 
+// eslint-disable-next-line no-unused-vars
 function createRateSchedule() {
-    var name = $('#add-rs-name').val();
-    var cost = $('#add-rs-cost').val();
-    var monday =  $('input[name="add-rs-options-monday"]:checked').val();
-    var tuesday =  $('input[name="add-rs-options-tuesday"]:checked').val();
-    var wednesday =  $('input[name="add-rs-options-wednesday"]:checked').val();
-    var thursday =  $('input[name="add-rs-options-thursday"]:checked').val();
-    var friday =  $('input[name="add-rs-options-friday"]:checked').val();
-    var startMonth = $('#add-rs-start-month').val();
-    var endMonth = $('#add-rs-end-month').val();
+  const name = $('#add-rs-name').val();
+  const cost = $('#add-rs-cost').val();
+  const monday = $('input[name="add-rs-options-monday"]:checked').val();
+  const tuesday = $('input[name="add-rs-options-tuesday"]:checked').val();
+  const wednesday = $('input[name="add-rs-options-wednesday"]:checked').val();
+  const thursday = $('input[name="add-rs-options-thursday"]:checked').val();
+  const friday = $('input[name="add-rs-options-friday"]:checked').val();
+  const startMonth = $('#add-rs-start-month').val();
+  const endMonth = $('#add-rs-end-month').val();
 
-    $.ajax({
-      url: '/rateschedule/create',
-      type: 'post',
-      data: {
-         name: name,
-         cost: cost,
-         monday: monday,
-         tuesday: tuesday,
-         wednesday: wednesday,
-         thursday: thursday,
-         friday: friday,
-         startMonth: startMonth,
-         endMonth: endMonth
-      },
-      success: function(data) {
-        document.location.href = 'rateschedules';
-        console.log('data: ' + data);
-      },
-      error: function(xhr, status, error) {
-        console.log('error: ' + error);
-      }
-    });
+  $.ajax({
+    url: '/rateschedule/create',
+    type: 'post',
+    data: {
+      name,
+      cost,
+      monday,
+      tuesday,
+      wednesday,
+      thursday,
+      friday,
+      startMonth,
+      endMonth,
+    },
+    success(data) {
+      document.location.href = 'rateschedules';
+      console.log(`data: ${data}`);
+    },
+    error(xhr, status, error) {
+      console.log(`error: ${error}`);
+    },
+  });
 }

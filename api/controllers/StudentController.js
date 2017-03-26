@@ -1,7 +1,7 @@
 module.exports = {
-  'create': function(req, res) {
-    var params = req.params.all();
-    if (!params.name || !params.birthday || !params.parent1 || !params.parentPhone1 
+  create(req, res) {
+    const params = req.params.all();
+    if (!params.name || !params.birthday || !params.parent1 || !params.parentPhone1
     || !params.physician || !params.physicianPhone || !params.startDate || !params.endDate) {
       return res.badRequest();
     }
@@ -17,7 +17,7 @@ module.exports = {
       physicianPhone: params.physicianPhone,
       startDate: params.startDate,
       endDate: params.endDate,
-    }).exec(function studentCreated(err, student) {
+    }).exec((err, student) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -26,8 +26,8 @@ module.exports = {
     });
   },
 
-  'find': function(req, res) {    
-    Student.find().populate('timePeriods').exec(function(err, students) {
+  find(req, res) {
+    Student.find().populate('timePeriods').exec((err, students) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -36,13 +36,13 @@ module.exports = {
     });
   },
 
-  'findOne': function(req, res) {
-    var params = req.params.all();
+  findOne(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    Student.findOne({id: params.id}).populate('timePeriods').exec(function(err, student) {
+    Student.findOne({ id: params.id }).populate('timePeriods').exec((err, student) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -54,45 +54,45 @@ module.exports = {
     });
   },
 
-  'update': function(req, res) {
-    var params = req.params.all();
+  update(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    var id = params.id;
+    const id = params.id;
     delete params.id;
-    Student.update({id: id}, params)
-      .exec(function(err, students) {
-      if (err) {
-        sails.log.error(err);
-        return res.serverError();
-      }
-      var student = students[0];
-      if (!student) {
-        return res.notFound();
-      }
-      return res.ok(student);
-    });
+    Student.update({ id }, params)
+      .exec((err, students) => {
+        if (err) {
+          sails.log.error(err);
+          return res.serverError();
+        }
+        const student = students[0];
+        if (!student) {
+          return res.notFound();
+        }
+        return res.ok(student);
+      });
   },
 
-  'destroy': function(req, res) {
-    var params = req.params.all();
+  destroy(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    Student.findOne({id: params.id}).populate('timePeriods').exec(function(err, student) {
-      var tps = [];
-      for (var i = 0; i < student.timePeriods.length; i++) {
+    Student.findOne({ id: params.id }).populate('timePeriods').exec((err, student) => {
+      const tps = [];
+      for (let i = 0; i < student.timePeriods.length; i++) {
         tps.push(student.timePeriods[i].id);
       }
-      TimePeriod.destroy({id: tps}).exec(function(err2) {
+      TimePeriod.destroy({ id: tps }).exec((err2) => {
         if (err2) {
           sails.log.error(err2);
           return res.serverError();
         }
-        Student.destroy({id: params.id}).exec(function(err3) {
+        Student.destroy({ id: params.id }).exec((err3) => {
           if (err3) {
             sails.log.error(err3);
             return res.serverError();
@@ -101,5 +101,5 @@ module.exports = {
         });
       });
     });
-  }
-}
+  },
+};

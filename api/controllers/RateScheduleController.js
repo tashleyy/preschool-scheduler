@@ -1,6 +1,6 @@
 module.exports = {
-  'create': function(req, res) {
-    var params = req.params.all();
+  create(req, res) {
+    const params = req.params.all();
     if (!params.name || !params.cost || !params.monday || !params.tuesday
       || !params.wednesday || !params.thursday || !params.friday
       || !params.startMonth || !params.endMonth || isNaN(params.cost)) {
@@ -8,7 +8,7 @@ module.exports = {
     }
 
     RateSchedule.create({
-      name: params.name, 
+      name: params.name,
       cost: params.cost,
       monday: params.monday,
       tuesday: params.tuesday,
@@ -16,8 +16,8 @@ module.exports = {
       thursday: params.thursday,
       friday: params.friday,
       startMonth: params.startMonth,
-      endMonth: params.endMonth
-    }).exec(function(err, rateSchedule) {
+      endMonth: params.endMonth,
+    }).exec((err, rateSchedule) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -26,8 +26,8 @@ module.exports = {
     });
   },
 
-  'find': function(req, res) {
-    RateSchedule.find().exec(function(err, rateSchedules) {
+  find(req, res) {
+    RateSchedule.find().exec((err, rateSchedules) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -36,13 +36,13 @@ module.exports = {
     });
   },
 
-  'findOne': function(req, res) {
-    var params = req.params.all();
+  findOne(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    RateSchedule.findOne({id: params.id}).exec(function(err, rateSchedule) {
+    RateSchedule.findOne({ id: params.id }).exec((err, rateSchedule) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -54,40 +54,40 @@ module.exports = {
     });
   },
 
-  'update': function(req, res) {
-    var params = req.params.all();
+  update(req, res) {
+    const params = req.params.all();
     if (!params.id || (params.cost && isNaN(params.cost))) {
       return res.badRequest();
     }
 
-    var id = params.id;
+    const id = params.id;
     delete params.id;
-    RateSchedule.update({id: id}, params)
-      .exec(function(err, rateSchedules) {
-      if (err) {
-        sails.log.error(err);
-        return res.serverError();
-      }
-      var rateSchedule = rateSchedules[0];
-      if (!rateSchedule) {
-        return res.notFound();
-      }
-      return res.ok(rateSchedule);
-    });
+    RateSchedule.update({ id }, params)
+      .exec((err, rateSchedules) => {
+        if (err) {
+          sails.log.error(err);
+          return res.serverError();
+        }
+        const rateSchedule = rateSchedules[0];
+        if (!rateSchedule) {
+          return res.notFound();
+        }
+        return res.ok(rateSchedule);
+      });
   },
 
-  'destroy': function(req, res) {
-    var params = req.params.all();
+  destroy(req, res) {
+    const params = req.params.all();
     if (!params.id) {
       return res.badRequest();
     }
 
-    RateSchedule.destroy({id: params.id}).exec(function(err) {
+    RateSchedule.destroy({ id: params.id }).exec((err) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
       }
       return res.ok();
     });
-  }
-}
+  },
+};

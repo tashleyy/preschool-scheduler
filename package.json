@@ -35,5 +35,10 @@
     "url": "git://github.com/tiffanyt/preschool-scheduler.git"
   },
   "author": "tiffanyt",
-  "license": ""
+  "license": "",
+  "devDependencies": {
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb-base": "^11.1.2",
+    "eslint-plugin-import": "^2.2.0"
+  }
 }
