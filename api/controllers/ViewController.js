@@ -47,7 +47,7 @@ module.exports = {
       for (let i = 0; i < rateSchedules.length; i++) {
         rsMap[rateSchedules[i].id] = rateSchedules[i];
       }
-      Student.find().populate('timePeriods').exec((err2, students) => {
+      Student.find().populate('timePeriods').sort('name ASC').exec((err2, students) => {
         if (err2) {
           sails.log.error(err2);
           return res.serverError();

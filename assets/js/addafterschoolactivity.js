@@ -1,3 +1,4 @@
+/* global showErrorOnElement, removeErrorFromElement */
 // eslint-disable-next-line no-unused-vars
 function createAfterSchoolActivity() {
   const name = $('#add-asa-name').val();
@@ -29,6 +30,7 @@ function createAfterSchoolActivity() {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
 function validateASAForm() {
   let submitForm = true;
   const costString = $('#add-asa-cost').val();
