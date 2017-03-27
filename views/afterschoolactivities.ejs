@@ -34,8 +34,6 @@
 				<th>Th</th>
 				<th>F</th>
 				<th>Cost</th>
-				<th>Start Month</th>
-				<th>End Month</th>
 				<th>Edit</th>
 				<th>Delete</th>
 			</thead>
@@ -50,8 +48,6 @@
 						<td><%= formatASADay(asa.thursday) %></td>
 						<td><%= formatASADay(asa.friday) %></td>
 						<td><%= formatCost(asa.cost) %></td>
-						<td><%= asa.startMonth %></td>
-						<td><%= asa.endMonth %></td>
 						<td><a href="#" onclick="showAfterSchoolActivityEditModal('<%= asa.id %>')">
 							<span class="glyphicon glyphicon-pencil"/>
 						</a></td>
@@ -106,14 +102,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="form-group">
-						<label for="edit-asa-start-month">Start Month</label>
-						<input class="form-control" type="month" id="edit-asa-start-month" required>
-					</div>
-					<div class="form-group">
-						<label for="edit-asa-end-month">End Month</label>
-						<input class="form-control" type="month" id="edit-asa-end-month" required>
-					</div>
 				</form>
 			</div>
 			<div class="modal-footer">

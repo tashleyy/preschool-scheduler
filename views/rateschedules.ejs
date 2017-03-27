@@ -42,8 +42,6 @@
 					<th>Th</th>
 					<th>F</th>
 					<th>Cost</th>
-					<th>Start Month</th>
-					<th>End Month</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
@@ -59,8 +57,6 @@
 						<td><%= formatDay(rs.thursday) %></td>
 						<td><%= formatDay(rs.friday) %></td>
 						<td><%= formatCost(rs.cost) %></td>
-						<td><%= rs.startMonth %></td>
-						<td><%= rs.endMonth %></td>
 						<td><a href="#" onclick="showRateScheduleEditModal('<%= rs.id %>')">
 							<span class="glyphicon glyphicon-pencil"/>
 						</a></td>
@@ -118,14 +114,6 @@
 							</tr>
 						</tbody>
 					</table>
-					<div class="form-group">
-						<label for="edit-rs-start-month">Start Month</label>
-						<input class="form-control" type="month" id="edit-rs-start-month" required>
-					</div>
-					<div class="form-group">
-						<label for="edit-rs-end-month">End Month</label>
-						<input class="form-control" type="month" id="edit-rs-end-month" required>
-					</div>
 				</form>
 			</div>
 			<div class="modal-footer">
