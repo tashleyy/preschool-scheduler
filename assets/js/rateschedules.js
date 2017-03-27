@@ -21,8 +21,6 @@ function showRateScheduleEditModal(id) {
       $('input[name="edit-rs-options-wednesday"]').filter(`[value=${data.wednesday}]`).prop('checked', true);
       $('input[name="edit-rs-options-thursday"]').filter(`[value=${data.thursday}]`).prop('checked', true);
       $('input[name="edit-rs-options-friday"]').filter(`[value=${data.friday}]`).prop('checked', true);
-      $('#edit-rs-start-month').val(data.startMonth);
-      $('#edit-rs-end-month').val(data.endMonth);
       $('#rs-edit-modal').attr('rsId', id);
       $('#rs-edit-modal').modal('show');
     },
@@ -50,8 +48,6 @@ function editRateSchedule() {
   const wednesday = $('input[name="edit-rs-options-wednesday"]:checked').val();
   const thursday = $('input[name="edit-rs-options-thursday"]:checked').val();
   const friday = $('input[name="edit-rs-options-friday"]:checked').val();
-  const startMonth = $('#edit-rs-start-month').val();
-  const endMonth = $('#edit-rs-end-month').val();
   $.ajax({
     url: '/rateschedule/update',
     type: 'put',
@@ -64,8 +60,6 @@ function editRateSchedule() {
       wednesday,
       thursday,
       friday,
-      startMonth,
-      endMonth,
     },
     success() {
       $('#rs-edit-modal').modal('hide');

@@ -7,7 +7,7 @@
 	<h1>New Rate Schedule</h1>
 
 	<div align="left">
-		<form id="add-rs-form" onsubmit="if (validateForm()) createRateSchedule(); return false;">
+		<form id="add-rs-form" onsubmit="if (validateRSForm()) createRateSchedule(); return false;">
 			<div class="form-group">
 				<label for="add-rs-name">Name *</label>
 				<input type="text" class="form-control" id="add-rs-name" required>
@@ -47,26 +47,6 @@
 					</tr>
 				</tbody>
 			</table>
-			<div class="form-group">
-				<label for="add-rs-start-month">Start Month *</label>
-				<input class="form-control" type="month" id="add-rs-start-month" required>
-				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-				<div id="add-rs-start-month-message" style="display: none;">
-					<font color="#a94442">
-						Start month must be before end month.
-					</font>
-				</div>
-			</div>
-			<div class="form-group">
-				<label for="add-rs-end-month">End Month *</label>
-				<input class="form-control" type="month" id="add-rs-end-month" required>
-				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-				<div id="add-rs-end-month-message" style="display: none;">
-					<font color="#a94442">
-						End month must be after start month.
-					</font>
-				</div>
-			</div>
 			<button class="btn btn-primary">Submit</button>
 		</form>
 	</div>

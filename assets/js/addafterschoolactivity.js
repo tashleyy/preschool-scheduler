@@ -7,8 +7,6 @@ function createAfterSchoolActivity() {
   const wednesday = $('input[name="add-asa-options-wednesday"]').prop('checked');
   const thursday = $('input[name="add-asa-options-thursday"]').prop('checked');
   const friday = $('input[name="add-asa-options-friday"]').prop('checked');
-  const startMonth = $('#add-asa-start-month').val();
-  const endMonth = $('#add-asa-end-month').val();
   $.ajax({
     url: '/afterschoolactivity/create',
     type: 'post',
@@ -20,8 +18,6 @@ function createAfterSchoolActivity() {
       wednesday,
       thursday,
       friday,
-      startMonth,
-      endMonth,
     },
     success(data) {
       document.location.href = 'afterschoolactivities';
@@ -31,4 +27,17 @@ function createAfterSchoolActivity() {
       console.log(`error: ${error}`);
     },
   });
+}
+
+function validateASAForm() {
+  let submitForm = true;
+  const costString = $('#add-asa-cost').val();
+  if (isNaN(parseInt(costString, 10))) {
+    showErrorOnElement('add-rs-cost');
+    submitForm = false;
+  } else {
+    removeErrorFromElement('add-rs-cost');
+  }
+
+  return submitForm;
 }

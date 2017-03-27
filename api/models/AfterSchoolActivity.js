@@ -28,14 +28,6 @@ module.exports = {
       type: 'float',
       defaultsTo: 0,
     },
-    startMonth: {
-      type: 'string',
-      required: true,
-    },
-    endMonth: {
-      type: 'string',
-      required: true,
-    },
     timePeriods: {
       collection: 'TimePeriod',
       via: 'afterSchoolActivities',

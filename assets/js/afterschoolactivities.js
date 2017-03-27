@@ -22,8 +22,6 @@ function showAfterSchoolActivityEditModal(id) {
       $('input[name="edit-asa-options-thursday"]').prop('checked', data.thursday);
       $('input[name="edit-asa-options-friday"]').prop('checked', data.friday);
 
-      $('#edit-asa-start-month').val(data.startMonth);
-      $('#edit-asa-end-month').val(data.endMonth);
       $('#asa-edit-modal').attr('asaId', id);
       $('#asa-edit-modal').modal('show');
     },
@@ -51,8 +49,6 @@ function editAfterSchoolActivity() {
   const wednesday = $('input[name="edit-asa-options-wednesday"]').prop('checked');
   const thursday = $('input[name="edit-asa-options-thursday"]').prop('checked');
   const friday = $('input[name="edit-asa-options-friday"]').prop('checked');
-  const startMonth = $('#edit-asa-start-month').val();
-  const endMonth = $('#edit-asa-end-month').val();
   $.ajax({
     url: '/afterschoolactivity/update',
     type: 'put',
@@ -65,8 +61,6 @@ function editAfterSchoolActivity() {
       wednesday,
       thursday,
       friday,
-      startMonth,
-      endMonth,
     },
     success() {
       $('#asa-edit-modal').modal('hide');

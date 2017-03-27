@@ -3,7 +3,7 @@ module.exports = {
     const params = req.params.all();
     if (!params.name || !params.cost || !params.monday || !params.tuesday
       || !params.wednesday || !params.thursday || !params.friday
-      || !params.startMonth || !params.endMonth || isNaN(params.cost)) {
+      || isNaN(params.cost)) {
       return res.badRequest();
     }
 
@@ -15,8 +15,6 @@ module.exports = {
       wednesday: params.wednesday,
       thursday: params.thursday,
       friday: params.friday,
-      startMonth: params.startMonth,
-      endMonth: params.endMonth,
     }).exec((err, rateSchedule) => {
       if (err) {
         sails.log.error(err);
