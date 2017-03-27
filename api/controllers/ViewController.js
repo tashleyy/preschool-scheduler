@@ -73,10 +73,26 @@ module.exports = {
               break;
             }
           }
-          if (tp) {
-            s.timePeriodString = rateScheduleToString(rsMap[tp.rateSchedule]);
-          } else {
-            s.timePeriodString = '';
+          if (tp) {
+            s.timePeriodString = rateScheduleToString(rsMap[tp.rateSchedule]);
+            /*
+            if(tp.afterSchoolActivities)
+            {
+              for(let k = 0; k<tp.afterSchoolActivities.length; k++)
+              {
+                s.afterSchoolActivitiesString += tp.afterSchoolActivities[k];
+              }
+            }
+            else
+            {
+              s.afterSchoolActivitiesString = '';
+            }
+            */
+            s.afterSchoolActivitiesString = "howdy"
+            } 
+          else {
+            s.timePeriodString = '';
+            s.afterSchoolActivitiesString = "doody";
           }
           if (i === students.length - 1) {
             res.view('students', { students });
