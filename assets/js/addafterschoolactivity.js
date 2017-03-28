@@ -33,10 +33,10 @@ function validateASAForm() {
   let submitForm = true;
   const costString = $('#add-asa-cost').val();
   if (isNaN(parseInt(costString, 10))) {
-    showErrorOnElement('add-rs-cost');
+    showErrorOnElement('add-asa-cost');
     submitForm = false;
   } else {
-    removeErrorFromElement('add-rs-cost');
+    removeErrorFromElement('add-asa-cost');
   }
 
   return submitForm;

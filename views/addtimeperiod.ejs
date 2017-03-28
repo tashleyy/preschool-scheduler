@@ -3,15 +3,26 @@
 <div class="container">
 	<h1>New Time Period</h1>
 
+<div class="form-group">
 	<div>
-		<form id="add-period-form" onsubmit="addTimePeriod('<%= student.id %>'); return false;">
+		<form id="add-period-form" onsubmit="if (validateTPForm('<%= student.id %>')) addTimePeriod('<%= student.id %>'); return false;">
 			<div class="form-group">
 				<label for="add-period-start-date">Start Date *</label>
 				<input class="form-control" type="date" id="add-period-start-date" required>
+				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+				<div id="add-period-start-date-message" style="display: none;">
+					<font color="#a94442">
+					</font>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="add-period-end-date">End Date *</label>
 				<input class="form-control" type="date" id="add-period-end-date" required>
+				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
+				<div id="add-period-end-month-message" style="display: none;">
+					<font color="#a94442">
+					</font>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="add-period-rate-schedules">Rate Schedule *</label>
