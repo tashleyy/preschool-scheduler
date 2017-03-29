@@ -36,7 +36,7 @@ function isPastTimePeriod(tp) {
     return false;
   }
   const date = dateToString(new Date());
-  return tp.endDate < date;
+  return tp.endDate.substring(0, 7) < date;
 }
 
 function isFutureTimePeriod(tp) {
@@ -44,7 +44,7 @@ function isFutureTimePeriod(tp) {
     return false;
   }
   const date = dateToString(new Date());
-  return tp.startDate > date;
+  return tp.startDate.substring(0, 7) > date;
 }
 
 function isCurrentTimePeriod(tp) {
@@ -185,6 +185,27 @@ module.exports = {
         const startDate = timePeriod.startDate.substring(0, 7);
         const endDate = timePeriod.endDate.substring(0, 7);
 
+        const monthArray = new Array(NUM_DAYS);
+        for (let j = 0; j < NUM_DAYS; j++) {
+          monthArray[j] = [0, 0];
+          if (rateSchedule[days[j]] === 'full') {
+            monthArray[j][0] = 1;
+            monthArray[j][1] = 1;
+          } else if (rateSchedule[days[j]] === 'am') {
+            monthArray[j][0] = 1;
+          } else if (rateSchedule[days[j]] === 'pm') {
+            monthArray[j][1] = 1;
+          }
+        }
+        const asaArray = [0, 0, 0, 0, 0];
+        for (let j = 0; j < afterSchoolActivities.length; j++) {
+          for (let k = 0; k < NUM_DAYS; k++) {
+            if (afterSchoolActivities[j][days[k]]) {
+              asaArray[k] = 1;
+            }
+          }
+        }
+
         if (rateSchedule && endDate >= earliest && latest >= startDate) {
           const actualStart = startDate > earliest ? startDate : earliest;
           const actualEnd = endDate < latest ? endDate : latest;
@@ -192,28 +213,8 @@ module.exports = {
 
           while (actualEnd >= currDate) {
             for (let j = 0; j < NUM_DAYS; j++) {
-              const monthArray = [0, 0];
-              if (rateSchedule[days[j]] === 'full') {
-                monthArray[0] = 1;
-                monthArray[1] = 1;
-              } else if (rateSchedule[days[j]] === 'am') {
-                monthArray[0] = 1;
-              } else if (rateSchedule[days[j]] === 'pm') {
-                monthArray[1] = 1;
-              }
-              calendar[monthToIndex[getMonth(currDate) - 1]][j][0] += monthArray[0];
-              calendar[monthToIndex[getMonth(currDate) - 1]][j][1] += monthArray[1];
-            }
-
-            const asaArray = [0, 0, 0, 0, 0];
-            for (let j = 0; j < afterSchoolActivities.length; j++) {
-              for (let k = 0; k < NUM_DAYS; k++) {
-                if (afterSchoolActivities[j][days[k]]) {
-                  asaArray[k] = 1;
-                }
-              }
-            }
-            for (let j = 0; j < NUM_DAYS; j++) {
+              calendar[monthToIndex[getMonth(currDate) - 1]][j][0] += monthArray[j][0];
+              calendar[monthToIndex[getMonth(currDate) - 1]][j][1] += monthArray[j][1];
               calendar[monthToIndex[getMonth(currDate) - 1]][j][2] += asaArray[j];
             }
 
