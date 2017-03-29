@@ -1,11 +1,11 @@
 // eslint-disable-next-line no-unused-vars
-function showErrorOnElement(elementName, messageName = null) {
+function showErrorOnElement(elementName, messageParam = null) {
   const div = $(`#${elementName}`).closest('div');
   div.addClass('has-error');
   div.addClass('has-feedback');
 
-  if (messageName == null)
-  {
+  let messageName = messageParam;
+  if (messageName == null) {
     messageName = `#${elementName}-message`;
   }
 

@@ -1,3 +1,4 @@
+/* global showErrorOnElement */
 // eslint-disable-next-line no-unused-vars
 function addTimePeriod(student) {
   const startDate = $('#add-period-start-date').val();
@@ -16,15 +17,14 @@ function addTimePeriod(student) {
       student,
     },
     success(data) {
-    
-      if (data == "misordered") {
+      if (data === 'misordered') {
         $('#add-period-start-date-message-overlap').hide();
         showErrorOnElement('add-period-start-date',
           '#add-period-start-date-message-misordered');
         $('#add-period-end-date-message-overlap').hide();
         showErrorOnElement('add-period-end-date',
           '#add-period-end-date-message-misordered');
-      } else if (data == "overlap") {
+      } else if (data === 'overlap') {
         $('#add-period-start-date-message-misordered').hide();
         showErrorOnElement('add-period-start-date',
           '#add-period-start-date-message-overlap');
