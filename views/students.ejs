@@ -9,6 +9,7 @@
                     <th>Parent Phone Number</th>
                     <th>Alternate Phone Number</th>
                     <th>Student Schedule</th>
+                    <th>After School Schedule</th>
                     <th>Birthday</th>
                     <th>Edit</th>
                     <th>Delete</th>
@@ -22,6 +23,7 @@
                         <td><%= s.parentPhone1 %></td>
                         <td><%= s.parentPhone2 %></td>
                         <td><%= s.timePeriodString %></td>
+                        <td><%= s.asaString %></td>
                         <td><%= s.birthday %></td>
                         <td><a href="#" onclick="showStudentEditModal('<%= s.id %>')">
                             <span class="glyphicon glyphicon-pencil"></span>
