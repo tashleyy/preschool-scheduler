@@ -85,6 +85,9 @@ module.exports = {
             sails.log.error(err3);
             return res.serverError();
           }
+          if (students.length === 0) {
+            res.view('students', { students });
+          }
           const date = dateToString(new Date());
           for (let i = 0; i < students.length; i++) {
             let tp;
