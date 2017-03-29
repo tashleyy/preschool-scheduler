@@ -2,7 +2,6 @@
 
 <div class="container">
     <h1><%= student.name %></h1>
-    <p id="student-id" hidden><%= student.id %></p>
     <div class="row">
         <table class="table table-bordered table-striped" id="student-info-table">
             <tbody align="left">
@@ -45,24 +44,60 @@
             </tbody>
         </table>   
         <div style="clear:both;"></div>
-        <h2>Current Weekly Schedule</h2>
-        
-        <table class="table table-bordered table-striped" id="time-period-table">
+        <h2>Current Weekly Schedule</h2>        
+        <table class="table table-bordered table-striped" id="current-time-period-table">
             <tbody align="left">
+                <% for (i = 0; i < current.length; i++) { %>
+                    <tr>
+                        <td><%= current[i].rateSchedule.name %></td>
+                        <td><%= current[i].startDate %></td>
+                        <td><%= current[i].endDate %></td>
+                        <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>')">
+                            <span class="glyphicon glyphicon-pencil"/>
+                        </a></td>
+                        <td><a href="#" onclick="showPeriodDeleteModal('<%= current[i].id %>')">
+                            <span class="glyphicon glyphicon-trash"/>
+                        </a></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
 
         <h2>Future Weekly Schedules</h2>
-        
         <table class="table table-bordered table-striped" id="future-time-period-table">
             <tbody align="left">
+                <% for (i = 0; i < future.length; i++) { %>
+                    <tr>
+                        <td><%= future[i].rateSchedule.name %></td>
+                        <td><%= future[i].startDate %></td>
+                        <td><%= future[i].endDate %></td>
+                        <td><a href="#" onclick="showPeriodEditModal('<%= future[i].id %>')">
+                            <span class="glyphicon glyphicon-pencil"/>
+                        </a></td>
+                        <td><a href="#" onclick="showPeriodDeleteModal('<%= future[i].id %>')">
+                            <span class="glyphicon glyphicon-trash"/>
+                        </a></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
 
         <h2>Past Weekly Schedules</h2>
-        
         <table class="table table-bordered table-striped" id="past-time-period-table">
             <tbody align="left">
+                <% for (i = 0; i < past.length; i++) { %>
+                    <tr>
+                        <td><%= past[i].rateSchedule.name %></td>
+                        <td><%= past[i].startDate %></td>
+                        <td><%= past[i].endDate %></td>
+                        <td><a href="#" onclick="showPeriodEditModal('<%= past[i].id %>')">
+                            <span class="glyphicon glyphicon-pencil"/>
+                        </a></td>
+                        <td><a href="#" onclick="showPeriodDeleteModal('<%= past[i].id %>')">
+                            <span class="glyphicon glyphicon-trash"/>
+                        </a></td>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
     </div>

@@ -32,6 +32,30 @@ function rateScheduleToString(rs) {
   return string;
 }
 
+function isPastTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.endDate < date;
+}
+
+function isFutureTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.startDate > date;
+}
+
+function isCurrentTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.endDate >= date && tp.startDate <= date;
+}
+
 module.exports = {
   login(req, res) {
     res.view('login');
@@ -186,15 +210,36 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
+          const rsMap = {};
+          for (let i = 0; i < rateSchedules.length; i++) {
+            rsMap[rateSchedules[i].id] = rateSchedules[i];
+          }
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
               return res.serverError();
             }
+            const past = [];
+            const current = [];
+            const future = [];
+            for (let i = 0; i < student.timePeriods.length; i++) {
+              const tp = student.timePeriods[i];
+              tp.rateSchedule = rsMap[tp.rateSchedule];
+              if (isPastTimePeriod(tp)) {
+                past.push(tp);
+              } else if (isFutureTimePeriod(tp)) {
+                future.push(tp);
+              } else if (isCurrentTimePeriod(tp)) {
+                current.push(tp);
+              }
+            }
             res.view('student', {
               student,
               rateSchedules,
               afterSchoolActivities,
+              past,
+              current,
+              future,
             });
           });
         });

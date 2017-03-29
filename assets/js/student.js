@@ -1,40 +1,3 @@
-/* global MonthAndYear */
-function displayTimePeriods() {
-  $.ajax({
-    url: '/timeperiod/find',
-    type: 'get',
-    success(data) {
-      const stuid = $('#student-id')[0].innerHTML;
-      const today = new Date();
-      const todayMAY = new MonthAndYear(today.getFullYear(), today.getMonth());
-      for (let i = 0; i < data.length; i++) {
-        const tp = data[i];
-        if (tp.student && tp.student.id === stuid) {
-          const rowHtml = `<tr><td>${tp.rateSchedule.name}</td><td>`
-            + `${tp.startDate}</td><td>`
-            + `${tp.endDate}</td><td>`
-            + `<a href="#" onclick="showPeriodEditModal('${tp.id}')">`
-            + '<span class="glyphicon glyphicon-pencil"/></a></td><td>'
-            + `<a href="#" onclick="showPeriodDeleteModal('${tp.id}')">`
-            + '<span class="glyphicon glyphicon-trash"/></a></td></tr>';
-          const tpEnd = MonthAndYear.makeFromString(tp.endDate);
-          const tpStart = MonthAndYear.makeFromString(tp.startDate);
-          if (MonthAndYear.lessThan(tpEnd, todayMAY)) {
-            $('#past-time-period-table tbody').append(rowHtml);
-          } else if (MonthAndYear.lessThan(todayMAY, tpStart)) {
-            $('#future-time-period-table tbody').append(rowHtml);
-          } else {
-            $('#time-period-table tbody').append(rowHtml);
-          }
-        }
-      }
-    },
-    error(xhr, status, error) {
-      console.log(`error: ${error}`);
-    },
-  });
-}
-
 // eslint-disable-next-line no-unused-vars
 function showPeriodEditModal(id) {
   $.ajax({
@@ -117,7 +80,6 @@ function deleteTimePeriod() {
 }
 
 $(document).ready(() => {
-  displayTimePeriods();
   $('#edit-period-asas').multiselect();
   $('#period-edit-modal').modal({ show: false });
   $('#period-delete-modal').modal({ show: false });
