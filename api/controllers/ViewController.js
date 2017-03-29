@@ -32,6 +32,30 @@ function rateScheduleToString(rs) {
   return string;
 }
 
+function isPastTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.endDate < date;
+}
+
+function isFutureTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.startDate > date;
+}
+
+function isCurrentTimePeriod(tp) {
+  if (!tp) {
+    return false;
+  }
+  const date = dateToString(new Date());
+  return tp.endDate >= date && tp.startDate <= date;
+}
+
 module.exports = {
   login(req, res) {
     res.view('login');
@@ -47,41 +71,63 @@ module.exports = {
       for (let i = 0; i < rateSchedules.length; i++) {
         rsMap[rateSchedules[i].id] = rateSchedules[i];
       }
-      Student.find().populate('timePeriods').sort('name ASC').exec((err2, students) => {
+      TimePeriod.find().populate('afterSchoolActivities').exec((err2, timePeriods) => {
         if (err2) {
           sails.log.error(err2);
           return res.serverError();
         }
-        const date = dateToString(new Date());
-        for (let i = 0; i < students.length; i++) {
-          let tp;
-          const s = students[i];
-          s.timePeriods.sort((a, b) => {
-            if (a.endDate < b.endDate) {
-              return -1;
-            }
-            if (a.endDate > b.endDate) {
-              return 1;
-            }
-            return 0;
-          });
-          for (let j = 0; j < s.timePeriods.length; j++) {
-            if (s.timePeriods[j].endDate > date) {
-              if (s.timePeriods[j].startDate <= date) {
-                tp = s.timePeriods[j];
-              }
-              break;
-            }
+        const tpMap = {};
+        for (let i = 0; i < timePeriods.length; i++) {
+          tpMap[timePeriods[i].id] = timePeriods[i];
+        }
+        Student.find().populate('timePeriods').sort('name ASC').exec((err3, students) => {
+          if (err3) {
+            sails.log.error(err3);
+            return res.serverError();
           }
-          if (tp) {
-            s.timePeriodString = rateScheduleToString(rsMap[tp.rateSchedule]);
-          } else {
-            s.timePeriodString = '';
-          }
-          if (i === students.length - 1) {
+          if (students.length === 0) {
             res.view('students', { students });
           }
-        }
+          const date = dateToString(new Date());
+          for (let i = 0; i < students.length; i++) {
+            let tp;
+            const s = students[i];
+            s.timePeriods.sort((a, b) => {
+              if (a.endDate < b.endDate) {
+                return -1;
+              }
+              if (a.endDate > b.endDate) {
+                return 1;
+              }
+              return 0;
+            });
+            for (let j = 0; j < s.timePeriods.length; j++) {
+              if (s.timePeriods[j].endDate > date) {
+                if (s.timePeriods[j].startDate <= date) {
+                  tp = s.timePeriods[j];
+                }
+                break;
+              }
+            }
+            if (tp) {
+              tp = tpMap[tp.id];
+              s.timePeriodString = rateScheduleToString(rsMap[tp.rateSchedule]);
+              s.asaString = '';
+              for (let j = 0; j < tp.afterSchoolActivities.length; j++) {
+                s.asaString += `${tp.afterSchoolActivities[j].name}, `;
+              }
+              if (s.asaString.endsWith(', ')) {
+                s.asaString = s.asaString.substring(0, s.asaString.length - 2);
+              }
+            } else {
+              s.timePeriodString = '';
+              s.asaString = '';
+            }
+            if (i === students.length - 1) {
+              res.view('students', { students });
+            }
+          }
+        });
       });
     });
   },
@@ -167,15 +213,36 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
+          const rsMap = {};
+          for (let i = 0; i < rateSchedules.length; i++) {
+            rsMap[rateSchedules[i].id] = rateSchedules[i];
+          }
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
               return res.serverError();
             }
+            const past = [];
+            const current = [];
+            const future = [];
+            for (let i = 0; i < student.timePeriods.length; i++) {
+              const tp = student.timePeriods[i];
+              tp.rateSchedule = rsMap[tp.rateSchedule];
+              if (isPastTimePeriod(tp)) {
+                past.push(tp);
+              } else if (isFutureTimePeriod(tp)) {
+                future.push(tp);
+              } else if (isCurrentTimePeriod(tp)) {
+                current.push(tp);
+              }
+            }
             res.view('student', {
               student,
               rateSchedules,
               afterSchoolActivities,
+              past,
+              current,
+              future,
             });
           });
         });
