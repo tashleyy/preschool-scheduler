@@ -175,8 +175,8 @@ module.exports = {
         }
       }
 
-      const earliest = dateToString(new Date(Date.UTC(year, 9)));
-      const latest = dateToString(new Date(Date.UTC(year + 1, 8)));
+      const earliest = `${year}-09`;
+      const latest = `${year + 1}-08`;
 
       for (let i = 0; i < timePeriods.length; i++) {
         const timePeriod = timePeriods[i];
@@ -207,6 +207,7 @@ module.exports = {
         }
 
         if (rateSchedule && endDate >= earliest && latest >= startDate) {
+          sails.log.debug(startDate, endDate, earliest, latest);
           const actualStart = startDate > earliest ? startDate : earliest;
           const actualEnd = endDate < latest ? endDate : latest;
           let currDate = actualStart;
