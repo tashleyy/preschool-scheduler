@@ -5,7 +5,7 @@ module.exports = {
       return res.badRequest();
     }
 
-    Student.findOne({ id: params.student }).exec((err, student) => {
+    Student.findOne({ id: params.student }).populate('timePeriods').exec((err, student) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -13,6 +13,31 @@ module.exports = {
       if (!student) {
         return res.notFound();
       }
+
+      const newPeriodStartDate = new Date(params.startDate);
+      const newPeriodEndDate = new Date(params.endDate);
+      if (newPeriodEndDate < newPeriodStartDate) {
+        return res.ok("misordered");
+      }
+
+      var inputOK = true;
+      var errorString = "";
+      if ((student != null) && (student.timePeriods != null)) {
+        for (var i = 0; i < student.timePeriods.length; i++) {
+          var timePeriod = student.timePeriods[i];
+          var oldPeriodStartDate = new Date(timePeriod.startDate);
+          var oldPeriodEndDate = new Date(timePeriod.endDate);
+          var endsBefore = (oldPeriodEndDate < newPeriodStartDate);
+          var beginsAfter = (oldPeriodStartDate > newPeriodEndDate);
+          inputOK = inputOK && (endsBefore || beginsAfter);
+        }
+      }
+
+      if (!inputOK)
+      {
+        return res.ok("overlap");
+      }
+
       RateSchedule.findOne({ id: params.rateSchedule }).exec((err2, rs) => {
         if (err2) {
           sails.log.error(err2);

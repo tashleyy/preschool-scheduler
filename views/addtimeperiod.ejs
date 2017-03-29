@@ -5,24 +5,32 @@
 
 <div class="form-group">
 	<div>
-		<form id="add-period-form" onsubmit="if (validateTPForm('<%= student.id %>')) addTimePeriod('<%= student.id %>'); return false;">
+		<form id="add-period-form" onsubmit="addTimePeriod('<%= student.id %>'); return false;">
 			<div class="form-group">
 				<label for="add-period-start-date">Start Date *</label>
 				<input class="form-control" type="date" id="add-period-start-date" required>
 				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-				<div id="add-period-start-date-message" style="display: none;">
-					<font color="#a94442">
-					</font>
-				</div>
+				<font color="#a94442">
+					<div id="add-period-start-date-message-misordered" style="display: none;">
+						Start date must be after end date.
+					</div>
+					<div id="add-period-start-date-message-overlap" style="display: none;">
+						This time period overlaps with a period this student is already signed up for.
+					</div>
+				</font>
 			</div>
 			<div class="form-group">
 				<label for="add-period-end-date">End Date *</label>
 				<input class="form-control" type="date" id="add-period-end-date" required>
 				<span class="glyphicon glyphicon-remove form-control-feedback"></span>
-				<div id="add-period-end-month-message" style="display: none;">
-					<font color="#a94442">
-					</font>
-				</div>
+				<font color="#a94442">
+					<div id="add-period-end-date-message-misordered" style="display: none;">
+						End date must be before start date.
+					</div>
+					<div id="add-period-end-date-message-overlap" style="display: none;">
+						This time period overlaps with a period this student is already signed up for.
+					</div>
+				</font>
 			</div>
 			<div class="form-group">
 				<label for="add-period-rate-schedules">Rate Schedule *</label>
