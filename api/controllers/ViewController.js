@@ -60,7 +60,7 @@ function timePeriodStartDateCompare(a, b) {
     return -1;
   } else if (a.startDate > b.startDate) {
     return 1;
-  } 
+  }
   return 0;
 }
 
@@ -331,13 +331,12 @@ module.exports = {
               return res.serverError();
             }
 
-            var earliestStartDate = "N/A";
-            var latestEndDate = "N/A";
+            let earliestStartDate = 'N/A';
+            let latestEndDate = 'N/A';
 
             student.timePeriods.sort(timePeriodStartDateCompare);
 
-            if (student.timePeriods.length != 0)
-            {
+            if (student.timePeriods.length !== 0) {
               earliestStartDate = student.timePeriods[0].startDate;
               latestEndDate = student.timePeriods[student.timePeriods.length - 1].endDate;
             }
