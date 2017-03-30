@@ -55,6 +55,15 @@ function isCurrentTimePeriod(tp) {
   return tp.endDate >= date && tp.startDate <= date;
 }
 
+function timePeriodStartDateCompare(a, b) {
+  if (a.startDate < b.startDate) {
+    return -1;
+  } else if (a.startDate > b.startDate) {
+    return 1;
+  } 
+  return 0;
+}
+
 function getYear(date) {
   if (date.length < 7) return null;
   return parseInt(date.substring(0, 4), 10);
@@ -316,11 +325,23 @@ module.exports = {
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
           }
-          AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
+          AfterSchoolActivity.find().sort('startDate ASC').exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
               return res.serverError();
             }
+
+            var earliestStartDate = "N/A";
+            var latestEndDate = "N/A";
+
+            student.timePeriods.sort(timePeriodStartDateCompare);
+
+            if (student.timePeriods.length != 0)
+            {
+              earliestStartDate = student.timePeriods[0].startDate;
+              latestEndDate = student.timePeriods[student.timePeriods.length - 1].endDate;
+            }
+
             const past = [];
             const current = [];
             const future = [];
@@ -335,6 +356,7 @@ module.exports = {
                 current.push(tp);
               }
             }
+
             res.view('student', {
               student,
               rateSchedules,
@@ -342,6 +364,8 @@ module.exports = {
               past,
               current,
               future,
+              earliestStartDate,
+              latestEndDate,
             });
           });
         });
