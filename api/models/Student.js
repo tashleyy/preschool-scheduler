@@ -30,14 +30,6 @@ module.exports = {
       type: 'string',
       required: true,
     },
-    startDate: {
-      type: 'string',
-      required: true,
-    },
-    endDate: {
-      type: 'string',
-      required: true,
-    },
     timePeriods: {
       collection: 'TimePeriod',
       via: 'student',

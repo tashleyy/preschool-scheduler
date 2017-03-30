@@ -2,7 +2,7 @@ module.exports = {
   create(req, res) {
     const params = req.params.all();
     if (!params.name || !params.birthday || !params.parent1 || !params.parentPhone1
-    || !params.physician || !params.physicianPhone || !params.startDate || !params.endDate) {
+    || !params.physician || !params.physicianPhone) {
       return res.badRequest();
     }
 
@@ -15,8 +15,6 @@ module.exports = {
       parentPhone2: params.parentPhone2,
       physician: params.physician,
       physicianPhone: params.physicianPhone,
-      startDate: params.startDate,
-      endDate: params.endDate,
     }).exec((err, student) => {
       if (err) {
         sails.log.error(err);

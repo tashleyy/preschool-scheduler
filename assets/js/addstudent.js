@@ -8,8 +8,6 @@ function addStudent() {
   const parentPhone2 = $('#add-student-parent-phone-2').val();
   const physician = $('#add-student-physician-name').val();
   const physicianPhone = $('#add-student-physician-phone').val();
-  const startDate = $('#add-student-start-date').val();
-  const endDate = $('#add-student-end-date').val();
   $.ajax({
     url: '/student/create',
     type: 'post',
@@ -22,8 +20,6 @@ function addStudent() {
       parentPhone2,
       physician,
       physicianPhone,
-      startDate,
-      endDate,
     },
     success(data) {
       document.location.href = 'students';
