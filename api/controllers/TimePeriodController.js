@@ -17,25 +17,23 @@ module.exports = {
       const newPeriodStartDate = new Date(params.startDate);
       const newPeriodEndDate = new Date(params.endDate);
       if (newPeriodEndDate < newPeriodStartDate) {
-        return res.ok("misordered");
+        return res.ok('misordered');
       }
 
-      var inputOK = true;
-      var errorString = "";
+      let inputOK = true;
       if ((student != null) && (student.timePeriods != null)) {
-        for (var i = 0; i < student.timePeriods.length; i++) {
-          var timePeriod = student.timePeriods[i];
-          var oldPeriodStartDate = new Date(timePeriod.startDate);
-          var oldPeriodEndDate = new Date(timePeriod.endDate);
-          var endsBefore = (oldPeriodEndDate < newPeriodStartDate);
-          var beginsAfter = (oldPeriodStartDate > newPeriodEndDate);
+        for (let i = 0; i < student.timePeriods.length; i++) {
+          const timePeriod = student.timePeriods[i];
+          const oldPeriodStartDate = new Date(timePeriod.startDate);
+          const oldPeriodEndDate = new Date(timePeriod.endDate);
+          const endsBefore = (oldPeriodEndDate < newPeriodStartDate);
+          const beginsAfter = (oldPeriodStartDate > newPeriodEndDate);
           inputOK = inputOK && (endsBefore || beginsAfter);
         }
       }
 
-      if (!inputOK)
-      {
-        return res.ok("overlap");
+      if (!inputOK) {
+        return res.ok('overlap');
       }
 
       RateSchedule.findOne({ id: params.rateSchedule }).exec((err2, rs) => {

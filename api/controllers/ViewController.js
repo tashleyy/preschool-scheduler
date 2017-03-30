@@ -1,8 +1,7 @@
 function dateToString(obj) {
   const year = obj.getFullYear();
   const month = obj.getMonth() + 1;
-  const date = obj.getDate();
-  return `${year}-${month > 9 ? '' : '0'}${month}-${date > 9 ? '' : '0'}${date}`;
+  return `${year}-${month > 9 ? '' : '0'}${month}`;
 }
 
 function rateScheduleDayToString(day, value) {
@@ -37,7 +36,7 @@ function isPastTimePeriod(tp) {
     return false;
   }
   const date = dateToString(new Date());
-  return tp.endDate < date;
+  return tp.endDate.substring(0, 7) < date;
 }
 
 function isFutureTimePeriod(tp) {
@@ -45,7 +44,7 @@ function isFutureTimePeriod(tp) {
     return false;
   }
   const date = dateToString(new Date());
-  return tp.startDate > date;
+  return tp.startDate.substring(0, 7) > date;
 }
 
 function isCurrentTimePeriod(tp) {
@@ -54,6 +53,16 @@ function isCurrentTimePeriod(tp) {
   }
   const date = dateToString(new Date());
   return tp.endDate >= date && tp.startDate <= date;
+}
+
+function getYear(date) {
+  if (date.length < 7) return null;
+  return parseInt(date.substring(0, 4), 10);
+}
+
+function getMonth(date) {
+  if (date.length < 7) return null;
+  return parseInt(date.substring(5, 7), 10);
 }
 
 module.exports = {
@@ -133,7 +142,97 @@ module.exports = {
   },
 
   home(req, res) {
-    res.view('home');
+    let year = req.query.year;
+    if (year) {
+      year = parseInt(year, 10);
+    } else {
+      const date = new Date();
+      year = parseInt(date.getFullYear(), 10);
+      if (date.getMonth() < 9) {
+        year--;
+      }
+    }
+
+    TimePeriod.find().populate('rateSchedule').populate('afterSchoolActivities').exec((err, timePeriods) => {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+
+      const NUM_MONTHS = 12;
+      const NUM_DAYS = 5;
+      const NUM_SESSIONS = 3;
+      const monthToIndex = [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3];
+      const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+      const calendar = new Array(NUM_MONTHS);
+      for (let i = 0; i < NUM_MONTHS; i++) {
+        calendar[i] = new Array(NUM_DAYS);
+        for (let j = 0; j < NUM_DAYS; j++) {
+          calendar[i][j] = new Array(NUM_SESSIONS);
+          for (let k = 0; k < NUM_SESSIONS; k++) {
+            calendar[i][j][k] = 0;
+          }
+        }
+      }
+
+      const earliest = `${year}-09`;
+      const latest = `${year + 1}-08`;
+
+      for (let i = 0; i < timePeriods.length; i++) {
+        const timePeriod = timePeriods[i];
+        const rateSchedule = timePeriod.rateSchedule;
+        const afterSchoolActivities = timePeriod.afterSchoolActivities;
+        const startDate = timePeriod.startDate.substring(0, 7);
+        const endDate = timePeriod.endDate.substring(0, 7);
+
+        const monthArray = new Array(NUM_DAYS);
+        for (let j = 0; j < NUM_DAYS; j++) {
+          monthArray[j] = [0, 0];
+          if (rateSchedule[days[j]] === 'full') {
+            monthArray[j][0] = 1;
+            monthArray[j][1] = 1;
+          } else if (rateSchedule[days[j]] === 'am') {
+            monthArray[j][0] = 1;
+          } else if (rateSchedule[days[j]] === 'pm') {
+            monthArray[j][1] = 1;
+          }
+        }
+        const asaArray = [0, 0, 0, 0, 0];
+        for (let j = 0; j < afterSchoolActivities.length; j++) {
+          for (let k = 0; k < NUM_DAYS; k++) {
+            if (afterSchoolActivities[j][days[k]]) {
+              asaArray[k] = 1;
+            }
+          }
+        }
+
+        if (rateSchedule && endDate >= earliest && latest >= startDate) {
+          sails.log.debug(startDate, endDate, earliest, latest);
+          const actualStart = startDate > earliest ? startDate : earliest;
+          const actualEnd = endDate < latest ? endDate : latest;
+          let currDate = actualStart;
+
+          while (actualEnd >= currDate) {
+            for (let j = 0; j < NUM_DAYS; j++) {
+              calendar[monthToIndex[getMonth(currDate) - 1]][j][0] += monthArray[j][0];
+              calendar[monthToIndex[getMonth(currDate) - 1]][j][1] += monthArray[j][1];
+              calendar[monthToIndex[getMonth(currDate) - 1]][j][2] += asaArray[j];
+            }
+
+            if (getMonth(currDate) === 12) {
+              currDate = `${getYear(currDate) + 1}-01`;
+            } else {
+              const month = getMonth(currDate) + 1;
+              currDate = `${getYear(currDate)}-${month > 9 ? '' : '0'}${month}`;
+            }
+          }
+        }
+      }
+      res.view('home', {
+        year,
+        calendar,
+      });
+    });
   },
 
   addstudent(req, res) {

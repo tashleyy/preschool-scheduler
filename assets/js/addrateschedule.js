@@ -1,4 +1,4 @@
-/* global showErrorOnElement, removeErrorFromElement, MonthAndYear */
+/* global showErrorOnElement, removeErrorFromElement */
 // eslint-disable-next-line no-unused-vars
 function validateRSForm() {
   let submitForm = true;
