@@ -194,29 +194,28 @@ module.exports = {
         const startDate = timePeriod.startDate.substring(0, 7);
         const endDate = timePeriod.endDate.substring(0, 7);
 
-        const monthArray = new Array(NUM_DAYS);
-        for (let j = 0; j < NUM_DAYS; j++) {
-          monthArray[j] = [0, 0];
-          if (rateSchedule[days[j]] === 'full') {
-            monthArray[j][0] = 1;
-            monthArray[j][1] = 1;
-          } else if (rateSchedule[days[j]] === 'am') {
-            monthArray[j][0] = 1;
-          } else if (rateSchedule[days[j]] === 'pm') {
-            monthArray[j][1] = 1;
-          }
-        }
-        const asaArray = [0, 0, 0, 0, 0];
-        for (let j = 0; j < afterSchoolActivities.length; j++) {
-          for (let k = 0; k < NUM_DAYS; k++) {
-            if (afterSchoolActivities[j][days[k]]) {
-              asaArray[k] = 1;
+        if (rateSchedule && endDate >= earliest && latest >= startDate) {
+          const monthArray = new Array(NUM_DAYS);
+          for (let j = 0; j < NUM_DAYS; j++) {
+            monthArray[j] = [0, 0];
+            if (rateSchedule[days[j]] === 'full') {
+              monthArray[j][0] = 1;
+              monthArray[j][1] = 1;
+            } else if (rateSchedule[days[j]] === 'am') {
+              monthArray[j][0] = 1;
+            } else if (rateSchedule[days[j]] === 'pm') {
+              monthArray[j][1] = 1;
             }
           }
-        }
+          const asaArray = [0, 0, 0, 0, 0];
+          for (let j = 0; j < afterSchoolActivities.length; j++) {
+            for (let k = 0; k < NUM_DAYS; k++) {
+              if (afterSchoolActivities[j][days[k]]) {
+                asaArray[k] = 1;
+              }
+            }
+          }
 
-        if (rateSchedule && endDate >= earliest && latest >= startDate) {
-          sails.log.debug(startDate, endDate, earliest, latest);
           const actualStart = startDate > earliest ? startDate : earliest;
           const actualEnd = endDate < latest ? endDate : latest;
           let currDate = actualStart;
@@ -325,7 +324,7 @@ module.exports = {
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
           }
-          AfterSchoolActivity.find().sort('startDate ASC').exec((err3, afterSchoolActivities) => {
+          AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
               return res.serverError();

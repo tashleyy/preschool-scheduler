@@ -27,8 +27,6 @@ function showStudentEditModal(id) {
       $('#edit-student-parent-phone-2').val(data.parentPhone2);
       $('#edit-student-physician').val(data.physician);
       $('#edit-student-physician-phone').val(data.physicianPhone);
-      $('#edit-student-start-date').val(data.startDate);
-      $('#edit-student-end-date').val(data.endDate);
 
       $('#student-edit-modal').attr('studentId', id);
       $('#student-edit-modal').modal('show');
@@ -58,8 +56,6 @@ function editStudent() {
   const parentPhone2 = $('#edit-student-parent-phone-2').val();
   const physician = $('#edit-student-physician').val();
   const physicianPhone = $('#edit-student-physician-phone').val();
-  const startDate = $('#edit-student-start-date').val();
-  const endDate = $('#edit-student-end-date').val();
   $.ajax({
     url: '/student/update',
     type: 'put',
@@ -73,8 +69,6 @@ function editStudent() {
       parentPhone2,
       physician,
       physicianPhone,
-      startDate,
-      endDate,
     },
     success() {
       $('#student-edit-modal').modal('hide');
