@@ -346,12 +346,14 @@ module.exports = {
             for (let i = 0; i < student.timePeriods.length; i++) {
               const tp = student.timePeriods[i];
               tp.rateSchedule = rsMap[tp.rateSchedule];
-              if (isPastTimePeriod(tp)) {
-                past.push(tp);
-              } else if (isFutureTimePeriod(tp)) {
-                future.push(tp);
-              } else if (isCurrentTimePeriod(tp)) {
-                current.push(tp);
+              if (tp.rateSchedule) {
+                if (isPastTimePeriod(tp)) {
+                  past.push(tp);
+                } else if (isFutureTimePeriod(tp)) {
+                  future.push(tp);
+                } else if (isCurrentTimePeriod(tp)) {
+                  current.push(tp);
+                }
               }
             }
 
