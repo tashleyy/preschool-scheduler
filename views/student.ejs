@@ -44,6 +44,7 @@
             </tbody>
         </table>   
         <div style="clear:both;"></div>
+
         <h2>Current Weekly Schedule</h2>        
         <table class="table table-bordered table-striped" id="current-time-period-table">
             <tbody align="left">
@@ -62,6 +63,31 @@
                 <% } %>
             </tbody>
         </table>
+        
+        <button type="button" data-toggle="collapse" data-target="#current-weekly">+/-</button>
+        <div id="current-weekly" class="collapse">
+            <table class="table table-bordered table-striped" id="current-weekly-schedule">
+                <tbody align = "left">
+                    <% for (i = 0; i < current.length; i++) { %>
+                        <%     console.log(current.length); %>
+
+                         <% var asas = ['', '', '', '', '']; %>
+                         <% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']; %>
+                         <% for (var j = 0; j <current[i].afterSchoolActivities.length; j++) { %>
+                             <% var asa = current[i].afterSchoolActivities[j]; %>
+                             <% for (var k = 0; k < 5; k++) { %>
+                                <%  if (asa[days[k]]){ %>
+                                 <%     asas[k] += asa.name + ', '; %>
+                                 <%     console.log(asa.name); %>
+                                <%  } %>
+                             <% }  %>
+                        <%  } %>
+                        <tr id="asa-monday-row"><th>Monday</th><td><%= current[i].rateSchedule.monday %></td><td class="asa-table-cell"><%= asas[0] %></td></tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+
 
         <h2>Future Weekly Schedules</h2>
         <table class="table table-bordered table-striped" id="future-time-period-table">
