@@ -56,6 +56,8 @@ module.exports.routes = {
 
   'get /addtimeperiod/:studentId': 'ViewController.addtimeperiod',
 
+  'get /income': 'ViewController.income',
+
   // UserController routes
 
   'post /user/login': 'UserController.login',
