@@ -305,6 +305,74 @@ module.exports = {
       });
   },
 
+  income(req, res) {
+    let year = req.query.year;
+    if (year) {
+      year = parseInt(year, 10);
+    } else {
+      const date = new Date();
+      year = parseInt(date.getFullYear(), 10);
+      if (date.getMonth() < 9) {
+        year--;
+      }
+    }
+
+    TimePeriod.find().populate('rateSchedule').populate('afterSchoolActivities').exec((err, timePeriods) => {
+      if (err) {
+        sails.log.error(err);
+        return res.serverError();
+      }
+
+      const NUM_MONTHS = 12;
+      const monthToIndex = [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3];
+      const monthlyIncome = new Array(NUM_MONTHS);
+
+      for (let i = 0; i < monthlyIncome.length; i++)
+      {
+        monthlyIncome[i] = 0;
+      }
+
+      const earliest = `${year}-09`;
+      const latest = `${year + 1}-08`;
+
+      for (let i = 0; i < timePeriods.length; i++) {
+        const timePeriod = timePeriods[i];
+        const rateSchedule = timePeriod.rateSchedule;
+        const afterSchoolActivities = timePeriod.afterSchoolActivities;
+        const startDate = timePeriod.startDate.substring(0, 7);
+        const endDate = timePeriod.endDate.substring(0, 7);
+
+        if (rateSchedule && endDate >= earliest && latest >= startDate) {
+          const actualStart = startDate > earliest ? startDate : earliest;
+          const actualEnd = endDate < latest ? endDate : latest;
+          let currDate = actualStart;
+
+          var actualCost = rateSchedule.cost;
+
+          for (let j = 0; j < afterSchoolActivities.length; j++)
+          {
+            actualCost += afterSchoolActivities[j].cost;
+          }
+
+          while (actualEnd >= currDate) {
+            monthlyIncome[monthToIndex[getMonth(currDate) - 1]] += actualCost;
+
+            if (getMonth(currDate) === 12) {
+              currDate = `${getYear(currDate) + 1}-01`;
+            } else {
+              const month = getMonth(currDate) + 1;
+              currDate = `${getYear(currDate)}-${month > 9 ? '' : '0'}${month}`;
+            }
+          }
+        }
+      }
+      res.view('income', {
+        year,
+        monthlyIncome,
+      });
+    });
+  },
+
   student(req, res) {
     Student.findOne({ id: req.params.studentId }).populate('timePeriods')
       .exec((err, student) => {
