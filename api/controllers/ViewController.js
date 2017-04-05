@@ -290,6 +290,9 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
+
+          var noRateSchedules = (rateSchedules.length == 0);
+
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
@@ -299,6 +302,7 @@ module.exports = {
               student,
               rateSchedules,
               afterSchoolActivities,
+              noRateSchedules,
             });
           });
         });
@@ -406,6 +410,9 @@ for (let i = 0; i < timePeriods.length; i++) {
             sails.log.error(err2);
             return res.serverError();
           }
+        
+          var noRateSchedules = (rateSchedules.length == 0);
+
           const rsMap = {};
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
@@ -435,30 +442,34 @@ for (let i = 0; i < timePeriods.length; i++) {
             let asas   = ['', '', '', '', ''];
             const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             console.log("# timeperiods: " + student.timePeriods.length);
+            var hasNullSchedule = false;
+
             for (let i = 0; i < student.timePeriods.length; i++) {
               let tp  = student.timePeriods[i];
               
               //console.log("ASA length: :" + ASA.length);
               tp.rateSchedule = rsMap[tp.rateSchedule];
-              if (tp.rateSchedule) {
-                if (isPastTimePeriod(tp)) {
-                  past.push(tp);
-                } else if (isFutureTimePeriod(tp)) {
-                  future.push(tp);
-                } else if (isCurrentTimePeriod(tp)) {
-                  current.push(tp);
-                  //populate aferschool activities to display in current weekly schedule
-                  tp = tpMap[tp.id];
-                  const ASA = tp.afterSchoolActivities;
-                  
-                  for (let j = 0; j <ASA.length; j++) {
-                    const asa = ASA[j];
-                    for (var k = 0; k < 5; k++) {
-                      if (asa[days[k]])
-                      {
-                          //console.log(asa.name);
-                          asas[k] += asa.name + ', ';
-                      }
+              
+              if (!tp.rateSchedule) {
+                hasNullSchedule = true;
+              }
+              if (isPastTimePeriod(tp)) {
+                past.push(tp);
+              } else if (isFutureTimePeriod(tp)) {
+                future.push(tp);
+              } else if (isCurrentTimePeriod(tp)) {
+                current.push(tp);
+                //populate aferschool activities to display in current weekly schedule
+                tp = tpMap[tp.id];
+                const ASA = tp.afterSchoolActivities;
+                
+                for (let j = 0; j <ASA.length; j++) {
+                  const asa = ASA[j];
+                  for (var k = 0; k < 5; k++) {
+                    if (asa[days[k]])
+                    {
+                        //console.log(asa.name);
+                        asas[k] += asa.name + ', ';
                     }
                   }
                 }
@@ -475,6 +486,8 @@ for (let i = 0; i < timePeriods.length; i++) {
               future,
               earliestStartDate,
               latestEndDate,
+              hasNullSchedule,
+              noRateSchedules,
             });
           });
 
