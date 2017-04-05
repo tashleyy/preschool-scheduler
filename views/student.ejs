@@ -63,26 +63,20 @@
                 <% } %>
             </tbody>
         </table>
-        
-        <button type="button" data-toggle="collapse" data-target="#current-weekly">+/-</button>
+        <% if(current.length != 0) { %>
+ 
+        <% } %>
+        <button type="button" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">+/-</button>
         <div id="current-weekly" class="collapse">
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
+                    <% console.log(asas[0]); %>
                     <% for (i = 0; i < current.length; i++) { %>
-                        <%     console.log(current.length); %>
-
-                         <% var asas = ['', '', '', '', '']; %>
-                         <% var days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']; %>
-                         <% for (var j = 0; j <current[i].afterSchoolActivities.length; j++) { %>
-                             <% var asa = current[i].afterSchoolActivities[j]; %>
-                             <% for (var k = 0; k < 5; k++) { %>
-                                <%  if (asa[days[k]]){ %>
-                                 <%     asas[k] += asa.name + ', '; %>
-                                 <%     console.log(asa.name); %>
-                                <%  } %>
-                             <% }  %>
-                        <%  } %>
                         <tr id="asa-monday-row"><th>Monday</th><td><%= current[i].rateSchedule.monday %></td><td class="asa-table-cell"><%= asas[0] %></td></tr>
+                        <tr id="asa-tuesday-row"><th>Tuesday</th><td><%= current[i].rateSchedule.tuesday %></td><td class="asa-table-cell"><%= asas[1] %></td></tr>
+                        <tr id="asa-wednesday-row"><th>Wednesday</th><td><%= current[i].rateSchedule.wednesday %></td><td class="asa-table-cell"><%= asas[2] %></td></tr>
+                        <tr id="asa-thursday-row"><th>Thursday</th><td><%= current[i].rateSchedule.thursday %></td><td class="asa-table-cell"><%= asas[3] %></td></tr>
+                        <tr id="asa-friday-row"><th>Friday</th><td><%= current[i].rateSchedule.friday %></td><td class="asa-table-cell"><%= asas[4] %></td></tr>
                     <% } %>
                 </tbody>
             </table>

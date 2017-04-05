@@ -374,6 +374,15 @@ module.exports = {
   },
 
   student(req, res) {
+TimePeriod.find().populate('afterSchoolActivities').exec((err2, timePeriods) => {
+if (err2) {
+  sails.log.error(err2);
+  return res.serverError();
+}
+const tpMap = {};
+for (let i = 0; i < timePeriods.length; i++) {
+  tpMap[timePeriods[i].id] = timePeriods[i];
+}
     Student.findOne({ id: req.params.studentId }).populate('timePeriods')
       .exec((err, student) => {
         if (err) {
@@ -392,6 +401,8 @@ module.exports = {
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
           }
+
+
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
@@ -411,8 +422,14 @@ module.exports = {
             const past = [];
             const current = [];
             const future = [];
+
+            let asas   = ['', '', '', '', ''];
+            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+            console.log("# timeperiods: " + student.timePeriods.length);
             for (let i = 0; i < student.timePeriods.length; i++) {
-              const tp = student.timePeriods[i];
+              const tp  = student.timePeriods[i];
+              const ASA = tp.afterSchoolActivities;
+              console.log("ASA length: :" + ASA.length);
               tp.rateSchedule = rsMap[tp.rateSchedule];
               if (tp.rateSchedule) {
                 if (isPastTimePeriod(tp)) {
@@ -421,12 +438,28 @@ module.exports = {
                   future.push(tp);
                 } else if (isCurrentTimePeriod(tp)) {
                   current.push(tp);
+                  /*
+                  //populate aferschool activities to display in current weekly schedule
+                  console.log(tp.afterSchoolActivities.length);
+                  console.log("hello");
+                  for (let j = 0; j <tp.afterSchoolActivities.length; j++) {
+                    const asa = tp.afterSchoolActivities[j];
+                    for (var k = 0; k < 5; k++) {
+                      if (asa[days[k]])
+                      {
+                          console.log(asa.name);
+                          asas[k] += asa.name + ', ';
+                      }
+                    }
+                  }
+                  */
                 }
               }
             }
 
             res.view('student', {
               student,
+              asas,
               rateSchedules,
               afterSchoolActivities,
               past,
@@ -436,6 +469,8 @@ module.exports = {
               latestEndDate,
             });
           });
+
+});
         });
       });
   },
