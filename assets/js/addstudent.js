@@ -22,8 +22,7 @@ function addStudent() {
       physicianPhone,
     },
     success(data) {
-      document.location.href = 'students';
-      console.log(`data: ${data}`);
+      document.location.href = `students/${data.id}`;
     },
     error(xhr, status, error) {
       console.log(`error: ${error}`);

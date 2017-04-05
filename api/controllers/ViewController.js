@@ -291,7 +291,7 @@ module.exports = {
             return res.serverError();
           }
 
-          var noRateSchedules = (rateSchedules.length == 0);
+          const noRateSchedules = (rateSchedules.length === 0);
 
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
@@ -331,8 +331,7 @@ module.exports = {
       const monthToIndex = [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3];
       const monthlyIncome = new Array(NUM_MONTHS);
 
-      for (let i = 0; i < monthlyIncome.length; i++)
-      {
+      for (let i = 0; i < monthlyIncome.length; i++) {
         monthlyIncome[i] = 0;
       }
 
@@ -351,10 +350,9 @@ module.exports = {
           const actualEnd = endDate < latest ? endDate : latest;
           let currDate = actualStart;
 
-          var actualCost = rateSchedule.cost;
+          let actualCost = rateSchedule.cost;
 
-          for (let j = 0; j < afterSchoolActivities.length; j++)
-          {
+          for (let j = 0; j < afterSchoolActivities.length; j++) {
             actualCost += afterSchoolActivities[j].cost;
           }
 
@@ -392,8 +390,8 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
-        
-          var noRateSchedules = (rateSchedules.length == 0);
+
+          const noRateSchedules = (rateSchedules.length === 0);
 
           const rsMap = {};
           for (let i = 0; i < rateSchedules.length; i++) {
@@ -418,7 +416,7 @@ module.exports = {
             const past = [];
             const current = [];
             const future = [];
-            var hasNullSchedule = false;
+            let hasNullSchedule = false;
             for (let i = 0; i < student.timePeriods.length; i++) {
               const tp = student.timePeriods[i];
               tp.rateSchedule = rsMap[tp.rateSchedule];
