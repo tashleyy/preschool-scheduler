@@ -378,121 +378,114 @@ module.exports = {
   },
 
   student(req, res) {
-TimePeriod.find().populate('afterSchoolActivities').exec((err2, timePeriods) => {
-if (err2) {
-  sails.log.error(err2);
-  return res.serverError();
-}
-const tpMap = {};
-for (let i = 0; i < timePeriods.length; i++) {
-  tpMap[timePeriods[i].id] = timePeriods[i];
-}
-/*
-for (let i = 0; i < timePeriods.length; i++) {
-        const timePeriod = timePeriods[i];
-        //const rateSchedule = timePeriod.rateSchedule;
-        const afterSchoolActivities = timePeriod.afterSchoolActivities;
-        console.log("All afterschool activities : " + afterSchoolActivities.length);
-}
-*/
-
-    Student.findOne({ id: req.params.studentId }).populate('timePeriods')
-      .exec((err, student) => {
-        if (err) {
-          sails.log.error(err);
-          return res.serverError();
-        }
-        if (!student) {
-          return res.notFound();
-        }
-        RateSchedule.find().exec((err2, rateSchedules) => {
-          if (err2) {
-            sails.log.error(err2);
+    TimePeriod.find().populate('afterSchoolActivities').exec((err2, timePeriods) => {
+      if (err2) {
+        sails.log.error(err2);
+        return res.serverError();
+      }
+      const tpMap = {};
+      for (let i = 0; i < timePeriods.length; i++) {
+        tpMap[timePeriods[i].id] = timePeriods[i];
+      }
+      Student.findOne({ id: req.params.studentId }).populate('timePeriods')
+        .exec((err, student) => {
+          if (err) {
+            sails.log.error(err);
             return res.serverError();
           }
-        
-          var noRateSchedules = (rateSchedules.length == 0);
-
-          const rsMap = {};
-          for (let i = 0; i < rateSchedules.length; i++) {
-            rsMap[rateSchedules[i].id] = rateSchedules[i];
+          if (!student) {
+            return res.notFound();
           }
-
-
-          AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
-            if (err3) {
-              sails.log.error(err3);
+          RateSchedule.find().exec((err2, rateSchedules) => {
+            if (err2) {
+              sails.log.error(err2);
               return res.serverError();
             }
+          
+            var noRateSchedules = (rateSchedules.length == 0);
 
-            let earliestStartDate = 'N/A';
-            let latestEndDate = 'N/A';
-
-            student.timePeriods.sort(timePeriodStartDateCompare);
-
-            if (student.timePeriods.length !== 0) {
-              earliestStartDate = student.timePeriods[0].startDate;
-              latestEndDate = student.timePeriods[student.timePeriods.length - 1].endDate;
+            const rsMap = {};
+            for (let i = 0; i < rateSchedules.length; i++) {
+              rsMap[rateSchedules[i].id] = rateSchedules[i];
             }
 
-            const past = [];
-            const current = [];
-            const future = [];
 
-            let asas   = ['', '', '', '', ''];
-            const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
-            console.log("# timeperiods: " + student.timePeriods.length);
-            var hasNullSchedule = false;
-
-            for (let i = 0; i < student.timePeriods.length; i++) {
-              let tp  = student.timePeriods[i];
-              
-              //console.log("ASA length: :" + ASA.length);
-              tp.rateSchedule = rsMap[tp.rateSchedule];
-              
-              if (!tp.rateSchedule) {
-                hasNullSchedule = true;
+            AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
+              if (err3) {
+                sails.log.error(err3);
+                return res.serverError();
               }
-              if (isPastTimePeriod(tp)) {
-                past.push(tp);
-              } else if (isFutureTimePeriod(tp)) {
-                future.push(tp);
-              } else if (isCurrentTimePeriod(tp)) {
-                current.push(tp);
-                //populate aferschool activities to display in current weekly schedule
-                tp = tpMap[tp.id];
-                const ASA = tp.afterSchoolActivities;
+
+              let earliestStartDate = 'N/A';
+              let latestEndDate = 'N/A';
+
+              student.timePeriods.sort(timePeriodStartDateCompare);
+
+              if (student.timePeriods.length !== 0) {
+                earliestStartDate = student.timePeriods[0].startDate;
+                latestEndDate = student.timePeriods[student.timePeriods.length - 1].endDate;
+              }
+
+              const past = [];
+              const current = [];
+              const future = [];
+
+              let asas   = [" ", " ", " ", " ", " "];
+              const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
+              var hasNullSchedule = false;
+
+              for (let i = 0; i < student.timePeriods.length; i++) {
+                let tp  = student.timePeriods[i];
                 
-                for (let j = 0; j <ASA.length; j++) {
-                  const asa = ASA[j];
-                  for (var k = 0; k < 5; k++) {
-                    if (asa[days[k]])
-                    {
-                        //console.log(asa.name);
-                        asas[k] += asa.name + ', ';
+                tp.rateSchedule = rsMap[tp.rateSchedule];
+                
+                if (!tp.rateSchedule) {
+                  hasNullSchedule = true;
+                }
+                if (isPastTimePeriod(tp)) {
+                  past.push(tp);
+                } else if (isFutureTimePeriod(tp)) {
+                  future.push(tp);
+                } else if (isCurrentTimePeriod(tp)) {
+                  current.push(tp);
+                  //populate aferschool activities to display in current weekly schedule
+                  tp = tpMap[tp.id];
+                  const ASA = tp.afterSchoolActivities;
+                  
+                  for (let j = 0; j <ASA.length; j++) {
+                    const asa = ASA[j];
+                    for (var k = 0; k < 5; k++) {
+                      if (asa[days[k]])
+                      {
+                          asas[k] += asa.name + ', ';
+                      }
                     }
+                  }
+                  //get rid of trailing commas
+                  for(let j = 0; j<5; j++){
+                      if (asas[j].endsWith(', ')) {
+                            asas[j] = asas[j].substring(0, asas[j].length - 2);
+                      }
                   }
                 }
               }
-            }
-
-            res.view('student', {
-              student,
-              asas,
-              rateSchedules,
-              afterSchoolActivities,
-              past,
-              current,
-              future,
-              earliestStartDate,
-              latestEndDate,
-              hasNullSchedule,
-              noRateSchedules,
+              
+              res.view('student', {
+                student,
+                asas,
+                rateSchedules,
+                afterSchoolActivities,
+                past,
+                current,
+                future,
+                earliestStartDate,
+                latestEndDate,
+                hasNullSchedule,
+                noRateSchedules,
+              });
             });
+           });
           });
-
-});
         });
-      });
   },
 };

@@ -51,31 +51,34 @@
         </table>   
         <div style="clear:both;"></div>
 
-        <h2>Current Weekly Schedule</h2>        
-        <table class="table table-bordered table-striped" id="current-time-period-table">
-            <tbody align="left">
-                <% for (i = 0; i < current.length; i++) { %>
-                    <tr>
-                        <% if (!current[i].rateSchedule) { %>
-                            <td bgcolor="#F95E76">Deleted</td>
-					    <% } else { %>
-                            <td><%= current[i].rateSchedule.name %></td>
-					    <% } %>
-                        <td><%= current[i].startDate %></td>
-                        <td><%= current[i].endDate %></td>
-                        <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>', <%= noRateSchedules %>)">
-                            <span class="glyphicon glyphicon-pencil"/>
-                        </a></td>
-                        <td><a href="#" onclick="showPeriodDeleteModal('<%= current[i].id %>')">
-                            <span class="glyphicon glyphicon-trash"/>
-                        </a></td>
-                    </tr>
-                <% } %>
-            </tbody>
-        </table>
+        <h2>Current Weekly Schedule</h2>
 
         <button type="button" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">+/-</button>
+
         <div id="current-weekly" class="collapse">
+
+            <table class="table table-bordered table-striped" id="current-time-period-table">
+                <tbody align="left">
+                    <% for (i = 0; i < current.length; i++) { %>
+                        <tr>
+                            <% if (!current[i].rateSchedule) { %>
+                                <td bgcolor="#F95E76">Deleted</td>
+                            <% } else { %>
+                                <td><%= current[i].rateSchedule.name %></td>
+                            <% } %>
+                            <td><%= current[i].startDate %></td>
+                            <td><%= current[i].endDate %></td>
+                            <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>', <%= noRateSchedules %>)">
+                                <span class="glyphicon glyphicon-pencil"/>
+                            </a></td>
+                            <td><a href="#" onclick="showPeriodDeleteModal('<%= current[i].id %>')">
+                                <span class="glyphicon glyphicon-trash"/>
+                            </a></td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
                     <% for (i = 0; i < current.length; i++) { %>
