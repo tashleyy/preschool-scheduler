@@ -13,7 +13,9 @@ function showPeriodEditModal(id) {
       }
       $('#edit-period-start-date').val(data.startDate);
       $('#edit-period-end-date').val(data.endDate);
-      $('#edit-period-rate-schedules').val(data.rateSchedule.id);
+      if (data.rateSchedule != undefined) {
+        $('#edit-period-rate-schedules').val(data.rateSchedule.id);
+      }
       $('#edit-period-asas').multiselect('deselectAll', false);
       $('#edit-period-asas').multiselect('select', asas);
       $('#period-edit-modal').attr('periodId', id);

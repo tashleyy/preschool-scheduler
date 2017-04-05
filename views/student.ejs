@@ -1,6 +1,12 @@
 <%- partial('partials/nav.ejs', {location: 'student'}) %>
-
 <div class="container">
+    <% if (hasNullSchedule) { %>
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            One or more of this student's rate schedules were deleted.
+            Please select new rate schedules for the affected time periods.
+        </div>
+    <% } %>
     <h1><%= student.name %></h1>
     <div class="row">
         <table class="table table-bordered table-striped" id="student-info-table">
@@ -49,7 +55,11 @@
             <tbody align="left">
                 <% for (i = 0; i < current.length; i++) { %>
                     <tr>
-                        <td><%= current[i].rateSchedule.name %></td>
+                        <% if (!current[i].rateSchedule) { %>
+                            <td bgcolor="#F95E76">Deleted</td>
+					    <% } else { %>
+                            <td><%= current[i].rateSchedule.name %></td>
+					    <% } %>
                         <td><%= current[i].startDate %></td>
                         <td><%= current[i].endDate %></td>
                         <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>')">
@@ -68,7 +78,13 @@
             <tbody align="left">
                 <% for (i = 0; i < future.length; i++) { %>
                     <tr>
+                    <% if (!future[i].rateSchedule) { %>
+					    <tr bgcolor="#F95E76">
+                        <td>Deleted</td>
+					<% } else { %>
+						<tr>
                         <td><%= future[i].rateSchedule.name %></td>
+					<% } %>
                         <td><%= future[i].startDate %></td>
                         <td><%= future[i].endDate %></td>
                         <td><a href="#" onclick="showPeriodEditModal('<%= future[i].id %>')">
@@ -87,7 +103,11 @@
             <tbody align="left">
                 <% for (i = 0; i < past.length; i++) { %>
                     <tr>
+                    <% if (!past[i].rateSchedule) { %>
+                        <td>Deleted</td>
+					<% } else { %>
                         <td><%= past[i].rateSchedule.name %></td>
+					<% } %>
                         <td><%= past[i].startDate %></td>
                         <td><%= past[i].endDate %></td>
                         <td><a href="#" onclick="showPeriodEditModal('<%= past[i].id %>')">

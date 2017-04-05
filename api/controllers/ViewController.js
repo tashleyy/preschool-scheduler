@@ -388,6 +388,7 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
+        
           const rsMap = {};
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
@@ -411,17 +412,20 @@ module.exports = {
             const past = [];
             const current = [];
             const future = [];
+            var hasNullSchedule = false;
             for (let i = 0; i < student.timePeriods.length; i++) {
               const tp = student.timePeriods[i];
               tp.rateSchedule = rsMap[tp.rateSchedule];
-              if (tp.rateSchedule) {
-                if (isPastTimePeriod(tp)) {
-                  past.push(tp);
-                } else if (isFutureTimePeriod(tp)) {
-                  future.push(tp);
-                } else if (isCurrentTimePeriod(tp)) {
-                  current.push(tp);
-                }
+              if (!tp.rateSchedule) {
+                hasNullSchedule = true;
+              }
+
+              if (isPastTimePeriod(tp)) {
+                past.push(tp);
+              } else if (isFutureTimePeriod(tp)) {
+                future.push(tp);
+              } else if (isCurrentTimePeriod(tp)) {
+                current.push(tp);
               }
             }
 
@@ -434,6 +438,7 @@ module.exports = {
               future,
               earliestStartDate,
               latestEndDate,
+              hasNullSchedule,
             });
           });
         });
