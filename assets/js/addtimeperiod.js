@@ -1,10 +1,18 @@
 /* global showErrorOnElement */
 // eslint-disable-next-line no-unused-vars
-function addTimePeriod(student) {
+function addTimePeriod(student, noRateSchedules) {
   const startDate = $('#add-period-start-date').val();
   const endDate = $('#add-period-end-date').val();
   const rs = $('#add-period-rate-schedules').val();
   const asas = $('#add-period-asas').val();
+
+  if(noRateSchedules) {
+    showErrorOnElement('add-period-rate-schedules');
+    return;
+  }
+  else {
+    $('#add-period-rate-schedules-message').hide();
+  }
 
   $.ajax({
     url: '/timeperiod/create',

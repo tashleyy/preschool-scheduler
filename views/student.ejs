@@ -62,7 +62,7 @@
 					    <% } %>
                         <td><%= current[i].startDate %></td>
                         <td><%= current[i].endDate %></td>
-                        <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>')">
+                        <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>', <%= noRateSchedules %>)">
                             <span class="glyphicon glyphicon-pencil"/>
                         </a></td>
                         <td><a href="#" onclick="showPeriodDeleteModal('<%= current[i].id %>')">
@@ -130,6 +130,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <% if (noRateSchedules) { %>
+                    <div class="alert alert-danger">
+                        <a href="#" class="close" data-dismiss="alert">&times;</a>
+			            There are no existing rate schedules in the database. You will not 
+			            be able to edit this time period until a rate schedule has been created.
+                    </div>
+                <% } %>
                 <h2>Edit Time Period</h2>
             </div>
             <div class="modal-body">
@@ -162,7 +169,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="editTimePeriod()">Submit</button>
+                <button type="button" class="btn btn-primary" id="edit-period-submit" onclick="editTimePeriod()">Submit</button>
             </div>
         </div>
     </div>

@@ -290,6 +290,9 @@ module.exports = {
             sails.log.error(err2);
             return res.serverError();
           }
+
+          var noRateSchedules = (rateSchedules.length == 0);
+
           AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
@@ -299,6 +302,7 @@ module.exports = {
               student,
               rateSchedules,
               afterSchoolActivities,
+              noRateSchedules,
             });
           });
         });
@@ -389,6 +393,8 @@ module.exports = {
             return res.serverError();
           }
         
+          var noRateSchedules = (rateSchedules.length == 0);
+
           const rsMap = {};
           for (let i = 0; i < rateSchedules.length; i++) {
             rsMap[rateSchedules[i].id] = rateSchedules[i];
@@ -439,6 +445,7 @@ module.exports = {
               earliestStartDate,
               latestEndDate,
               hasNullSchedule,
+              noRateSchedules,
             });
           });
         });

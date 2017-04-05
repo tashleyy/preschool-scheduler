@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-function showPeriodEditModal(id) {
+function showPeriodEditModal(id, noRateSchedules) {
   $.ajax({
     url: '/timeperiod/findone',
     type: 'get',
@@ -19,6 +19,12 @@ function showPeriodEditModal(id) {
       $('#edit-period-asas').multiselect('deselectAll', false);
       $('#edit-period-asas').multiselect('select', asas);
       $('#period-edit-modal').attr('periodId', id);
+
+      if (noRateSchedules) {
+        console.log("Want to disable button...");
+        $('#edit-period-submit').prop('disabled', true);
+      }
+
       $('#period-edit-modal').modal('show');
     },
     error(xhr, status, error) {
