@@ -98,3 +98,8 @@ $(document).ready(() => {
   //$('#pls_mns').css("display","none");
 });
 
+function toggleExpandButton() 
+{
+  $('#plus-picture').toggle();
+  $('#minus-picture').toggle();
+}

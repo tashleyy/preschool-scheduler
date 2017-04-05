@@ -51,12 +51,7 @@
         </table>   
         <div style="clear:both;"></div>
 
-        <h2>Current Weekly Schedule</h2>
-
-        <button type="button" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">+/-</button>
-
-        <div id="current-weekly" class="collapse">
-
+        <h2>Current Weekly Schedule</h2>        
             <table class="table table-bordered table-striped" id="current-time-period-table">
                 <tbody align="left">
                     <% for (i = 0; i < current.length; i++) { %>
@@ -74,10 +69,17 @@
                             <td><a href="#" onclick="showPeriodDeleteModal('<%= current[i].id %>')">
                                 <span class="glyphicon glyphicon-trash"/>
                             </a></td>
+                            <td>
+                            <a href="#" onclick="toggleExpandButton()" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">
+                                <span id='plus-picture' class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span id='minus-picture' class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;"></span>
+                            </a>
+                            </td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
+        <div id="current-weekly" class="collapse">
 
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
