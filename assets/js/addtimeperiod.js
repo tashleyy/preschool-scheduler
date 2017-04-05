@@ -6,13 +6,13 @@ function addTimePeriod(student, noRateSchedules) {
   const rs = $('#add-period-rate-schedules').val();
   const asas = $('#add-period-asas').val();
 
-  if(noRateSchedules) {
+  if (noRateSchedules) {
     showErrorOnElement('add-period-rate-schedules');
     return;
   }
-  else {
-    $('#add-period-rate-schedules-message').hide();
-  }
+
+  $('#add-period-rate-schedules-message').hide();
+
 
   $.ajax({
     url: '/timeperiod/create',

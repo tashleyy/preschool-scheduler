@@ -13,7 +13,7 @@ function showPeriodEditModal(id, noRateSchedules) {
       }
       $('#edit-period-start-date').val(data.startDate);
       $('#edit-period-end-date').val(data.endDate);
-      if (data.rateSchedule != undefined) {
+      if (data.rateSchedule !== undefined) {
         $('#edit-period-rate-schedules').val(data.rateSchedule.id);
       }
       $('#edit-period-asas').multiselect('deselectAll', false);
@@ -21,7 +21,7 @@ function showPeriodEditModal(id, noRateSchedules) {
       $('#period-edit-modal').attr('periodId', id);
 
       if (noRateSchedules) {
-        console.log("Want to disable button...");
+        console.log('Want to disable button...');
         $('#edit-period-submit').prop('disabled', true);
       }
 
