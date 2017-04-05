@@ -63,14 +63,11 @@
                 <% } %>
             </tbody>
         </table>
-        <% if(current.length != 0) { %>
- 
-        <% } %>
+
         <button type="button" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">+/-</button>
         <div id="current-weekly" class="collapse">
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
-                    <% console.log(asas[0]); %>
                     <% for (i = 0; i < current.length; i++) { %>
                         <tr id="asa-monday-row"><th>Monday</th><td><%= current[i].rateSchedule.monday %></td><td class="asa-table-cell"><%= asas[0] %></td></tr>
                         <tr id="asa-tuesday-row"><th>Tuesday</th><td><%= current[i].rateSchedule.tuesday %></td><td class="asa-table-cell"><%= asas[1] %></td></tr>

@@ -383,6 +383,15 @@ const tpMap = {};
 for (let i = 0; i < timePeriods.length; i++) {
   tpMap[timePeriods[i].id] = timePeriods[i];
 }
+/*
+for (let i = 0; i < timePeriods.length; i++) {
+        const timePeriod = timePeriods[i];
+        //const rateSchedule = timePeriod.rateSchedule;
+        const afterSchoolActivities = timePeriod.afterSchoolActivities;
+        console.log("All afterschool activities : " + afterSchoolActivities.length);
+}
+*/
+
     Student.findOne({ id: req.params.studentId }).populate('timePeriods')
       .exec((err, student) => {
         if (err) {
@@ -427,9 +436,9 @@ for (let i = 0; i < timePeriods.length; i++) {
             const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
             console.log("# timeperiods: " + student.timePeriods.length);
             for (let i = 0; i < student.timePeriods.length; i++) {
-              const tp  = student.timePeriods[i];
-              const ASA = tp.afterSchoolActivities;
-              console.log("ASA length: :" + ASA.length);
+              let tp  = student.timePeriods[i];
+              
+              //console.log("ASA length: :" + ASA.length);
               tp.rateSchedule = rsMap[tp.rateSchedule];
               if (tp.rateSchedule) {
                 if (isPastTimePeriod(tp)) {
@@ -438,21 +447,20 @@ for (let i = 0; i < timePeriods.length; i++) {
                   future.push(tp);
                 } else if (isCurrentTimePeriod(tp)) {
                   current.push(tp);
-                  /*
                   //populate aferschool activities to display in current weekly schedule
-                  console.log(tp.afterSchoolActivities.length);
-                  console.log("hello");
-                  for (let j = 0; j <tp.afterSchoolActivities.length; j++) {
-                    const asa = tp.afterSchoolActivities[j];
+                  tp = tpMap[tp.id];
+                  const ASA = tp.afterSchoolActivities;
+                  
+                  for (let j = 0; j <ASA.length; j++) {
+                    const asa = ASA[j];
                     for (var k = 0; k < 5; k++) {
                       if (asa[days[k]])
                       {
-                          console.log(asa.name);
+                          //console.log(asa.name);
                           asas[k] += asa.name + ', ';
                       }
                     }
                   }
-                  */
                 }
               }
             }

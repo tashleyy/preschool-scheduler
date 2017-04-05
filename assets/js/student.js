@@ -87,6 +87,6 @@ $(document).ready(() => {
   $('#edit-period-asas').multiselect();
   $('#period-edit-modal').modal({ show: false });
   $('#period-delete-modal').modal({ show: false });
-  $('#pls_mns').css("display","none");
+  //$('#pls_mns').css("display","none");
 });
 
