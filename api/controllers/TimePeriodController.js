@@ -141,10 +141,10 @@ module.exports = {
           sails.log.error(err);
           return res.serverError();
         }
-        const timePeriod = timePeriods[0];
-        if (!timePeriod) {
+        if (!timePeriods || timePeriods.length === 0) {
           return res.notFound();
         }
+        const timePeriod = timePeriods[0];
         return res.ok(timePeriod);
       });
   },

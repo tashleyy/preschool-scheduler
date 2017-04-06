@@ -2,7 +2,8 @@ module.exports = {
   create(req, res) {
     const params = req.params.all();
     if (!params.name || !params.cost || !params.monday || !params.tuesday
-        || !params.wednesday || !params.thursday || !params.friday) {
+        || !params.wednesday || !params.thursday || !params.friday
+        || isNaN(params.cost)) {
       return res.badRequest();
     }
 
@@ -65,10 +66,10 @@ module.exports = {
           sails.log.error(err);
           return res.serverError();
         }
-        const afterSchoolActivity = afterSchoolActivities[0];
-        if (!afterSchoolActivity) {
+        if (!afterSchoolActivities || afterSchoolActivities.length === 0) {
           return res.notFound();
         }
+        const afterSchoolActivity = afterSchoolActivities[0];
         return res.ok(afterSchoolActivity);
       });
   },

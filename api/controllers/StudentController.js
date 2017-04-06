@@ -66,10 +66,10 @@ module.exports = {
           sails.log.error(err);
           return res.serverError();
         }
-        const student = students[0];
-        if (!student) {
+        if (!students || students.length === 0) {
           return res.notFound();
         }
+        const student = students[0];
         return res.ok(student);
       });
   },

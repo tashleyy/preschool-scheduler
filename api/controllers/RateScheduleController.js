@@ -66,10 +66,10 @@ module.exports = {
           sails.log.error(err);
           return res.serverError();
         }
-        const rateSchedule = rateSchedules[0];
-        if (!rateSchedule) {
+        if (!rateSchedules || rateSchedules.length === 0) {
           return res.notFound();
         }
+        const rateSchedule = rateSchedules[0];
         return res.ok(rateSchedule);
       });
   },
