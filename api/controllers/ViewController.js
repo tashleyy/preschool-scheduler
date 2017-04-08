@@ -256,7 +256,7 @@ module.exports = {
   },
 
   rateschedules(req, res) {
-    RateSchedule.find().exec((err, rateSchedules) => {
+    RateSchedule.find().sort('name ASC').exec((err, rateSchedules) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
@@ -266,7 +266,7 @@ module.exports = {
   },
 
   afterschoolactivities(req, res) {
-    AfterSchoolActivity.find().exec((err, afterSchoolActivities) => {
+    AfterSchoolActivity.find().sort('name ASC').exec((err, afterSchoolActivities) => {
       if (err) {
         sails.log.error(err);
         return res.serverError();
