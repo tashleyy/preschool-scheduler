@@ -334,6 +334,7 @@ module.exports = {
       for (let i = 0; i < monthlyIncome.length; i++) {
         monthlyIncome[i] = 0;
       }
+      var totalIncome = 0;
 
       const earliest = `${year}-09`;
       const latest = `${year + 1}-08`;
@@ -358,6 +359,7 @@ module.exports = {
 
           while (actualEnd >= currDate) {
             monthlyIncome[monthToIndex[getMonth(currDate) - 1]] += actualCost;
+            totalIncome += actualCost;
 
             if (getMonth(currDate) === 12) {
               currDate = `${getYear(currDate) + 1}-01`;
@@ -371,6 +373,7 @@ module.exports = {
       res.view('income', {
         year,
         monthlyIncome,
+        totalIncome,
       });
     });
   },
