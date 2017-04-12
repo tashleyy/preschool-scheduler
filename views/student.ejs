@@ -52,7 +52,7 @@
         <div style="clear:both;"></div>
 
         <h2>Current Weekly Schedule</h2>        
-            <table class="table table-bordered table-striped" id="current-time-period-table">
+            <table class="table table-bordered table-striped" id="current-time-period-table" style="margin-top: 0px; margin-bottom: 0px;">
                 <tbody align="left">
                     <% for (i = 0; i < current.length; i++) { %>
                         <tr>
@@ -70,16 +70,16 @@
                                 <span class="glyphicon glyphicon-trash"/>
                             </a></td>
                             <td>
-                            <a href="#" onclick="toggleExpandButton()" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">
-                                <span id='plus-picture' class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                <span id='minus-picture' class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;"></span>
+                            <a href="#" onclick="toggleExpandButton('current')" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">
+                                <span id='current-plus-picture' class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                <span id='current-minus-picture' class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;"></span>
                             </a>
                             </td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
-        <div id="current-weekly" class="collapse">
+        <div id="current-weekly" class="collapse" >
 
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
@@ -98,9 +98,10 @@
 
 
         <h2>Future Weekly Schedules</h2>
-        <table class="table table-bordered table-striped" id="future-time-period-table">
+        <% for (i = 0; i < future.length; i++) { %>
+        <table class="table table-bordered table-striped" id="future-time-period-table" style="margin-top: 0px; margin-bottom: 0px;">
             <tbody align="left">
-                <% for (i = 0; i < future.length; i++) { %>
+                
                     <tr>
                     <% if (!future[i].rateSchedule) { %>
 					    <tr bgcolor="#F95E76">
@@ -117,19 +118,44 @@
                         <td><a href="#" onclick="showPeriodDeleteModal('<%= future[i].id %>')">
                             <span class="glyphicon glyphicon-trash"/>
                         </a></td>
+                        <td> 
+                            <a href="#" onclick= "toggleExpandButton('future-<%= i %>')" id="pls_mns" data-toggle="collapse" data-target="#future-<%= i %>-weekly">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" id= "future-<%= i %>-plus-picture" ></span>
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;" id= "future-<%= i %>-minus-picture" ></span>
+                            </a>
+                        </td>
+                        
                     </tr>
-                <% } %>
+                    </table>
+                    
+                    <div id="future-<%= i %>-weekly" class="collapse" style="margin-top: 0px; margin-bottom: 0px;">
+                    <table class="table table-bordered table-striped" id="future-<%= i%>-weekly-schedule">
+                        <tbody align = "left">
+                            <% if (future[i].rateSchedule) { %>
+                                <tr id="asa-monday-row"><th>Monday</th><td><%= future[i].rateSchedule.monday %></td><td class="asa-table-cell"><%= futureAsas[i][0] %></td></tr>
+                                <tr id="asa-tuesday-row"><th>Tuesday</th><td><%= future[i].rateSchedule.tuesday %></td><td class="asa-table-cell"><%= futureAsas[i][1] %></td></tr>
+                                <tr id="asa-wednesday-row"><th>Wednesday</th><td><%= future[i].rateSchedule.wednesday %></td><td class="asa-table-cell"><%= futureAsas[i][2] %></td></tr>
+                                <tr id="asa-thursday-row"><th>Thursday</th><td><%= future[i].rateSchedule.thursday %></td><td class="asa-table-cell"><%= futureAsas[i][3] %></td></tr>
+                                <tr id="asa-friday-row"><th>Friday</th><td><%= future[i].rateSchedule.friday %></td><td class="asa-table-cell"><%= futureAsas[i][4] %></td></tr>
+                            <% }%>
+                        </tbody>
+                    </table>
+                    </div>
+            
             </tbody>
-        </table>
+        <% } %>
 
         <h2>Past Weekly Schedules</h2>
-        <table class="table table-bordered table-striped" id="past-time-period-table">
+        <% for (i = 0; i < past.length; i++) { %>
+        <table class="table table-bordered table-striped" id="past-time-period-table" style="margin-top: 0px; margin-bottom: 0px;">
             <tbody align="left">
-                <% for (i = 0; i < past.length; i++) { %>
+                
                     <tr>
                     <% if (!past[i].rateSchedule) { %>
+					    <tr bgcolor="#F95E76">
                         <td>Deleted</td>
 					<% } else { %>
+						<tr>
                         <td><%= past[i].rateSchedule.name %></td>
 					<% } %>
                         <td><%= past[i].startDate %></td>
@@ -140,10 +166,32 @@
                         <td><a href="#" onclick="showPeriodDeleteModal('<%= past[i].id %>')">
                             <span class="glyphicon glyphicon-trash"/>
                         </a></td>
+                        <td> 
+                            <a href="#" onclick= "toggleExpandButton('past-<%= i %>')" id="pls_mns" data-toggle="collapse" data-target="#past-<%= i %>-weekly">
+                                <span class="glyphicon glyphicon-plus" aria-hidden="true" id= "past-<%= i %>-plus-picture" ></span>
+                                <span class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;" id= "past-<%= i %>-minus-picture" ></span>
+                            </a>
+                        </td>
+                        
                     </tr>
-                <% } %>
+                    </table>
+                    
+                    <div id="past-<%= i %>-weekly" class="collapse" style="margin-top: 0px; margin-bottom: 0px;">
+                    <table class="table table-bordered table-striped" id="past-<%= i%>-weekly-schedule">
+                        <tbody align = "left">
+                            <% if (past[i].rateSchedule) { %>
+                                <tr id="asa-monday-row"><th>Monday</th><td><%= past[i].rateSchedule.monday %></td><td class="asa-table-cell"><%= pastAsas[i][0] %></td></tr>
+                                <tr id="asa-tuesday-row"><th>Tuesday</th><td><%= past[i].rateSchedule.tuesday %></td><td class="asa-table-cell"><%= pastAsas[i][1] %></td></tr>
+                                <tr id="asa-wednesday-row"><th>Wednesday</th><td><%= past[i].rateSchedule.wednesday %></td><td class="asa-table-cell"><%= pastAsas[i][2] %></td></tr>
+                                <tr id="asa-thursday-row"><th>Thursday</th><td><%= past[i].rateSchedule.thursday %></td><td class="asa-table-cell"><%= pastAsas[i][3] %></td></tr>
+                                <tr id="asa-friday-row"><th>Friday</th><td><%= past[i].rateSchedule.friday %></td><td class="asa-table-cell"><%= pastAsas[i][4] %></td></tr>
+                            <% }%>
+                        </tbody>
+                    </table>
+                    </div>
+            
             </tbody>
-        </table>
+        <% } %>
     </div>
     <div class="container">
         <a href="/addtimeperiod/<%= student.id %>"><button type="button">Add Time Period</button></a>

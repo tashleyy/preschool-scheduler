@@ -98,8 +98,8 @@ $(document).ready(() => {
   //$('#pls_mns').css("display","none");
 });
 
-function toggleExpandButton() 
+function toggleExpandButton(buttonName) 
 {
-  $('#plus-picture').toggle();
-  $('#minus-picture').toggle();
+  $('#' + buttonName + '-plus-picture').toggle();
+  $('#' + buttonName + '-minus-picture').toggle();
 }

@@ -431,6 +431,8 @@ module.exports = {
               const future = [];
 
               let asas   = [" ", " ", " ", " ", " "];
+              const futureAsas = [];
+              const pastAsas = [];
               const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
               let hasNullSchedule = false;
 
@@ -444,8 +446,51 @@ module.exports = {
                 }
                 if (isPastTimePeriod(tp)) {
                   past.push(tp);
+                  var weekAsas = [" ", " ", " ", " ", " "];
+
+                  tp = tpMap[tp.id];
+                  const ASA = tp.afterSchoolActivities;
+
+                  for (let j = 0; j <ASA.length; j++) {
+                    const asa = ASA[j];
+                    for (var k = 0; k < 5; k++) {
+                      if (asa[days[k]])
+                      {
+                          weekAsas[k] += asa.name + ', ';
+                      }
+                    }
+                  }
+
+                  for(let j = 0; j<5; j++){
+                      if (weekAsas[j].endsWith(', ')) {
+                            weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
+                      }
+                  }
+
+                  pastAsas.push(weekAsas.slice());
                 } else if (isFutureTimePeriod(tp)) {
                   future.push(tp);
+                  var weekAsas = [" ", " ", " ", " ", " "];
+
+                  tp = tpMap[tp.id];
+                  const ASA = tp.afterSchoolActivities;
+                  for (let j = 0; j <ASA.length; j++) {
+                    const asa = ASA[j];
+                    for (var k = 0; k < 5; k++) {
+                      if (asa[days[k]])
+                      {
+                          weekAsas[k] += asa.name + ', ';
+                      }
+                    }
+                  }
+
+                  for(let j = 0; j<5; j++){
+                      if (weekAsas[j].endsWith(', ')) {
+                            weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
+                      }
+                  }
+
+                  futureAsas.push(weekAsas.slice());
                 } else if (isCurrentTimePeriod(tp)) {
                   current.push(tp);
                   //populate aferschool activities to display in current weekly schedule
@@ -473,6 +518,8 @@ module.exports = {
               res.view('student', {
                 student,
                 asas,
+                futureAsas,
+                pastAsas,
                 rateSchedules,
                 afterSchoolActivities,
                 past,
