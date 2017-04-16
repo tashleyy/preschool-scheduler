@@ -41,10 +41,6 @@ function showPeriodDeleteModal(id) {
   return false;
 }
 
-function showPlsMns(){
-  $('#pls_mns').css("display","block");
-  return false;
-}
 // eslint-disable-next-line no-unused-vars
 function editTimePeriod() {
   const id = $('#period-edit-modal').attr('periodId');
@@ -95,7 +91,6 @@ $(document).ready(() => {
   $('#edit-period-asas').multiselect();
   $('#period-edit-modal').modal({ show: false });
   $('#period-delete-modal').modal({ show: false });
-  //$('#pls_mns').css("display","none");
 });
 
 function toggleExpandButton(buttonName) 

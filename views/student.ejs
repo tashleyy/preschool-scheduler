@@ -71,15 +71,15 @@
                             </a></td>
                             <td>
                             <a href="#" onclick="toggleExpandButton('current')" id="pls_mns" data-toggle="collapse" data-target="#current-weekly">
-                                <span id='current-plus-picture' class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                                <span id='current-minus-picture' class="glyphicon glyphicon-minus" aria-hidden="true" style="display: none;"></span>
+                                <span id='current-plus-picture' class="glyphicon glyphicon-plus" aria-hidden="true" style="display: none;"></span>
+                                <span id='current-minus-picture' class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                             </a>
                             </td>
                         </tr>
                     <% } %>
                 </tbody>
             </table>
-        <div id="current-weekly" class="collapse" >
+        <div id="current-weekly" class="collapse in" >
 
             <table class="table table-bordered table-striped" id="current-weekly-schedule">
                 <tbody align = "left">
@@ -104,8 +104,7 @@
                 
                     <tr>
                     <% if (!future[i].rateSchedule) { %>
-					    <tr bgcolor="#F95E76">
-                        <td>Deleted</td>
+                        <td bgcolor="#F95E76">Deleted</td>
 					<% } else { %>
 						<tr>
                         <td><%= future[i].rateSchedule.name %></td>
@@ -152,8 +151,7 @@
                 
                     <tr>
                     <% if (!past[i].rateSchedule) { %>
-					    <tr bgcolor="#F95E76">
-                        <td>Deleted</td>
+					    <td bgcolor="#F95E76">Deleted</td>
 					<% } else { %>
 						<tr>
                         <td><%= past[i].rateSchedule.name %></td>
@@ -271,7 +269,7 @@
 		}
 
 		h1 {
-			color: #4CAF50;
+			color: #0047b3;
 			margin-left: 40px;
 		} 
 		table {
@@ -284,12 +282,24 @@
 			padding: 8px;
 		}
 
-		tr:nth-child(even){background-color: #ccffcc}
+		tr:nth-child(even){background-color: #e6f0ff}
 		tr:nth-child(odd){background-color: linen}
 
 		th {
-			background-color: #4CAF50;
+			background-color: #0047b3;
 			color: white;
+		}
+        		button {
+				background-color: #0047b3;
+				border: none;
+				color: white;
+				padding: 10px 10px;
+				text-align: center;
+				text-decoration: none;
+				display: inline-block;
+				font-size: 16px;
+				margin: 4px 2px;
+				cursor: pointer;
 		}
 	</style>
 </head>

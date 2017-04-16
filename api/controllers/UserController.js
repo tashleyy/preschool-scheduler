@@ -18,11 +18,10 @@ module.exports = {
         const email = payload.email;
         User.findOne({ email }).exec((error2, user) => {
           if (error2) {
-            req.session.authenticated = false;
             return res.serverError();
           }
           if (!user) {
-            // return res.forbidden();
+            return res.forbidden();
           }
           res.cookie('gauth', token, { maxAge: 86400000 });
           return res.ok();
@@ -32,7 +31,6 @@ module.exports = {
   },
 
   logout(req, res) {
-    // req.session.authenticated = false;
     res.clearCookie('gauth');
     return res.ok();
   },

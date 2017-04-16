@@ -135,6 +135,7 @@ module.exports = {
 
     const id = params.id;
     delete params.id;
+    if (params.afterSchoolActivities === '') params.afterSchoolActivities = [];
     TimePeriod.update({ id }, params)
       .exec((err, timePeriods) => {
         if (err) {

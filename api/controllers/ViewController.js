@@ -285,7 +285,7 @@ module.exports = {
         if (!student) {
           return res.notFound();
         }
-        RateSchedule.find().exec((err2, rateSchedules) => {
+        RateSchedule.find().sort('name ASC').exec((err2, rateSchedules) => {
           if (err2) {
             sails.log.error(err2);
             return res.serverError();
@@ -293,7 +293,7 @@ module.exports = {
 
           const noRateSchedules = (rateSchedules.length === 0);
 
-          AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
+          AfterSchoolActivity.find().sort('name ASC').exec((err3, afterSchoolActivities) => {
             if (err3) {
               sails.log.error(err3);
               return res.serverError();
@@ -334,7 +334,7 @@ module.exports = {
       for (let i = 0; i < monthlyIncome.length; i++) {
         monthlyIncome[i] = 0;
       }
-      var totalIncome = 0;
+      let totalIncome = 0;
 
       const earliest = `${year}-09`;
       const latest = `${year + 1}-08`;
@@ -397,12 +397,12 @@ module.exports = {
           if (!student) {
             return res.notFound();
           }
-          RateSchedule.find().exec((err2, rateSchedules) => {
-            if (err2) {
-              sails.log.error(err2);
+          RateSchedule.find().exec((err3, rateSchedules) => {
+            if (err3) {
+              sails.log.error(err3);
               return res.serverError();
             }
-          
+
             const noRateSchedules = (rateSchedules.length === 0);
 
             const rsMap = {};
@@ -410,9 +410,9 @@ module.exports = {
               rsMap[rateSchedules[i].id] = rateSchedules[i];
             }
 
-            AfterSchoolActivity.find().exec((err3, afterSchoolActivities) => {
-              if (err3) {
-                sails.log.error(err3);
+            AfterSchoolActivity.find().exec((err4, afterSchoolActivities) => {
+              if (err4) {
+                sails.log.error(err4);
                 return res.serverError();
               }
 
@@ -425,22 +425,23 @@ module.exports = {
                 earliestStartDate = student.timePeriods[0].startDate;
                 latestEndDate = student.timePeriods[student.timePeriods.length - 1].endDate;
               }
-              
+
               const past = [];
               const current = [];
               const future = [];
 
-              let asas   = [" ", " ", " ", " ", " "];
+              const asas   = [' ', ' ', ' ', ' ', ' '];
               const futureAsas = [];
               const pastAsas = [];
+
               const days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
               let hasNullSchedule = false;
 
               for (let i = 0; i < student.timePeriods.length; i++) {
-                let tp  = student.timePeriods[i];
-                
+                let tp = student.timePeriods[i];
+
                 tp.rateSchedule = rsMap[tp.rateSchedule];
-                
+
                 if (!tp.rateSchedule) {
                   hasNullSchedule = true;
                 }
@@ -493,28 +494,27 @@ module.exports = {
                   futureAsas.push(weekAsas.slice());
                 } else if (isCurrentTimePeriod(tp)) {
                   current.push(tp);
-                  //populate aferschool activities to display in current weekly schedule
+                  // populate aferschool activities to display in current weekly schedule
                   tp = tpMap[tp.id];
                   const ASA = tp.afterSchoolActivities;
-                  
-                  for (let j = 0; j <ASA.length; j++) {
+
+                  for (let j = 0; j < ASA.length; j++) {
                     const asa = ASA[j];
-                    for (var k = 0; k < 5; k++) {
-                      if (asa[days[k]])
-                      {
-                          asas[k] += asa.name + ', ';
+                    for (let k = 0; k < 5; k++) {
+                      if (asa[days[k]]) {
+                        asas[k] += `${asa.name}, `;
                       }
                     }
                   }
-                  //get rid of trailing commas
-                  for(let j = 0; j<5; j++){
-                      if (asas[j].endsWith(', ')) {
-                            asas[j] = asas[j].substring(0, asas[j].length - 2);
-                      }
+                  // get rid of trailing commas
+                  for (let j = 0; j < 5; j++) {
+                    if (asas[j].endsWith(', ')) {
+                      asas[j] = asas[j].substring(0, asas[j].length - 2);
+                    }
                   }
                 }
               }
-              
+
               res.view('student', {
                 student,
                 asas,
@@ -530,10 +530,9 @@ module.exports = {
                 hasNullSchedule,
                 noRateSchedules,
               });
-
             });
-           });
           });
         });
+    });
   },
 };
