@@ -1,4 +1,13 @@
 <%- partial('partials/nav.ejs', {location: 'student'}) %>
+
+<%
+    formatDate = function(s) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let year = parseInt(s.substr(0, 4)), month = parseInt(s.substr(5, 2)), day = parseInt(s.substr(8, 2));
+        return months[month-1] + '. ' + day + ', ' + year;
+    }
+%>
+
 <div class="container">
     <% if (hasNullSchedule) { %>
         <div class="alert alert-danger">
@@ -13,7 +22,7 @@
             <tbody align="left">
                 <tr>
                     <th>Birthdate</th>
-                    <td><%= student.birthday %></td>
+                    <td><%= formatDate(student.birthday) %></td>
                 </tr>
                 <tr>
                     <th>Parent/Guardian Name 1</th>
@@ -41,11 +50,11 @@
                 </tr>
                 <tr>
                     <th>Date Enrolled</th>
-                    <td><%= earliestStartDate %></td>
+                    <td><%= formatDate(earliestStartDate) %></td>
                 </tr>
                 <tr>
                     <th>Date Left</th>
-                    <td><%= latestEndDate %></td>
+                    <td><%= formatDate(latestEndDate) %></td>
                 </tr>
             </tbody>
         </table>   
@@ -61,8 +70,8 @@
                             <% } else { %>
                                 <td><%= current[i].rateSchedule.name %></td>
                             <% } %>
-                            <td><%= current[i].startDate %></td>
-                            <td><%= current[i].endDate %></td>
+                            <td><%= formatDate(current[i].startDate) %></td>
+                            <td><%= formatDate(current[i].endDate) %></td>
                             <td><a href="#" onclick="showPeriodEditModal('<%= current[i].id %>', <%= noRateSchedules %>)">
                                 <span class="glyphicon glyphicon-pencil"/>
                             </a></td>
@@ -109,8 +118,8 @@
 						<tr>
                         <td><%= future[i].rateSchedule.name %></td>
 					<% } %>
-                        <td><%= future[i].startDate %></td>
-                        <td><%= future[i].endDate %></td>
+                        <td><%= formatDate(future[i].startDate) %></td>
+                        <td><%= formatDate(future[i].endDate) %></td>
                         <td><a href="#" onclick="showPeriodEditModal('<%= future[i].id %>')">
                             <span class="glyphicon glyphicon-pencil"/>
                         </a></td>
@@ -156,8 +165,8 @@
 						<tr>
                         <td><%= past[i].rateSchedule.name %></td>
 					<% } %>
-                        <td><%= past[i].startDate %></td>
-                        <td><%= past[i].endDate %></td>
+                        <td><%= formatDate(past[i].startDate) %></td>
+                        <td><%= formatDate(past[i].endDate) %></td>
                         <td><a href="#" onclick="showPeriodEditModal('<%= past[i].id %>')">
                             <span class="glyphicon glyphicon-pencil"/>
                         </a></td>

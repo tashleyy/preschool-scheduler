@@ -1,5 +1,13 @@
 <%- partial('partials/nav.ejs', {location: 'students'}) %>
 
+<%
+    formatDate = function(s) {
+        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        let year = parseInt(s.substr(0, 4)), month = parseInt(s.substr(5, 2)), day = parseInt(s.substr(8, 2));
+        return months[month-1] + '. ' + day + ', ' + year;
+    }
+%>
+
 <div class="container">
     <div class="row">
         <table class="table table-bordered table-striped" id="students-table">
@@ -24,7 +32,7 @@
                         <td><%= s.parentPhone2 %></td>
                         <td><%= s.timePeriodString %></td>
                         <td><%= s.asaString %></td>
-                        <td><%= s.birthday %></td>
+                        <td><%= formatDate(s.birthday) %></td>
                         <td><a href="#" onclick="showStudentEditModal('<%= s.id %>')">
                             <span class="glyphicon glyphicon-pencil"></span>
                         </a></td>
