@@ -328,7 +328,6 @@ module.exports = {
       }
 
       const NUM_MONTHS = 12;
-      const monthToIndex = [4, 5, 6, 7, 8, 9, 10, 11, 0, 1, 2, 3];
       const monthlyIncome = new Array(NUM_MONTHS);
 
       for (let i = 0; i < monthlyIncome.length; i++) {
@@ -336,8 +335,8 @@ module.exports = {
       }
       let totalIncome = 0;
 
-      const earliest = `${year}-09`;
-      const latest = `${year + 1}-08`;
+      const earliest = `${year}-01`;
+      const latest = `${year + 1}-12`;
 
       for (let i = 0; i < timePeriods.length; i++) {
         const timePeriod = timePeriods[i];
@@ -358,7 +357,7 @@ module.exports = {
           }
 
           while (actualEnd >= currDate) {
-            monthlyIncome[monthToIndex[getMonth(currDate) - 1]] += actualCost;
+            monthlyIncome[getMonth(currDate) - 1] += actualCost;
             totalIncome += actualCost;
 
             if (getMonth(currDate) === 12) {
