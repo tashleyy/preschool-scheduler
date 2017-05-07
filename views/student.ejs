@@ -2,6 +2,7 @@
 
 <%
     formatDate = function(s) {
+        if (s === undefined || s.length < 10) return '';
         const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         let year = parseInt(s.substr(0, 4)), month = parseInt(s.substr(5, 2)), day = parseInt(s.substr(8, 2));
         return months[month-1] + '. ' + day + ', ' + year;
@@ -201,7 +202,7 @@
         <% } %>
     </div>
     <div class="container">
-        <a href="/addtimeperiod/<%= student.id %>"><button type="button">Add Time Period</button></a>
+        <a href="/addtimeperiod/<%= student.id %>"><button type="button" class="btn btn-primary">Add Time Period</button></a>
     </div>
 </div>
 
@@ -270,45 +271,3 @@
         </div>
     </div>
 </div>
-
-<head>
-	<style>
-		body {
-			background-color: #ccefff;
-		}
-
-		h1 {
-			color: #0047b3;
-			margin-left: 40px;
-		} 
-		table {
-			border-collapse: collapse;
-			width: 100%;
-		}
-
-		th, td {
-			text-align: left;
-			padding: 8px;
-		}
-
-		tr:nth-child(even){background-color: #e6f0ff}
-		tr:nth-child(odd){background-color: linen}
-
-		th {
-			background-color: #0047b3;
-			color: white;
-		}
-        		button {
-				background-color: #0047b3;
-				border: none;
-				color: white;
-				padding: 10px 10px;
-				text-align: center;
-				text-decoration: none;
-				display: inline-block;
-				font-size: 16px;
-				margin: 4px 2px;
-				cursor: pointer;
-		}
-	</style>
-</head>

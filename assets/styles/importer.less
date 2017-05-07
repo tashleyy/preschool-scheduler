@@ -15,13 +15,53 @@
  */
 
 @import 'bootstrap-multiselect.less';
+@import 'pages/addafterschoolactivity.less';
 @import 'pages/addrateschedule.less';
+@import 'pages/addstudent.less';
+@import 'pages/addtimeperiod.less';
 @import 'pages/login.less';
 @import 'pages/income.less';
 @import 'partials/nav.less';
 
 body {
-    padding-bottom: 10px;
+    background-color: #f2f3f5;
+    height: 100vh;
+    font-family: 'Roboto Condensed', sans-serif;
+    &>.container {
+        padding-bottom: 20px;
+    }
+
+    h1 {
+        color: #ff8324;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    h2 {
+        color: #ff8324;
+        font-family: 'Raleway', sans-serif;
+    }
+
+    table {
+        th {
+            color: #2a66be;
+        }
+        thead {
+            background-color: #ffffff;
+        }
+        tbody {
+            tr:nth-child(even) {
+                background-color: #ebebeb;
+            }
+            tr:nth-child(odd) {
+                background-color:  #ffffff;
+            }
+        }
+    }
+
+    .btn-primary {
+        background-color: #ff8324;
+        border-color: #ff6f00;
+    }
 }
 
 // For example:

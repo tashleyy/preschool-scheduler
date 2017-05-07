@@ -429,7 +429,7 @@ module.exports = {
               const current = [];
               const future = [];
 
-              const asas   = [' ', ' ', ' ', ' ', ' '];
+              const asas = [' ', ' ', ' ', ' ', ' '];
               const futureAsas = [];
               const pastAsas = [];
 
@@ -446,48 +446,46 @@ module.exports = {
                 }
                 if (isPastTimePeriod(tp)) {
                   past.push(tp);
-                  var weekAsas = [" ", " ", " ", " ", " "];
+                  const weekAsas = [' ', ' ', ' ', ' ', ' '];
 
                   tp = tpMap[tp.id];
                   const ASA = tp.afterSchoolActivities;
 
-                  for (let j = 0; j <ASA.length; j++) {
+                  for (let j = 0; j < ASA.length; j++) {
                     const asa = ASA[j];
-                    for (var k = 0; k < 5; k++) {
-                      if (asa[days[k]])
-                      {
-                          weekAsas[k] += asa.name + ', ';
+                    for (let k = 0; k < 5; k++) {
+                      if (asa[days[k]]) {
+                        weekAsas[k] += `${asa.name}, `;
                       }
                     }
                   }
 
-                  for(let j = 0; j<5; j++){
-                      if (weekAsas[j].endsWith(', ')) {
-                            weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
-                      }
+                  for (let j = 0; j < 5; j++) {
+                    if (weekAsas[j].endsWith(', ')) {
+                      weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
+                    }
                   }
 
                   pastAsas.push(weekAsas.slice());
                 } else if (isFutureTimePeriod(tp)) {
                   future.push(tp);
-                  var weekAsas = [" ", " ", " ", " ", " "];
+                  const weekAsas = [' ', ' ', ' ', ' ', ' '];
 
                   tp = tpMap[tp.id];
                   const ASA = tp.afterSchoolActivities;
-                  for (let j = 0; j <ASA.length; j++) {
+                  for (let j = 0; j < ASA.length; j++) {
                     const asa = ASA[j];
-                    for (var k = 0; k < 5; k++) {
-                      if (asa[days[k]])
-                      {
-                          weekAsas[k] += asa.name + ', ';
+                    for (let k = 0; k < 5; k++) {
+                      if (asa[days[k]]) {
+                        weekAsas[k] += `${asa.name}, `;
                       }
                     }
                   }
 
-                  for(let j = 0; j<5; j++){
-                      if (weekAsas[j].endsWith(', ')) {
-                            weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
-                      }
+                  for (let j = 0; j < 5; j++) {
+                    if (weekAsas[j].endsWith(', ')) {
+                      weekAsas[j] = weekAsas[j].substring(0, weekAsas[j].length - 2);
+                    }
                   }
 
                   futureAsas.push(weekAsas.slice());

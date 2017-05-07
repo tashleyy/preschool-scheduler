@@ -1,4 +1,23 @@
-nav + .container {
-    margin-top: 50px;
-    padding-top: 10px;
+nav {
+    background-color: #2a66be;
+    .nav>li>a:hover {
+        background-color: #2a66be;
+    }
+
+    .navbar-header>a, li.active>a {
+        color: rgba(255, 255, 255, 1);        
+    }
+    a {
+        color: rgba(255, 255, 255, 0.75);
+        text-transform: uppercase;
+
+        &:hover {
+            color: rgba(255, 255, 255, 1);
+        }
+    }
+
+    & + .container {
+        margin-top: 50px;
+        padding-top: 10px;
+    }
 }

@@ -87,14 +87,14 @@ function deleteTimePeriod() {
   });
 }
 
+// eslint-disable-next-line no-unused-vars
+function toggleExpandButton(buttonName) {
+  $(`#${buttonName}-plus-picture`).toggle();
+  $(`#${buttonName}-minus-picture`).toggle();
+}
+
 $(document).ready(() => {
   $('#edit-period-asas').multiselect();
   $('#period-edit-modal').modal({ show: false });
   $('#period-delete-modal').modal({ show: false });
 });
-
-function toggleExpandButton(buttonName) 
-{
-  $('#' + buttonName + '-plus-picture').toggle();
-  $('#' + buttonName + '-minus-picture').toggle();
-}
