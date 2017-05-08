@@ -15,52 +15,53 @@
  */
 
 @import 'bootstrap-multiselect.less';
-@import 'pages/addafterschoolactivity.less';
-@import 'pages/addrateschedule.less';
-@import 'pages/addstudent.less';
-@import 'pages/addtimeperiod.less';
+@import 'variables/colors.less';
 @import 'pages/login.less';
 @import 'pages/income.less';
 @import 'partials/nav.less';
 
 body {
-    background-color: #f2f3f5;
-    height: 100vh;
+    background-color: @light-grey;
+    min-height: 100vh;
     font-family: 'Roboto Condensed', sans-serif;
     &>.container {
         padding-bottom: 20px;
     }
 
     h1 {
-        color: #ff8324;
+        color: @secondary;
         font-family: 'Raleway', sans-serif;
     }
 
     h2 {
-        color: #ff8324;
+        color: @secondary;
         font-family: 'Raleway', sans-serif;
     }
 
     table {
         th {
-            color: #2a66be;
+            color: @primary;
         }
         thead {
-            background-color: #ffffff;
+            background-color: @white;
         }
         tbody {
             tr:nth-child(even) {
-                background-color: #ebebeb;
+                background-color: @dark-grey;
             }
             tr:nth-child(odd) {
-                background-color:  #ffffff;
+                background-color:  @white;
             }
         }
     }
 
+    form.add-form {
+        max-width: 500px;
+    }
+
     .btn-primary {
-        background-color: #ff8324;
-        border-color: #ff6f00;
+        background-color: @secondary;
+        border-color: @secondary-dark;
     }
 }
 

@@ -12,7 +12,7 @@
 
 <div class="form-group">
 	<div>
-		<form id="add-period-form" onsubmit="addTimePeriod('<%= student.id %>', <%= noRateSchedules %>); return false;">
+		<form class="add-form" onsubmit="addTimePeriod('<%= student.id %>', <%= noRateSchedules %>); return false;">
 			<div class="form-group">
 				<label for="add-period-start-date">Start Date * (YYYY-MM-DD)</label>
 				<input class="form-control" type="date" id="add-period-start-date" required>
